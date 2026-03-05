@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications - CreditFlow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .applications-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .application-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .application-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .loan-type {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3c72;
+        }
+
+        .status {
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status.pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status.approved {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status.rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.reviewing {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .card-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        .detail-value {
+            font-size: 1rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .card-footer {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .application-date {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .view-details-btn {
+            background: #1e3c72;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .view-details-btn:hover {
+            background: #2a5298;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .empty-state h3 {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state p {
+            color: #888;
+            margin-bottom: 1.5rem;
+        }
+
+        .apply-now-btn {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .apply-now-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.2rem;
+            border: 2px solid #1e3c72;
+            background: transparent;
+            color: #1e3c72;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #1e3c72;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>CreditFlow</h1>
+        <nav class="nav-links">
+            <a href="Homepage.html">Home</a>
+            <a href="MyApplications.html">My Applications</a>
+            <a href="MyLoans.html">My Loans</a>
+            <a href="BorrowerDashboard.html">Dashboard</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2 class="page-title">My Applications</h2>
+
+        <div class="filters">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Pending</button>
+            <button class="filter-btn">Approved</button>
+            <button class="filter-btn">Rejected</button>
+            <button class="filter-btn">Under Review</button>
+        </div>
+
+        <div class="applications-grid">
+            <div class="application-card">
+                <div class="card-header">
+                    <span class="loan-type">Personal Loan</span>
+                    <span class="status pending">Pending</span>
+                </div>
+                <div class="card-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Amount Requested</span>
+                        <span class="detail-value">$25,000</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Loan Term</span>
+                        <span class="detail-value">36 Months</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Interest Rate</span>
+                        <span class="detail-value">12.5% APR</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Applied On</span>
+                        <span class="detail-value">March 3, 2026</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="application-date">Submitted 2 days ago</span>
+                    <button class="view-details-btn">View Details</button>
+                </div>
+            </div>
+
+            <div class="application-card">
+                <div class="card-header">
+                    <span class="loan-type">Home Improvement Loan</span>
+                    <span class="status reviewing">Under Review</span>
+                </div>
+                <div class="card-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Amount Requested</span>
+                        <span class="detail-value">$15,000</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Loan Term</span>
+                        <span class="detail-value">24 Months</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Interest Rate</span>
+                        <span class="detail-value">10.9% APR</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Applied On</span>
+                        <span class="detail-value">February 28, 2026</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="application-date">Submitted 5 days ago</span>
+                    <button class="view-details-btn">View Details</button>
+                </div>
+            </div>
+
+            <div class="application-card">
+                <div class="card-header">
+                    <span class="loan-type">Business Loan</span>
+                    <span class="status approved">Approved</span>
+                </div>
+                <div class="card-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Amount Requested</span>
+                        <span class="detail-value">$50,000</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Loan Term</span>
+                        <span class="detail-value">48 Months</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Interest Rate</span>
+                        <span class="detail-value">9.5% APR</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Applied On</span>
+                        <span class="detail-value">February 15, 2026</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="application-date">Approved on Feb 20, 2026</span>
+                    <button class="view-details-btn">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
