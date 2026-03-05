@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#facc15",
+                        "midnight": "#11425D",
+                        "background-light": "#f8f9ff",
+                        "background-dark": "#0a0b1e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }</script>
+<title>Help &amp; Support | CreditFlow</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-['Inter',sans-serif] text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-primary" style="color: #11425D;">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white" style="background-color: #facc15; color: #11425D;">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">CreditFlow</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<label class="hidden md:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-500 flex border-none bg-slate-100 dark:bg-slate-800 items-center justify-center pl-4 rounded-l-lg">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-slate-100 dark:bg-slate-800 focus:ring-0 h-full placeholder:text-slate-500 px-4 rounded-r-lg text-sm font-normal" placeholder="Search for help..."/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex flex-1">
+<!-- Sidebar Navigation -->
+<aside class="hidden lg:flex w-64 flex-col bg-[#11425D] p-4 gap-2 sticky top-[65px] h-[calc(100vh-65px)] text-white/70">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/10 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/10 transition-colors" href="#">
+<span class="material-symbols-outlined">add_card</span>
+<span class="text-sm font-medium">Apply for Loan</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/10 transition-colors" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="text-sm font-medium">My Applications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/10 transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-medium">My Loans</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/10 transition-colors" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="text-sm font-medium">Credit Building Journey</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 bg-primary text-[#11425D] rounded-lg border-l-4 border-midnight font-bold transition-colors" href="#" style="background-color: #facc15; color: #11425D;">
+<span class="material-symbols-outlined">help</span>
+<span class="text-sm font-bold">Help and Support</span>
+</a><a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/10 transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-sm font-medium">Profile</span>
+</a>
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/10 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Profile and Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-6 md:px-12 lg:px-20 max-w-7xl mx-auto w-full">
+<div class="mb-8">
+<h1 class="text-3xl font-black text-slate-900 dark:text-slate-100 tracking-tight">Help &amp; Support</h1>
+<p class="text-slate-600 dark:text-slate-400 mt-2">Find answers, learn how to use CreditFlow, or get in touch with our support team.</p>
+</div>
+<!-- Grievance Redressal Section -->
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 mb-8 shadow-sm">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" style="color: #facc15;">gavel</span>
+<h2 class="text-xl font-bold">Grievance Redressal Officer</h2>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">If your query is not resolved within 30 days, you may contact our Grievance Officer.</p>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="flex flex-col">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Name</span>
+<span class="text-slate-900 dark:text-slate-100 font-medium">Mr. Arvind Kumar</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Contact Number</span>
+<span class="text-slate-900 dark:text-slate-100 font-medium">+91 800-123-4567</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Email Address</span>
+<a class="font-medium hover:underline text-slate-900 dark:text-slate-100" href="mailto:grievance@creditflow.com">grievance@creditflow.com</a>
+</div>
+</div>
+</section>
+<div class="grid lg:grid-cols-2 gap-8 items-start">
+<!-- Submit a Complaint Form -->
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" style="color: #facc15;">edit_note</span>
+<h2 class="text-xl font-bold">Submit a Complaint</h2>
+</div>
+<form class="space-y-4">
+<div>
+<label class="block text-sm font-medium mb-1.5 text-slate-700 dark:text-slate-300">Complaint Category</label>
+<select class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:border-primary focus:ring-primary">
+<option>Select a category</option>
+<option>Credit Score Issue</option>
+<option>Loan Application Delay</option>
+<option>Payment Failure</option>
+<option>Account Access</option>
+<option>Other</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1.5 text-slate-700 dark:text-slate-300">Description</label>
+<textarea class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:border-primary focus:ring-primary" placeholder="Tell us more about the issue..." rows="4"></textarea>
+</div>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity" style="background-color: #facc15; color: #11425D;" type="submit">
+                            Submit Complaint
+                        </button>
+</form>
+</section>
+<!-- Video Tutorials -->
+<section>
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" style="color: #facc15;">play_circle</span>
+<h2 class="text-xl font-bold">Video Tutorials</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="group cursor-pointer">
+<div class="aspect-video bg-slate-200 dark:bg-slate-800 rounded-lg relative overflow-hidden mb-2">
+<div class="absolute inset-0 bg-primary/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-white">play_arrow</span>
+</div>
+<div class="w-full h-full bg-gradient-to-br from-primary/10 to-primary/30" data-alt="Tutorial video for applying for loans"></div>
+</div>
+<h4 class="text-sm font-bold group-hover:text-primary transition-colors leading-snug">How to apply for a Personal Loan</h4>
+<p class="text-xs text-slate-500 mt-1">2:30 mins • CreditFlow Basics</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-video bg-slate-200 dark:bg-slate-800 rounded-lg relative overflow-hidden mb-2">
+<div class="absolute inset-0 bg-primary/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-white">play_arrow</span>
+</div>
+<div class="w-full h-full bg-gradient-to-br from-slate-400/20 to-slate-600/20" data-alt="Tutorial for reading credit reports"></div>
+</div>
+<h4 class="text-sm font-bold group-hover:text-primary transition-colors leading-snug">Reading your Credit Report</h4>
+<p class="text-xs text-slate-500 mt-1">4:15 mins • Knowledge Base</p>
+</div>
+</div>
+</section>
+</div>
+<!-- FAQ Section -->
+<section class="mt-12">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" style="color: #facc15;">quiz</span>
+<h2 class="text-xl font-bold">Frequently Asked Questions</h2>
+</div>
+<div class="space-y-3">
+<!-- FAQ Item 1 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden">
+<button class="w-full flex items-center justify-between p-4 text-left hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="font-bold text-sm">How is my credit score calculated?</span>
+<span class="material-symbols-outlined text-slate-400">expand_more</span>
+</button>
+</div>
+<!-- FAQ Item 2 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden">
+<button class="w-full flex items-center justify-between p-4 text-left hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="font-bold text-sm">Can I apply for multiple loans simultaneously?</span>
+<span class="material-symbols-outlined text-slate-400">expand_more</span>
+</button>
+</div>
+<!-- FAQ Item 3 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden">
+<button class="w-full flex items-center justify-between p-4 text-left bg-slate-50 dark:bg-slate-800 transition-colors">
+<span class="font-bold text-sm text-primary" style="color: #11425D;">How long does it take for loan approval?</span>
+<span class="material-symbols-outlined text-primary" style="color: #facc15;">expand_less</span>
+</button>
+<div class="px-4 pb-4 bg-slate-50 dark:bg-slate-800 text-sm text-slate-600 dark:text-slate-400">
+                            Typically, most applications are processed within 24-48 hours. However, depending on the documentation provided and third-party verification, it may take up to 5 business days.
+                        </div>
+</div>
+</div>
+</section>
+<!-- Escalation to RBI -->
+<section class="mt-12 p-8 bg-midnight/5 dark:bg-midnight/10 rounded-2xl border-2 border-dashed border-midnight/20 text-center">
+<div class="flex flex-col items-center">
+<div class="size-16 rounded-full bg-white dark:bg-slate-900 flex items-center justify-center shadow-lg mb-4">
+<span class="material-symbols-outlined text-primary text-3xl" style="color: #facc15;">verified_user</span>
+</div>
+<h3 class="text-xl font-bold mb-2">Escalation to Banking Ombudsman</h3>
+<p class="max-w-2xl text-slate-600 dark:text-slate-400 text-sm mb-6 mx-auto">
+                        If your grievance is not resolved to your satisfaction by the company within 30 days, you may approach the Integrated Ombudsman Scheme, RBI.
+                    </p>
+<div class="flex flex-wrap justify-center gap-4">
+<a class="px-6 py-2.5 bg-primary text-[#11425D] font-bold rounded-lg text-sm shadow-md hover:shadow-lg transition-all" href="#" style="background-color: #facc15; color: #11425D;">Visit RBI CMS Portal</a>
+<div class="px-6 py-2.5 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-base">phone</span>
+                            14448 (Toll Free)
+                        </div>
+</div>
+</div>
+</section>
+<footer class="mt-16 py-8 border-t border-slate-200 dark:border-slate-800 text-center">
+<p class="text-slate-500 text-xs">© 2024 CreditFlow. All rights reserved. Trusted by over 2 Million Users.</p>
+</footer>
+</main>
+</div>
+</div>
+</body></html>

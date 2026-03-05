@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#001f3f", // Deep Neptune Blue
+                        "accent": "#FFD700",  // Solar Yellow
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#13181f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>CreditFlow - Login</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 lg:px-40">
+<div class="flex items-center gap-3 text-primary dark:text-accent">
+<div class="size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">account_balance_wallet</span>
+</div>
+<h2 class="text-primary dark:text-slate-100 text-xl font-bold leading-tight tracking-[-0.015em]">CreditFlow</h2>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-primary dark:text-slate-100 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-primary dark:text-slate-100 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex items-center justify-center p-4 pt-20">
+<div class="w-full max-w-md bg-white dark:bg-slate-900 rounded-xl shadow-xl p-8 border border-slate-100 dark:border-slate-800">
+<!-- Secure Icon -->
+<div class="flex justify-center mb-6">
+<div class="bg-primary/10 dark:bg-accent/10 p-4 rounded-full">
+<span class="material-symbols-outlined text-primary dark:text-accent text-4xl">lock</span>
+</div>
+</div>
+<!-- Title & Subtitle -->
+<div class="text-center mb-8">
+<h1 class="text-3xl font-bold text-primary dark:text-slate-100">Welcome Back</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-2">Login to your CreditFlow account</p>
+</div>
+<!-- Login Form -->
+<form class="space-y-6">
+<!-- Mobile Number -->
+<div>
+<label class="block text-sm font-semibold text-primary dark:text-slate-200 mb-2">Mobile Number</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined">call</span>
+<input class="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-accent outline-none transition-all" placeholder="Enter 10-digit number" type="tel"/>
+</div>
+</div>
+<!-- MPIN -->
+<div>
+<div class="flex justify-between items-center mb-2">
+<label class="block text-sm font-semibold text-primary dark:text-slate-200">6-digit MPIN</label>
+<a class="text-xs font-bold hover:underline tracking-tight" href="#" style="color: #000000;">FORGOT MPIN?</a>
+</div>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined">pin</span>
+<input class="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-accent outline-none transition-all" maxlength="6" placeholder="••••••" type="password"/>
+</div>
+</div>
+<!-- Primary Action Button -->
+<button class="w-full py-4 bg-accent hover:bg-yellow-500 text-slate-900 font-bold text-lg rounded-lg transition-transform active:scale-[0.98] shadow-md" type="submit">
+                    LOGIN
+                </button>
+</form>
+<!-- Footer Link -->
+<p class="text-center mt-8 text-slate-600 dark:text-slate-400 text-sm">
+                Don't have an account? <a class="text-primary dark:text-accent font-bold hover:underline" href="#">Register</a>
+</p>
+<!-- Security Note -->
+<div class="mt-10 flex items-center justify-center gap-2 py-3 border-t border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-green-600 dark:text-green-400 text-sm">shield_lock</span>
+<span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 tracking-widest uppercase">Your data is encrypted and secure</span>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="py-6 px-4 text-center">
+<p class="text-slate-400 dark:text-slate-500 text-xs">
+            © 2024 CreditFlow Fintech Solutions. All rights reserved.
+        </p>
+</footer>
+</body></html>

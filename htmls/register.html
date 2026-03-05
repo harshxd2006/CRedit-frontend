@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a355b",
+                        "accent": "#ffcc00",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#13181f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>CreditFlow - Secure Registration</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 px-6 md:px-40 py-4 bg-white dark:bg-background-dark">
+<div class="flex items-center gap-4 text-primary dark:text-slate-100">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-accent">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<h2 class="text-primary dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">CreditFlow</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<span class="material-symbols-outlined text-primary/60 dark:text-slate-400">help_outline</span>
+<div class="bg-primary/10 dark:bg-primary/30 rounded-full p-1">
+<span class="material-symbols-outlined text-primary dark:text-slate-100">person</span>
+</div>
+</div>
+</header>
+<main class="flex flex-1 justify-center items-center py-12 px-4">
+<div class="layout-content-container flex flex-col max-w-[480px] w-full bg-white dark:bg-slate-900 p-8 rounded-xl shadow-xl border border-primary/5">
+<div class="flex flex-col items-center text-center mb-8">
+<div class="size-16 bg-primary/5 rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-4xl">lock_open</span>
+</div>
+<h1 class="text-primary dark:text-slate-100 tracking-tight text-3xl font-bold leading-tight">Create Your Account</h1>
+<p class="text-primary/60 dark:text-slate-400 text-sm font-normal mt-2">Join CreditFlow for secure financial management</p>
+</div>
+<form class="flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-primary dark:text-slate-200 text-sm font-semibold uppercase tracking-wider">Mobile Number</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-primary/40">smartphone</span>
+<input class="form-input flex w-full rounded-lg border border-primary/20 bg-white dark:bg-slate-800 dark:border-slate-700 text-primary dark:text-slate-100 focus:ring-2 focus:ring-primary h-14 pl-12 pr-4 text-base font-medium" placeholder="Enter 10-digit mobile number" type="tel"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-primary dark:text-slate-200 text-sm font-semibold uppercase tracking-wider">6-Digit OTP</label>
+<div class="flex gap-2 justify-between">
+<input class="w-full h-12 text-center rounded-lg border border-primary/20 dark:bg-slate-800 dark:border-slate-700 focus:ring-2 focus:ring-primary text-lg font-bold" maxlength="1" type="text"/>
+<input class="w-full h-12 text-center rounded-lg border border-primary/20 dark:bg-slate-800 dark:border-slate-700 focus:ring-2 focus:ring-primary text-lg font-bold" maxlength="1" type="text"/>
+<input class="w-full h-12 text-center rounded-lg border border-primary/20 dark:bg-slate-800 dark:border-slate-700 focus:ring-2 focus:ring-primary text-lg font-bold" maxlength="1" type="text"/>
+<input class="w-full h-12 text-center rounded-lg border border-primary/20 dark:bg-slate-800 dark:border-slate-700 focus:ring-2 focus:ring-primary text-lg font-bold" maxlength="1" type="text"/>
+<input class="w-full h-12 text-center rounded-lg border border-primary/20 dark:bg-slate-800 dark:border-slate-700 focus:ring-2 focus:ring-primary text-lg font-bold" maxlength="1" type="text"/>
+<input class="w-full h-12 text-center rounded-lg border border-primary/20 dark:bg-slate-800 dark:border-slate-700 focus:ring-2 focus:ring-primary text-lg font-bold" maxlength="1" type="text"/>
+</div>
+<p class="text-xs text-right text-primary/60 dark:text-slate-500 mt-1 cursor-pointer hover:text-primary">Resend OTP?</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex flex-col gap-2">
+<label class="text-primary dark:text-slate-200 text-sm font-semibold uppercase tracking-wider">Set MPIN</label>
+<input class="form-input rounded-lg border border-primary/20 dark:bg-slate-800 dark:border-slate-700 focus:ring-2 focus:ring-primary h-12 text-center text-lg tracking-widest" maxlength="6" placeholder="••••••" type="password"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-primary dark:text-slate-200 text-sm font-semibold uppercase tracking-wider">Confirm MPIN</label>
+<input class="form-input rounded-lg border border-primary/20 dark:bg-slate-800 dark:border-slate-700 focus:ring-2 focus:ring-primary h-12 text-center text-lg tracking-widest" maxlength="6" placeholder="••••••" type="password"/>
+</div>
+</div>
+<button class="w-full bg-accent hover:bg-accent/90 text-slate-900 font-bold py-4 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 mt-4 shadow-lg shadow-accent/20">
+                            REGISTER
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</form>
+<div class="mt-8 pt-6 border-t border-primary/10 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-green-600 text-sm">verified_user</span>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-tighter">Your data is encrypted and secure</p>
+</div>
+</div>
+</main>
+<footer class="p-6 text-center">
+<p class="text-primary/40 dark:text-slate-500 text-xs">© 2024 CreditFlow Fintech Solutions. All rights reserved.</p>
+</footer>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#facc15",
+                        "midnight": "#11425D",
+                        "background-light": "#f8f9ff",
+                        "background-dark": "#0a0b1e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }</script>
+<title>Profile &amp; Settings | CreditFlow</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-screen w-full flex-col">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark px-6 py-3 lg:px-10">
+<div class="flex items-center gap-4">
+<div class="text-primary" style="color: #11425D;">
+<svg class="size-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-tight">CreditFlow</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<label class="hidden md:flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-2 w-64">
+<span class="material-symbols-outlined text-slate-500 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full" placeholder="Search settings..." type="text"/>
+</label>
+<button class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20 overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="User avatar profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX8x1IhmqeXSCPLchH2MF0ZSwgODzEjCpQkD1s6xTuBAXZ9oC-GGZ44eKu1wbZ65K50gtSFAehrhRXxwTKVRuIvqaaVPSH9SfRg5RMQzG-cO2kI6u0bRiiDvK55fZtXsf87u_Xh_9-7vdSW5YlNcERRX1bEXGG3Cd42Z3Fv_AFPugHzYmMdinQEwzXBLshCAJEFmRvVZ-h5IFZzJoaaBAtMyvUb6UUidyMgejU3yX9mWgwh2xXjdNMLeCikEDMTnqzm0d7MKY55Zkd"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1">
+<!-- Sidebar Navigation -->
+<aside class="hidden lg:flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark p-6 gap-6 sticky top-[65px] h-[calc(100vh-65px)]" style="background-color: #11425D; color: white;">
+<div class="space-y-1">
+<p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4 px-3">Menu</p>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors text-slate-300 hover:text-white hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors text-slate-300 hover:text-white hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-medium">Credit Score</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors text-slate-300 hover:text-white hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-medium">Loans</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors text-slate-300 hover:text-white hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-medium">Payments</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-primary rounded-lg transition-colors" href="#" style="background-color: #facc15; color: #11425D; font-weight: bold;">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Profile &amp; Settings</span>
+</a>
+</div>
+<div class="mt-auto p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-800">
+<p class="text-sm font-semibold text-primary" style="color: #11425D;">Need Help?</p>
+<p class="text-xs text-slate-500 mt-1">Our support team is available 24/7 for financial queries.</p>
+<button class="mt-3 w-full py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold hover:shadow-sm transition-all">Contact Us</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 p-6 lg:p-10 max-w-5xl mx-auto w-full">
+<div class="mb-8">
+<h1 class="text-3xl font-black tracking-tight mb-2">Profile &amp; Settings</h1>
+<p class="text-slate-500 dark:text-slate-400">Manage your financial identity, privacy consents, and account security.</p>
+</div>
+<div class="grid gap-8">
+<!-- Section 1: Personal Details -->
+<section class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" style="color: #11425D;">person</span>
+<h2 class="text-xl font-bold">Personal Details</h2>
+</div>
+<div class="grid md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-600 dark:text-slate-400">Full Name</label>
+<input class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-transparent focus:ring-primary focus:border-primary" type="text" value="Arjun Malhotra"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-600 dark:text-slate-400">PAN Number</label>
+<input class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 cursor-not-allowed" readonly="" type="text" value="ABCDE1234F"/>
+<p class="text-[10px] text-slate-400">Verification complete. Contact support to change.</p>
+</div>
+<div class="space-y-2 md:col-span-2">
+<label class="text-sm font-medium text-slate-600 dark:text-slate-400">Residential Address</label>
+<textarea class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-transparent focus:ring-primary focus:border-primary" rows="3">12th Floor, Skyview Towers, Hitech City, Hyderabad, Telangana - 500081</textarea>
+</div>
+</div>
+<div class="mt-6 flex justify-end">
+<button class="bg-primary text-white px-6 py-2 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity text-midnight" style="background-color: #facc15; color: #11425D;">Update Details</button>
+</div>
+</section>
+<!-- Section 2: Consent Management (DPDP Act) -->
+<section class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" style="color: #11425D;">gavel</span>
+<h2 class="text-xl font-bold">Consent Management</h2>
+</div>
+<p class="text-sm text-slate-500 mb-6">In compliance with the DPDP Act, you have full control over how your data is processed.</p>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
+<div>
+<p class="font-semibold">Bank Data Usage</p>
+<p class="text-xs text-slate-500">Allow us to fetch and analyze your transaction history for better loan offers.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary" style="background-color: #11425D !important;"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
+<div>
+<p class="font-semibold">Sharing Reports with Partners</p>
+<p class="text-xs text-slate-500">Share your credit health reports with pre-approved lending partners.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary" style="background-color: #11425D !important;"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
+<div>
+<p class="font-semibold">Automated Profiling</p>
+<p class="text-xs text-slate-500">Use AI to automatically categorize your spending patterns.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary" style="background-color: #11425D !important;"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Section 3: Notification Preferences -->
+<section class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" style="color: #11425D;">notifications_active</span>
+<h2 class="text-xl font-bold">Notification Preferences</h2>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+<div>
+<p class="font-medium">EMI Reminders</p>
+<p class="text-xs text-slate-500">Get alerts 3 days before your payment is due.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary" style="background-color: #11425D !important;"></div>
+</label>
+</div>
+<div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+<div>
+<p class="font-medium">Credit Score Updates</p>
+<p class="text-xs text-slate-500">Monthly notification when your new score is generated.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary" style="background-color: #11425D !important;"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-medium">Promotional Offers</p>
+<p class="text-xs text-slate-500">Curated loan and credit card offers based on your profile.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary" style="background-color: #11425D !important;"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Section 4: Security -->
+<section class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" style="color: #11425D;">security</span>
+<h2 class="text-xl font-bold">Security &amp; Login</h2>
+</div>
+<div class="grid md:grid-cols-2 gap-4">
+<button class="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">lock</span>
+<div class="text-left">
+<p class="font-medium">Change Password</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-wide">Last changed 3 months ago</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">fingerprint</span>
+<div class="text-left">
+<p class="font-medium">Biometric Login</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-wide">Enabled on 1 device</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors md:col-span-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">devices</span>
+<div class="text-left">
+<p class="font-medium">Active Sessions</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-wide">Currently logged in on iPhone 15, Web (Chrome)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Section 5: Data Rights (Danger Zone) -->
+<section class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-red-100 dark:border-red-900/30 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-red-500">privacy_tip</span>
+<h2 class="text-xl font-bold">Data Rights &amp; Account</h2>
+</div>
+<div class="flex flex-col md:flex-row gap-4">
+<button class="flex-1 flex items-center justify-center gap-2 p-4 bg-slate-100 dark:bg-slate-800 rounded-lg font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">download</span>
+                                Download My Data
+                            </button>
+<button class="flex-1 flex items-center justify-center gap-2 p-4 border border-red-200 dark:border-red-900/30 text-red-600 rounded-lg font-bold hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors">
+<span class="material-symbols-outlined">delete_forever</span>
+                                Delete My Account
+                            </button>
+</div>
+<p class="mt-4 text-xs text-slate-400 text-center italic">Processing a data deletion request can take up to 30 days as per regulatory guidelines.</p>
+</section>
+</div>
+<footer class="mt-12 py-8 border-t border-slate-200 dark:border-slate-800 text-center">
+<p class="text-sm text-slate-500">© 2024 CreditFlow Financial Services. All rights reserved.</p>
+<div class="mt-2 flex justify-center gap-4 text-xs text-primary font-medium" style="color: #11425D;">
+<a class="hover:underline" href="#">Privacy Policy</a>
+<a class="hover:underline" href="#">Terms of Service</a>
+<a class="hover:underline" href="#">Compliance Docs</a>
+</div>
+</footer>
+</main>
+</div>
+</div>
+</body></html>

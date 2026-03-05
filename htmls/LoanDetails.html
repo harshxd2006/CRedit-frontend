@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CreditFlow - Step 4: Loan Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#facc15",
+                        "midnight": "#11425D",
+                        "background-light": "#f8f9ff",
+                        "background-dark": "#0a0b1e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }</script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen w-full flex-col md:flex-row overflow-x-hidden">
+<!-- Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-[#11425D] flex flex-col shrink-0 md:sticky md:top-0 md:h-screen">
+<div class="p-6 flex items-center gap-3"><div class="flex items-center gap-3">
+<div class="text-primary" style="color: #facc15;">
+<svg class="size-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-white">CreditFlow</span>
+</div></div>
+<nav class="flex-1 px-4 py-4 space-y-1"><a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary text-[#11425D] rounded-lg border-l-4 border-white shadow-sm" href="#" style="background-color: #facc15; color: #11425D;">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="text-sm font-bold">Apply for Loan</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-medium">My Applications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="text-sm font-medium">My Loans</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="text-sm font-medium">Credit Building Journey</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-sm font-medium">Help and Support</span>
+</a></nav>
+<div class="p-4 border-t border-white/10">
+<div class="p-4 rounded-xl bg-white/5 border border-white/10 mb-4">
+<p class="text-[10px] font-bold text-primary uppercase tracking-wider mb-1" style="color: #facc15;">Current Progress</p>
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-medium text-white/70">Step 4 of 5</span>
+<span class="text-xs font-bold text-primary" style="color: #facc15;">80%</span>
+</div>
+<div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 80%; background-color: #facc15;"></div>
+</div>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">person_settings</span>
+<span class="text-sm font-medium">Profile and Settings</span>
+</a></div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col">
+<!-- Header -->
+<header class="flex items-center justify-between px-6 py-4 bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10"><div class="flex items-center gap-4">
+<button class="md:hidden text-slate-600">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="text-xl font-bold text-slate-900 dark:text-slate-100">Configure Loan</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex flex-col items-end">
+<span class="text-sm font-bold text-slate-900 dark:text-slate-100">Alex Thompson</span>
+<span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Premium Member</span>
+</div>
+<div class="size-10 rounded-full bg-slate-200 bg-cover bg-center border-2 border-primary/30" data-alt="User profile avatar of a smiling man" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDiTW083hmMPvAKV6Aga1rzv6r5B5RzHauSkIsDvOxZnzVPvn92PEWfvnHHAhR-S2cQxkeb0CFpJZyGFQuXSRRRHThKbnnWTqfxI5KE8mhmrz4pHk1FiSt70wHpyRgjAW_S7ZTcEL1A9mZQ_1tMGw05CS0Nquc1mBXseU7GSb5TeVfd9hGsqkw4zLejm-PW9ipXysteruePq_g82kCIdJyRr3Kl9ipk-XkGhyGohToUMn8_eY9bs_qc5qkjZ2XqtcUBZ8MUFPqY91HD')"></div>
+</div></header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-6 md:p-12 lg:px-24">
+<div class="max-w-3xl mx-auto flex flex-col gap-10">
+<!-- Title Section -->
+<div class="space-y-2">
+<h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Loan Customization</h2>
+<p class="text-slate-500 dark:text-slate-400">Fine-tune your credit requirements. We'll generate a personalized report based on these parameters.</p>
+</div>
+<!-- Loan Amount Slider Section -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-8">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<h3 class="text-lg font-bold text-slate-800 dark:text-slate-200">Desired Loan Amount</h3>
+<p class="text-sm text-slate-500">Drag to adjust your capital requirement</p>
+</div>
+<div class="bg-primary/5 px-6 py-3 rounded-xl border border-primary/20" style="background-color: rgba(17, 66, 93, 0.05); border-color: rgba(17, 66, 93, 0.1);">
+<span class="text-3xl font-black text-primary" style="color: #11425D;">₹2,50,000</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="relative w-full h-3 bg-slate-100 dark:bg-slate-800 rounded-full">
+<div class="absolute top-0 left-0 h-full bg-primary rounded-full" style="width: 48%; background-color: #11425D;"></div>
+<div class="absolute top-1/2 left-[48%] -translate-y-1/2 -translate-x-1/2 size-8 bg-white border-4 border-primary rounded-full shadow-lg cursor-pointer" style="border-color: #11425D;"></div>
+</div>
+<div class="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest">
+<span>₹10,000</span>
+<span>₹5,00,000</span>
+</div>
+</div>
+<!-- EMI Preview Widget -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+<div class="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/30 text-center">
+<p class="text-xs font-bold text-emerald-600 uppercase mb-1">Estimated EMI</p>
+<p class="text-xl font-bold text-emerald-700">₹8,450</p>
+<p class="text-[10px] text-emerald-500">Per Month</p>
+</div>
+<div class="p-4 rounded-xl bg-primary/5 border border-primary/10 text-center" style="background-color: rgba(17, 66, 93, 0.05); border-color: rgba(17, 66, 93, 0.1);">
+<p class="text-xs font-bold text-primary uppercase mb-1" style="color: #11425D;">Interest Rate</p>
+<p class="text-xl font-bold text-primary" style="color: #11425D;">10.5%</p>
+<p class="text-[10px] text-slate-500">p.a. Fixed</p>
+</div>
+<div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 text-center">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Total Tenure</p>
+<p class="text-xl font-bold text-slate-700 dark:text-slate-300">36 Months</p>
+<p class="text-[10px] text-slate-500">Standard Term</p>
+</div>
+</div>
+</div>
+<!-- Options Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Loan Purpose -->
+<div class="space-y-3">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Loan Purpose</label>
+<div class="relative">
+<select class="w-full h-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-4 appearance-none focus:ring-2 focus:ring-primary focus:border-transparent">
+<option>Debt Consolidation</option>
+<option>Home Renovation</option>
+<option>Business Expansion</option>
+<option>Education</option>
+<option>Medical Emergency</option>
+</select>
+<div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-slate-400">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Tenure Dropdown -->
+<div class="space-y-3">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Preferred Tenure</label>
+<div class="relative">
+<select class="w-full h-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-4 appearance-none focus:ring-2 focus:ring-primary focus:border-transparent">
+<option>12 Months</option>
+<option>24 Months</option>
+<option selected="">36 Months</option>
+<option>48 Months</option>
+<option>60 Months</option>
+</select>
+<div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-slate-400">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Advanced Preferences (Optional) -->
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest">Advanced Preferences (Optional)</h3>
+<span class="h-px flex-1 bg-slate-200 dark:bg-slate-800 ml-4"></span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="space-y-2">
+<label class="text-xs font-semibold text-slate-500 uppercase">Target EMI</label>
+<input class="w-full h-10 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded px-3 text-sm" placeholder="e.g. 10,000" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-semibold text-slate-500 uppercase">Max Rate (%)</label>
+<input class="w-full h-10 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded px-3 text-sm" placeholder="e.g. 12" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-semibold text-slate-500 uppercase">Collateral Type</label>
+<input class="w-full h-10 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded px-3 text-sm" disabled="" placeholder="Unsecured" type="text"/>
+</div>
+</div>
+</div>
+<!-- Notification Banner -->
+<div class="flex gap-4 p-5 rounded-xl bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-900/30" style="background-color: rgba(17, 66, 93, 0.05); border-color: rgba(17, 66, 93, 0.1);">
+<span class="material-symbols-outlined text-blue-600" style="color: #11425D;">info</span>
+<p class="text-sm dark:text-blue-300 leading-relaxed" style="color: #11425D;">
+                            Your credit score is 780. You qualify for our <span class="font-bold">Platinum Tier</span> interest rates starting at 8.99% p.a.
+                        </p>
+</div>
+<!-- Footer / CTA -->
+<div class="pt-10 pb-20 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
+<button class="flex items-center gap-2 text-slate-500 font-bold hover:text-primary transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+                            Back to Employment
+                        </button>
+<button class="w-full sm:w-auto px-10 py-4 bg-primary rounded-xl font-bold shadow-lg shadow-primary/30 hover:shadow-xl transition-all flex items-center justify-center gap-3 active:scale-95" style="background-color: #facc15; color: #11425D;">
+                            Generate My Report
+                            <span class="material-symbols-outlined">analytics</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

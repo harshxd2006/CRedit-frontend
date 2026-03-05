@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CreditFlow - NTC Credit Report</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FFD700",
+                        "midnight": "#11425D",
+                        "sidebar-bg": "#11425D",
+                        "background-light": "#f8f9ff",
+                        "background-dark": "#0a0b1e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }</script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background-light text-slate-900 font-display">
+<div class="flex min-h-screen">
+<!-- Fixed Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-[#11425D] flex flex-col shrink-0 fixed left-0 top-0 h-screen z-50">
+<div class="p-6 flex items-center gap-3"><div class="flex items-center gap-3">
+<div class="text-primary" style="color: #FFD700;">
+<svg class="size-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-white">CreditFlow</span>
+</div></div>
+<nav class="flex-1 px-4 py-4 space-y-1"><a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary text-[#11425D] rounded-lg border-l-4 border-white" href="#" style="background-color: #FFD700; color: #11425D;">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="text-sm font-bold">Apply for Loan</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-medium">Credit Report</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="text-sm font-medium">My Loans</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="text-sm font-medium">Credit Building Journey</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-sm font-medium">Help and Support</span>
+</a></nav>
+<div class="p-4 border-t border-slate-100 dark:border-slate-800"><a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">person_settings</span>
+<span class="text-sm font-medium">Profile and Settings</span>
+</a></div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 flex-1 p-8 overflow-y-auto">
+<header class="max-w-5xl mx-auto mb-8 flex justify-between items-end">
+<div>
+<h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">NTC Credit Report</h2>
+<p class="text-slate-500 font-medium">Comprehensive financial health analysis • Last updated: Oct 24, 2023</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-sm font-semibold hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+                        Download PDF
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-sm font-semibold hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-lg">bookmark</span>
+                        Save Later
+                    </button>
+</div>
+</header>
+<div class="max-w-5xl mx-auto grid grid-cols-12 gap-6">
+<!-- Score & Tier Section -->
+<div class="col-span-12 md:col-span-4 flex flex-col gap-6">
+<div class="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col items-center text-center">
+<div class="relative w-40 h-40 flex items-center justify-center">
+<svg class="absolute inset-0 w-full h-full -rotate-90">
+<circle class="text-slate-100 dark:text-slate-800" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-primary" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-dasharray="440" stroke-dashoffset="120" stroke-width="12" style="color: #FFD700;"></circle>
+</svg>
+<div class="flex flex-col items-center">
+<span class="text-5xl font-black text-primary" style="color: #11425D;">720</span>
+<span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Score</span>
+</div>
+</div>
+<div class="mt-6">
+<span class="px-4 py-1.5 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 rounded-full text-sm font-black uppercase tracking-wide">
+                                Tier 1 Low Risk
+                            </span>
+<p class="mt-4 text-sm text-slate-500 leading-relaxed">Your credit profile is in the top 15% of applicants. You qualify for the most competitive interest rates.</p>
+</div>
+</div>
+<!-- Eligibility Card -->
+<div class="bg-primary text-white p-6 rounded-xl shadow-lg flex flex-col gap-4" style="background-color: #11425D; color: white;">
+<h3 class="font-bold flex items-center gap-2">
+<span class="material-symbols-outlined">verified</span>
+                            Loan Eligibility
+                        </h3>
+<div class="space-y-4">
+<div>
+<p class="text-primary/70 text-xs font-bold uppercase tracking-wider">Max Amount</p>
+<p class="text-3xl font-black">$250,000</p>
+</div>
+<div>
+<p class="text-primary/70 text-xs font-bold uppercase tracking-wider">Expected APR</p>
+<p class="text-3xl font-black">4.25% <span class="text-sm font-normal text-primary/60">Fixed</span></p>
+</div>
+</div>
+<button class="mt-2 w-full bg-white text-primary py-3 rounded-lg font-black hover:bg-slate-100 transition-colors uppercase text-xs tracking-widest" style="background-color: #FFD700; color: #11425D;">
+                            Proceed to Lender Selection
+                        </button>
+</div>
+</div>
+<!-- Analysis Details -->
+<div class="col-span-12 md:col-span-8 space-y-6">
+<!-- Signals Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Positive Signals -->
+<div class="space-y-4">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-green-600">check_circle</span>
+                                Positive Signals
+                            </h3>
+<div class="bg-green-50 dark:bg-green-900/10 border border-green-100 dark:border-green-800/30 p-4 rounded-xl flex gap-4">
+<div class="w-10 h-10 rounded-lg bg-green-500 flex-shrink-0 flex items-center justify-center text-white">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<div>
+<h4 class="font-bold text-green-800 dark:text-green-400 text-sm">On-Time Payments</h4>
+<p class="text-xs text-green-700/80 dark:text-green-500/80 mt-1">100% of your last 24 payments were on time.</p>
+</div>
+</div>
+<div class="bg-green-50 dark:bg-green-900/10 border border-green-100 dark:border-green-800/30 p-4 rounded-xl flex gap-4">
+<div class="w-10 h-10 rounded-lg bg-green-500 flex-shrink-0 flex items-center justify-center text-white">
+<span class="material-symbols-outlined">pie_chart</span>
+</div>
+<div>
+<h4 class="font-bold text-green-800 dark:text-green-400 text-sm">Low Utilization</h4>
+<p class="text-xs text-green-700/80 dark:text-green-500/80 mt-1">You are using only 12% of your total credit limit.</p>
+</div>
+</div>
+</div>
+<!-- Negative Signals -->
+<div class="space-y-4">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-red-600">warning</span>
+                                Areas to Improve
+                            </h3>
+<div class="bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800/30 p-4 rounded-xl flex gap-4">
+<div class="w-10 h-10 rounded-lg bg-red-500 flex-shrink-0 flex items-center justify-center text-white">
+<span class="material-symbols-outlined">history</span>
+</div>
+<div>
+<h4 class="font-bold text-red-800 dark:text-red-400 text-sm">Credit History Length</h4>
+<p class="text-xs text-red-700/80 dark:text-red-500/80 mt-1">Average account age is 2.4 years. Goal: 5+ years.</p>
+</div>
+</div>
+<div class="bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800/30 p-4 rounded-xl flex gap-4">
+<div class="w-10 h-10 rounded-lg bg-red-500 flex-shrink-0 flex items-center justify-center text-white">
+<span class="material-symbols-outlined">search</span>
+</div>
+<div>
+<h4 class="font-bold text-red-800 dark:text-red-400 text-sm">Recent Inquiries</h4>
+<p class="text-xs text-red-700/80 dark:text-red-500/80 mt-1">3 hard inquiries in the last 6 months.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Improvement Action Plan -->
+<section class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
+<h3 class="text-xl font-black mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="color: #11425D;">rocket_launch</span>
+                            Improvement Action Plan
+                        </h3>
+<div class="space-y-6">
+<div class="flex gap-4 relative">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold z-10" style="background-color: #11425D;">1</div>
+<div class="w-0.5 h-full bg-slate-100 dark:bg-slate-800 absolute top-8"></div>
+</div>
+<div class="pb-6">
+<h4 class="font-bold text-slate-900 dark:text-white">Reduce Credit Card Balances</h4>
+<p class="text-sm text-slate-500 mt-1">Paying down your balance by just $1,200 could increase your score by 15-20 points within 30 days.</p>
+<div class="mt-3 w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[65%]" style="background-color: #FFD700;"></div>
+</div>
+<p class="text-[10px] text-slate-400 font-bold uppercase mt-2">65% of target reached</p>
+</div>
+</div>
+<div class="flex gap-4 relative">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold z-10" style="background-color: #11425D;">2</div>
+<div class="w-0.5 h-full bg-slate-100 dark:bg-slate-800 absolute top-8"></div>
+</div>
+<div class="pb-6">
+<h4 class="font-bold text-slate-900 dark:text-white">Request Credit Limit Increase</h4>
+<p class="text-sm text-slate-500 mt-1">Increasing your available credit while keeping spend the same will lower your utilization ratio instantly.</p>
+<div class="mt-4 flex gap-2">
+<span class="px-2 py-1 bg-primary/5 text-[10px] font-bold rounded text-slate-900">HIGH IMPACT</span>
+<span class="px-2 py-1 bg-primary/5 text-[10px] font-bold rounded text-slate-900">EASY TASK</span>
+</div>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold z-10" style="background-color: #11425D;">3</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white">Maintain Age of Accounts</h4>
+<p class="text-sm text-slate-500 mt-1">Avoid closing old credit card accounts, even if unused, to preserve your credit history length.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Detailed Factors Table (Subtle Neptune Style) -->
+<div class="max-w-5xl mx-auto mt-12 overflow-hidden border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-900">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50">
+<th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Credit Factor</th>
+<th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-center">Impact</th>
+<th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Status</th>
+<th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-right">Value</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-bold text-sm">Payment History</span>
+<span class="text-xs text-slate-400">Consistency in meeting deadlines</span>
+</div>
+</td>
+<td class="p-4 text-center">
+<div class="flex justify-center gap-0.5">
+<div class="w-1 h-3 rounded-full bg-primary" style="background-color: #FFD700;"></div>
+<div class="w-1 h-3 rounded-full bg-primary" style="background-color: #FFD700;"></div>
+<div class="w-1 h-3 rounded-full bg-primary" style="background-color: #FFD700;"></div>
+</div>
+</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-xs font-bold rounded">Excellent</span>
+</td>
+<td class="p-4 text-right font-mono text-sm">100%</td>
+</tr>
+<tr>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-bold text-sm">Credit Utilization</span>
+<span class="text-xs text-slate-400">Balance relative to total limits</span>
+</div>
+</td>
+<td class="p-4 text-center">
+<div class="flex justify-center gap-0.5">
+<div class="w-1 h-3 rounded-full bg-primary" style="background-color: #FFD700;"></div>
+<div class="w-1 h-3 rounded-full bg-primary" style="background-color: #FFD700;"></div>
+<div class="w-1 h-3 rounded-full bg-primary" style="background-color: #FFD700;"></div>
+</div>
+</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-xs font-bold rounded">Good</span>
+</td>
+<td class="p-4 text-right font-mono text-sm">12%</td>
+</tr>
+<tr>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-bold text-sm">Derogatory Marks</span>
+<span class="text-xs text-slate-400">Bankruptcies or collections</span>
+</div>
+</td>
+<td class="p-4 text-center">
+<div class="flex justify-center gap-0.5">
+<div class="w-1 h-3 rounded-full bg-primary" style="background-color: #FFD700;"></div>
+<div class="w-1 h-3 rounded-full bg-primary" style="background-color: #FFD700;"></div>
+<div class="w-1 h-3 rounded-full bg-primary" style="background-color: #FFD700;"></div>
+</div>
+</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-xs font-bold rounded">None</span>
+</td>
+<td class="p-4 text-right font-mono text-sm">0</td>
+</tr>
+<tr>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-bold text-sm">Average Account Age</span>
+<span class="text-xs text-slate-400">Total duration of history</span>
+</div>
+</td>
+<td class="p-4 text-center">
+<div class="flex justify-center gap-0.5">
+<div class="w-1 h-3 rounded-full bg-primary" style="background-color: #FFD700;"></div>
+<div class="w-1 h-3 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+<div class="w-1 h-3 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+</div>
+</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 text-xs font-bold rounded">Fair</span>
+</td>
+<td class="p-4 text-right font-mono text-sm">2.4y</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Sticky Footer Action Bar -->
+<div class="max-w-5xl mx-auto mt-12 flex items-center justify-between p-6 bg-slate-900 rounded-2xl shadow-2xl text-white" style="background-color: #11425D;">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-white/10 rounded-xl">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<p class="font-bold">Ready to take the next step?</p>
+<p class="text-xs text-slate-400">We've pre-selected 4 lenders based on your Tier 1 profile.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-xl text-sm font-bold transition-all">
+                        Save and Apply Later
+                    </button>
+<button class="px-8 py-3 bg-primary rounded-xl text-sm font-black hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(26,53,91,0.5)]" style="background-color: #FFD700; color: #11425D;">
+                        Proceed to Lender Selection
+                    </button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

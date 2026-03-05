@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Application Confirmation | CreditFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FACC15",
+                        "brand-dark": "#11425D",
+                        "sidebar-bg": "#11425D",
+                        "background-light": "#f8f9ff",
+                        "background-dark": "#0a0b1e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }</script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex h-screen w-full overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-[#11425D] flex flex-col shrink-0">
+<div class="p-6 flex items-center gap-3"><div class="flex items-center gap-3">
+<div class="text-primary" style="color: #11425D;">
+<svg class="size-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-white">CreditFlow</span>
+</div></div>
+<nav class="flex-1 px-4 py-4 space-y-1"><a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary text-[#11425D] rounded-lg border-l-4 border-white" href="#" style="background-color: #FACC15; color: #000000;">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="text-sm font-bold">Apply for Loan</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-medium">My Applications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="text-sm font-medium">My Loans</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="text-sm font-medium">Credit Building Journey</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-sm font-medium">Help and Support</span>
+</a></nav>
+<div class="p-4 border-t border-slate-100 dark:border-slate-800">
+<button class="w-full flex items-center justify-center gap-2 rounded-lg h-10 bg-[#1e4e69] text-white text-sm font-bold hover:bg-opacity-90 transition-all">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+<span>Support</span>
+</button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-y-auto">
+<!-- Header -->
+<header class="flex items-center justify-between px-8 py-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="color: #11425D;">check_circle</span>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">Application Confirmation</h2>
+</div>
+<div class="flex gap-3">
+<button class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Success Content -->
+<div class="flex-1 max-w-4xl mx-auto w-full p-8">
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<!-- Success Hero -->
+<div class="bg-brand-dark p-12 flex flex-col items-center text-center text-white" style="background-color: #11425D;">
+<div class="size-20 rounded-full bg-primary flex items-center justify-center text-brand-dark mb-6 shadow-lg shadow-primary/20" style="background-color: #FACC15; color: #000000;">
+<span class="material-symbols-outlined text-[48px] font-bold">check</span>
+</div>
+<h1 class="text-3xl font-black text-white mb-3">Application Submitted!</h1>
+<p class="text-slate-300 max-w-md">Your application for the <strong class="text-primary" style="color: #FACC15;">Gold Tier Credit Line</strong> has been successfully received and is currently in the final review stage.</p>
+</div>
+<div class="p-8 space-y-8">
+<!-- Key Info Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+<p class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Application Reference</p>
+<p class="text-2xl font-black dark:text-primary-light text-brand-dark" style="color: #11425D;">#CF-98234-LX</p>
+</div>
+<div class="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+<p class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Expected Disbursement</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white">Oct 24, 2023</p>
+</div>
+</div>
+<!-- Timeline/Next Steps -->
+<div class="space-y-6">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Next Steps</h3>
+<div class="relative space-y-8">
+<!-- Vertical Line -->
+<div class="absolute left-4 top-2 bottom-2 w-0.5 bg-slate-200 dark:bg-slate-800"></div>
+<!-- Step 1 -->
+<div class="relative flex gap-6">
+<div class="z-10 size-8 rounded-full bg-green-500 flex items-center justify-center text-white shrink-0">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="flex flex-col">
+<p class="font-bold text-slate-900 dark:text-white">Application Received</p>
+<p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">System has verified all uploaded documents and identity information.</p>
+<span class="text-[11px] font-bold text-green-600 mt-1 uppercase">Completed</span>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative flex gap-6">
+<div class="z-10 size-8 rounded-full bg-primary flex items-center justify-center text-white shrink-0 shadow-md" style="background-color: #FACC15; color: #000000;">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div class="flex flex-col">
+<p class="font-bold text-slate-900 dark:text-white">Lender Review</p>
+<p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">A specialized credit officer is reviewing your credit limit and terms. This usually takes 12-24 hours.</p>
+<span class="text-[11px] font-bold text-primary mt-1 uppercase" style="color: #11425D;">In Progress</span>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative flex gap-6">
+<div class="z-10 size-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-400 shrink-0">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+</div>
+<div class="flex flex-col">
+<p class="font-bold text-slate-400 dark:text-slate-600">Fund Disbursement</p>
+<p class="text-sm text-slate-400 dark:text-slate-600 leading-relaxed">Once approved, funds will be instantly transferred to your linked bank account ending in **4902.</p>
+<span class="text-[11px] font-bold text-slate-400 mt-1 uppercase">Upcoming</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-100 dark:border-slate-800"><button class="flex-1 bg-primary text-brand-dark h-12 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all shadow-lg" style="background-color: #FACC15; color: #000000;">
+<span class="material-symbols-outlined">analytics</span>
+                                Track Status
+                            </button>
+<button class="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white h-12 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined">home</span>
+                                Back to Dashboard
+                            </button></div>
+</div>
+</div>
+<!-- Footer Promo -->
+</div>
+</main>
+</div>
+</body></html>
