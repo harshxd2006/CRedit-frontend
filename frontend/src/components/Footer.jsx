@@ -1,18 +1,6 @@
 const GOLD = "#FFD700";
 const MIDNIGHT = "#11425D";
 
-function Logo() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 48 48" fill={GOLD}>
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
-      />
-    </svg>
-  );
-}
-
 export default function Footer() {
   const cols = [
     { title: "Company", links: ["About Us", "Career", "Partner Lenders", "Blog"] },
@@ -33,10 +21,19 @@ export default function Footer() {
         }}>
           {/* Brand col */}
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 24 }}>
-              <Logo />
-              <span style={{ fontSize: 20, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-                CreditFlow
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
+              {/* ── Same wallet icon as Navbar ── */}
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: 32, color: GOLD }}
+              >
+                account_balance_wallet
+              </span>
+              <span style={{
+                fontSize: 20, fontWeight: 900, letterSpacing: "0.08em",
+                textTransform: "uppercase", color: "#fff",
+              }}>
+                CREDITFLOW
               </span>
             </div>
             <p style={{ fontSize: 13, color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 280, marginBottom: 32 }}>

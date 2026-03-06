@@ -1,18 +1,5 @@
-const GOLD = "#FFD700";
+const GOLD    = "#FFD700";
 const MIDNIGHT = "#11425D";
-
-function Logo() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
-        fill={GOLD}
-      />
-    </svg>
-  );
-}
 
 function NavBtn({ children, onClick }) {
   return (
@@ -44,14 +31,17 @@ export default function Navbar({ navigate }) {
         padding: "0 24px", height: 68,
         display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
-        {/* Logo */}
+
+        {/* ── Logo: wallet icon ── */}
         <button
           onClick={() => navigate("home")}
           style={{ display: "flex", alignItems: "center", gap: 10, background: "none", border: "none", cursor: "pointer" }}
         >
-          <Logo />
-          <span style={{ fontSize: 20, fontWeight: 800, color: "#0f172a", letterSpacing: "-0.4px" }}>
-            CreditFlow
+          <span className="material-symbols-outlined" style={{ fontSize: 32, color: GOLD }}>
+            account_balance_wallet
+          </span>
+          <span style={{ fontSize: 20, fontWeight: 900, color: "#1a2744", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            CREDITFLOW
           </span>
         </button>
 

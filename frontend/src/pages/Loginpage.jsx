@@ -1,7 +1,65 @@
 import { useState } from "react";
+import Navbar from "../components/Navbar";
 
-const GOLD    = "#FFD700";
-const PRIMARY = "#001f3f";
+const GOLD     = "#FFD700";
+const PRIMARY  = "#1a355b";
+const MIDNIGHT = "#11425D";
+
+function HomeFooter() {
+  return (
+    <footer style={{ background: MIDNIGHT, color: "#cbd5e1", paddingTop: 80, paddingBottom: 40, borderTop: "1px solid rgba(255,255,255,.08)" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 64 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span className="material-symbols-outlined" style={{ fontSize: 28, color: GOLD }}>account_balance_wallet</span>
+              <span style={{ fontSize: 22, fontWeight: 900, color: "#fff", textTransform: "uppercase", letterSpacing: "0.08em" }}>CREDITFLOW</span>
+            </div>
+            <p style={{ fontSize: 13, lineHeight: 1.8, maxWidth: 280, margin: 0 }}>
+              Empowering the new-to-credit population of India with fair access to financial opportunities through data and trust.
+            </p>
+            <div style={{ display: "flex", gap: 12 }}>
+              {["share", "public", "alternate_email"].map(icon => (
+                <div key={icon} style={{ width: 40, height: 40, borderRadius: 8, background: "rgba(255,255,255,.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "background .15s" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = GOLD; e.currentTarget.querySelector("span").style.color = "#000"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,.08)"; e.currentTarget.querySelector("span").style.color = "#fff"; }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: 20, color: "#fff", transition: "color .15s" }}>{icon}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          {[
+            { title: "Company", links: ["About Us", "Career", "Partner Lenders", "Blog"] },
+            { title: "Support", links: ["Help Center", "Grievance Officer", "Security", "Contact Us"] },
+            { title: "Legal",   links: ["Privacy Policy", "Terms of Service", "RBI Compliance", "Cookie Policy"] },
+          ].map(col => (
+            <div key={col.title}>
+              <h4 style={{ fontSize: 13, fontWeight: 700, color: "#fff", marginBottom: 24, marginTop: 0 }}>{col.title}</h4>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 14 }}>
+                {col.links.map(l => (
+                  <li key={l}>
+                    <a href="#" style={{ fontSize: 13, color: "#94a3b8", textDecoration: "none", transition: "color .15s" }}
+                      onMouseEnter={e => e.target.style.color = "#fff"}
+                      onMouseLeave={e => e.target.style.color = "#94a3b8"}>{l}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div style={{ borderTop: "1px solid rgba(255,255,255,.08)", paddingTop: 40, marginBottom: 24 }}>
+          <div style={{ background: "rgba(255,255,255,.04)", padding: "24px 32px", borderRadius: 16, maxWidth: 896, margin: "0 auto", textAlign: "center" }}>
+            <p style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.2em", color: "#64748b", marginBottom: 12 }}>RBI Disclaimer</p>
+            <p style={{ fontSize: 11, color: "#64748b", lineHeight: 1.8, margin: 0 }}>
+              CreditFlow is a technology platform and not a lender. All loan products are offered by RBI-registered NBFCs and Banks. Approval is subject to lender terms and conditions. We never ask for payments to get a loan approved. Report any suspicious calls to our Grievance Officer.
+            </p>
+          </div>
+        </div>
+        <p style={{ textAlign: "center", fontSize: 11, color: "#475569", margin: 0 }}>© 2024 CreditFlow India Pvt. Ltd. All Rights Reserved.</p>
+      </div>
+    </footer>
+  );
+}
 
 export default function Loginpage({ navigate }) {
   const [mobile, setMobile]   = useState("");
@@ -20,169 +78,127 @@ export default function Loginpage({ navigate }) {
     setTimeout(() => { setLoading(false); alert("Login Successful! 🎉"); }, 1500);
   };
 
-  const inputStyle = (errKey) => ({
-    width: "100%", borderRadius: 8,
-    border: `1px solid ${errors[errKey] ? "#ef4444" : "#e2e8f0"}`,
-    background: "#f8fafc", color: PRIMARY,
-    fontFamily: "'Inter', sans-serif", fontSize: 15,
-    height: 52, paddingLeft: 48, paddingRight: 16,
-    transition: "border-color .2s, box-shadow .2s",
-  });
-
-  const onFocus = (e) => {
-    e.target.style.borderColor = PRIMARY;
-    e.target.style.boxShadow = `0 0 0 3px rgba(0,31,63,.1)`;
-  };
-  const onBlur = (e, errKey) => {
-    e.target.style.borderColor = errors[errKey] ? "#ef4444" : "#e2e8f0";
-    e.target.style.boxShadow = "none";
-  };
+  const onFocus = (e) => { e.target.style.borderColor = MIDNIGHT; e.target.style.boxShadow = "0 0 0 3px rgba(17,66,93,.1)"; };
+  const onBlur  = (e, hasErr) => { e.target.style.borderColor = hasErr ? "#ef4444" : "rgba(26,53,91,.2)"; e.target.style.boxShadow = "none"; };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f6f7f8", display: "flex", flexDirection: "column", fontFamily: "'Inter', sans-serif" }}>
+    <div style={{ fontFamily: "'Inter', sans-serif" }}>
+      <Navbar navigate={navigate} />
 
-      {/* Header */}
-      <header style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        borderBottom: "1px solid #e2e8f0", padding: "12px 24px", background: "#fff",
+      <section style={{
+        minHeight: "calc(100vh - 68px)",
+        background: "#f6f7f8",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: "48px 24px",
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <span className="material-symbols-outlined" style={{ fontSize: 28, color: PRIMARY }}>account_balance_wallet</span>
-          <h2 style={{ fontSize: 20, fontWeight: 700, color: PRIMARY }}>CreditFlow</h2>
-        </div>
-        <div style={{ display: "flex", gap: 10 }}>
-          {["help", "account_circle"].map((icon) => (
-            <button key={icon} style={{
-              width: 40, height: 40, borderRadius: 8, background: "#f1f5f9",
-              border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-            }}>
-              <span className="material-symbols-outlined" style={{ color: PRIMARY, fontSize: 22 }}>{icon}</span>
-            </button>
-          ))}
-        </div>
-      </header>
-
-      {/* Main */}
-      <main style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "24px", paddingTop: 80 }}>
         <div style={{
-          width: "100%", maxWidth: 440, background: "#fff",
-          borderRadius: 16, boxShadow: "0 20px 60px rgba(0,0,0,.1)",
-          border: "1px solid #f1f5f9", padding: "36px 32px",
+          width: "100%", maxWidth: 460,
+          background: "#fff", borderRadius: 20,
+          boxShadow: "0 20px 60px rgba(26,53,91,.12)",
+          border: "1px solid rgba(26,53,91,.07)",
+          padding: "36px 36px 28px",
         }}>
-          {/* Lock icon */}
-          <div style={{ display: "flex", justifyContent: "center", marginBottom: 24 }}>
-            <div style={{ background: "rgba(0,31,63,.08)", borderRadius: "50%", padding: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span className="material-symbols-outlined" style={{ color: PRIMARY, fontSize: 40 }}>lock</span>
-            </div>
+
+          {/* Title */}
+          <div style={{ marginBottom: 32 }}>
+            <h1 style={{ fontSize: 26, fontWeight: 800, color: PRIMARY, margin: "0 0 6px" }}>Welcome Back</h1>
+            <p style={{ fontSize: 14, color: "rgba(26,53,91,.55)", margin: 0 }}>Login to your CreditFlow account</p>
           </div>
 
-          <div style={{ textAlign: "center", marginBottom: 32 }}>
-            <h1 style={{ fontSize: 30, fontWeight: 800, color: PRIMARY }}>Welcome Back</h1>
-            <p style={{ fontSize: 14, color: "#64748b", marginTop: 8 }}>Login to your CreditFlow account</p>
-          </div>
+          <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: 0 }}>
 
-          <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-
-            {/* Mobile */}
-            <div>
-              <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: PRIMARY, marginBottom: 8 }}>
-                Mobile Number
-              </label>
+            {/* Mobile Number */}
+            <div style={{ marginBottom: 24 }}>
+              <label style={{ display: "block", fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: 8 }}>Mobile Number</label>
               <div style={{ position: "relative" }}>
-                <span className="material-symbols-outlined" style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: "#94a3b8", fontSize: 20 }}>
-                  call
-                </span>
-                <input
-                  type="tel" value={mobile}
-                  onChange={(e) => setMobile(e.target.value.replace(/\D/g, "").slice(0, 10))}
-                  placeholder="Enter 10-digit number"
-                  style={inputStyle("mobile")}
-                  onFocus={onFocus}
-                  onBlur={(e) => onBlur(e, "mobile")}
-                />
+                <span className="material-symbols-outlined" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "rgba(26,53,91,.35)", fontSize: 18 }}>smartphone</span>
+                <input type="tel" value={mobile}
+                  onChange={e => setMobile(e.target.value.replace(/\D/g, "").slice(0, 10))}
+                  placeholder="Enter 10-digit mobile number"
+                  style={{
+                    width: "100%", height: 56, paddingLeft: 42, paddingRight: 14,
+                    borderRadius: 8, outline: "none", fontSize: 14, fontWeight: 500,
+                    border: `1px solid ${errors.mobile ? "#ef4444" : "rgba(26,53,91,.2)"}`,
+                    background: "#fff", color: PRIMARY, fontFamily: "'Inter', sans-serif",
+                    transition: "border-color .2s, box-shadow .2s",
+                  }}
+                  onFocus={onFocus} onBlur={e => onBlur(e, errors.mobile)} />
               </div>
-              {errors.mobile && <p style={{ color: "#ef4444", fontSize: 11, marginTop: 5, fontWeight: 600 }}>{errors.mobile}</p>}
+              {errors.mobile && <p style={{ color: "#ef4444", fontSize: 11, marginTop: 4, fontWeight: 600 }}>{errors.mobile}</p>}
             </div>
 
-            {/* MPIN */}
-            <div>
+            {/* 6-Digit MPIN — same tall treatment as OTP row in Register */}
+            <div style={{ marginBottom: 28 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                <label style={{ fontSize: 13, fontWeight: 600, color: PRIMARY }}>6-digit MPIN</label>
-                <a href="#" style={{ fontSize: 11, fontWeight: 800, color: "#000" }}>FORGOT MPIN?</a>
+                <label style={{ fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em" }}>6-Digit MPIN</label>
+                <a href="#" style={{ fontSize: 12, fontWeight: 700, color: "rgba(26,53,91,.55)", textDecoration: "none" }}>Forgot MPIN?</a>
               </div>
-              <div style={{ position: "relative" }}>
-                <span className="material-symbols-outlined" style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: "#94a3b8", fontSize: 20 }}>
-                  pin
-                </span>
-                <input
-                  type={showPin ? "text" : "password"}
-                  value={mpin}
-                  onChange={(e) => setMpin(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                  maxLength={6} placeholder="••••••"
-                  style={{ ...inputStyle("mpin"), paddingRight: 48, fontSize: 22, letterSpacing: "0.35em" }}
-                  onFocus={onFocus}
-                  onBlur={(e) => onBlur(e, "mpin")}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPin(!showPin)}
-                  style={{ position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", padding: 0 }}
-                >
-                  <span className="material-symbols-outlined" style={{ color: "#94a3b8", fontSize: 20 }}>
-                    {showPin ? "visibility_off" : "visibility"}
-                  </span>
-                </button>
+              {/* Same two-column grid layout as MPIN/Confirm MPIN in Register */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                <div style={{ position: "relative" }}>
+                  <span className="material-symbols-outlined" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "rgba(26,53,91,.35)", fontSize: 18 }}>pin</span>
+                  <input type={showPin ? "text" : "password"} value={mpin}
+                    onChange={e => setMpin(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                    maxLength={6} placeholder="••••••"
+                    style={{
+                      width: "100%", height: 56, paddingLeft: 42, paddingRight: 44,
+                      borderRadius: 8, outline: "none",
+                      border: `1px solid ${errors.mpin ? "#ef4444" : "rgba(26,53,91,.2)"}`,
+                      background: "#fff", color: PRIMARY,
+                      fontFamily: "'Inter', sans-serif", fontSize: 22, letterSpacing: "0.35em",
+                      transition: "border-color .2s, box-shadow .2s",
+                    }}
+                    onFocus={onFocus} onBlur={e => onBlur(e, errors.mpin)} />
+                  <button type="button" onClick={() => setShowPin(!showPin)}
+                    style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+                    <span className="material-symbols-outlined" style={{ color: "rgba(26,53,91,.35)", fontSize: 18 }}>{showPin ? "visibility_off" : "visibility"}</span>
+                  </button>
+                </div>
+                {/* Forgot MPIN placeholder column — keeps visual balance */}
+                <div style={{
+                  height: 56, borderRadius: 8,
+                  border: "1px dashed rgba(26,53,91,.12)",
+                  background: "rgba(26,53,91,.02)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                  <span style={{ fontSize: 11, color: "rgba(26,53,91,.3)", fontWeight: 600, textAlign: "center", lineHeight: 1.4 }}>Secure &amp; Encrypted</span>
+                </div>
               </div>
-              {errors.mpin && <p style={{ color: "#ef4444", fontSize: 11, marginTop: 5, fontWeight: 600 }}>{errors.mpin}</p>}
+              {errors.mpin && <p style={{ color: "#ef4444", fontSize: 11, marginTop: 4, fontWeight: 600 }}>{errors.mpin}</p>}
             </div>
 
             {/* Submit */}
-            <button
-              type="submit"
-              disabled={loading}
-              style={{
-                width: "100%", padding: "16px",
-                background: loading ? "#e2e8f0" : GOLD,
-                color: loading ? "#94a3b8" : "#0f172a",
-                fontWeight: 800, fontSize: 17, borderRadius: 10,
-                border: "none", cursor: loading ? "not-allowed" : "pointer",
-                boxShadow: loading ? "none" : "0 6px 20px rgba(255,215,0,.45)",
-                transition: "all .2s",
-                display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
-              }}
-            >
+            <button type="submit" disabled={loading} style={{
+              width: "100%", background: loading ? "#e2e8f0" : GOLD,
+              color: loading ? "#94a3b8" : "#0f172a",
+              fontWeight: 800, fontSize: 16, padding: "15px", borderRadius: 12,
+              border: "none", cursor: loading ? "not-allowed" : "pointer",
+              boxShadow: loading ? "none" : "0 6px 20px rgba(255,204,0,.4)",
+              transition: "all .2s", marginBottom: 0,
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+            }}>
               {loading ? (
-                <>
-                  <span style={{ width: 18, height: 18, borderRadius: "50%", border: "3px solid #94a3b8", borderTopColor: "#475569", display: "inline-block", animation: "spin .8s linear infinite" }} />
-                  Logging in...
-                </>
+                <><span style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #94a3b8", borderTopColor: "#475569", display: "inline-block", animation: "spin .8s linear infinite" }} />Logging in...</>
               ) : "LOGIN"}
             </button>
           </form>
 
-          <p style={{ textAlign: "center", marginTop: 28, fontSize: 13, color: "#64748b" }}>
+          <p style={{ textAlign: "center", marginTop: 20, fontSize: 13, color: "#64748b" }}>
             Don't have an account?{" "}
-            <button
-              onClick={() => navigate("register")}
-              style={{ background: "none", border: "none", color: PRIMARY, fontWeight: 700, cursor: "pointer", textDecoration: "underline", fontSize: 13 }}
-            >
+            <button onClick={() => navigate("register")}
+              style={{ background: "none", border: "none", color: PRIMARY, fontWeight: 700, cursor: "pointer", textDecoration: "underline", fontSize: 13 }}>
               Register
             </button>
           </p>
 
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginTop: 28, paddingTop: 24, borderTop: "1px solid #f1f5f9" }}>
-            <span className="material-symbols-outlined" style={{ color: "#16a34a", fontSize: 16 }}>shield_lock</span>
-            <span style={{ fontSize: 10, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.15em" }}>
-              Your data is encrypted and secure
-            </span>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginTop: 20, paddingTop: 20, borderTop: "1px solid rgba(26,53,91,.08)" }}>
+            <span className="material-symbols-outlined" style={{ color: "#16a34a", fontSize: 14 }}>shield_lock</span>
+            <span style={{ fontSize: 10, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.12em" }}>Your data is encrypted and secure</span>
           </div>
         </div>
-      </main>
+      </section>
 
-      <footer style={{ padding: "20px", textAlign: "center" }}>
-        <p style={{ fontSize: 11, color: "#94a3b8" }}>© 2024 CreditFlow Fintech Solutions. All rights reserved.</p>
-      </footer>
-
+      <HomeFooter />
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
