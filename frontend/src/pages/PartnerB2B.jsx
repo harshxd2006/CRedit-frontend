@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 export default function PartnerB2B({ navigate }) {
@@ -25,90 +26,8 @@ export default function PartnerB2B({ navigate }) {
       style={{ fontFamily: "'Inter', sans-serif" }}
       className="bg-background-light text-slate-900"
     >
-      {/* ── HEADER ── */}
-      <header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 50,
-          width: "100%",
-          borderBottom: "1px solid #e2e8f0",
-          background: "rgba(255,255,255,0.90)",
-          backdropFilter: "blur(12px)",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1280,
-            margin: "0 auto",
-            padding: "0 24px",
-            height: 68,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          {/* ── LOGO ── */}
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span
-              className="material-symbols-outlined"
-              style={{ fontSize: 32, color: "#FFD700" }}
-            >
-              account_balance_wallet
-            </span>
-            <span
-              style={{
-                fontSize: 20,
-                fontWeight: 900,
-                color: "#1a2744",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                fontFamily: "'Inter', sans-serif",
-              }}
-            >
-              CREDITFLOW
-            </span>
-          </div>
-
-          {/* Nav */}
-          <nav style={{ display: "flex", alignItems: "center", gap: 32 }}>
-            <a
-              href="#how-it-works"
-              style={{ fontSize: 14, fontWeight: 600, color: "#475569", textDecoration: "none" }}
-            >
-              How It Works
-            </a>
-            <a
-              href="#compliance"
-              style={{ fontSize: 14, fontWeight: 600, color: "#475569", textDecoration: "none" }}
-            >
-              Compliance
-            </a>
-            <a
-              href="#pricing"
-              style={{ fontSize: 14, fontWeight: 600, color: "#475569", textDecoration: "none" }}
-            >
-              Partnership
-            </a>
-            {/* ── Redirects to Homepage ── */}
-            <button
-              onClick={() => navigate("home")}
-              style={{
-                background: "#FFD700",
-                color: "#0f172a",
-                fontWeight: 700,
-                fontSize: 14,
-                padding: "10px 20px",
-                borderRadius: 8,
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              Looking for Loan
-            </button>
-          </nav>
-        </div>
-      </header>
+      {/* ── NAVBAR ── */}
+      <Navbar navigate={navigate} variant="partner" />
 
       {/* ── HERO ── */}
       <section

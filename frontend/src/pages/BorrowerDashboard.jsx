@@ -1,0 +1,365 @@
+import { useState } from "react";
+import Navbar from "../components/Navbar";
+
+const GOLD = "#FFD700";
+const MIDNIGHT = "#11425D";
+
+const sidebarLinks = [
+  { icon: "dashboard",     label: "Dashboard",               active: true  },
+  { icon: "currency_rupee",label: "Apply for Loan",          active: false },
+  { icon: "description",   label: "My Applications",         active: false },
+  { icon: "credit_card",   label: "My Loans",                active: false },
+  { icon: "route",         label: "Credit Building Journey", active: false },
+  { icon: "help",          label: "Help & Support",          active: false },
+];
+
+const healthIndicators = [
+  { label: "Salary Consistency", value: "Stable",  icon: "check_circle", iconColor: "#22c55e", barColor: "#22c55e", barWidth: "90%" },
+  { label: "Savings Rate",       value: "18.5%",   icon: "warning",      iconColor: "#f59e0b", barColor: "#f59e0b", barWidth: "45%" },
+  { label: "FOIR",               value: "32.0%",   icon: "check_circle", iconColor: "#22c55e", barColor: "#22c55e", barWidth: "75%" },
+];
+
+const applications = [
+  { label: "Auto Loan",     sub: "IDFC First Bank", status: "Pending",  statusBg: "#fffbeb", statusColor: "#d97706", statusBorder: "#fef3c7" },
+  { label: "Consumer Loan", sub: "Home Credit",     status: "Approved", statusBg: "#f0fdf4", statusColor: "#16a34a", statusBorder: "#dcfce7" },
+];
+
+const lenderMatches = [
+  { amount: "₹5,00,000", bank: "ICICI Bank", apr: "10.5%", match: "98%" },
+  { amount: "₹3,50,000", bank: "Axis Bank",  apr: "11.2%", match: "92%" },
+];
+
+const journeySteps = [
+  { icon: "check",       label: "Onboarding",        sub: "Completed on 12 Sep",       state: "done"    },
+  { icon: "trending_up", label: "Credit Foundation",  sub: "Maintain EMI for 3 months", state: "active"  },
+  { icon: "lock",        label: "Premium Profile",    sub: "Unlock Tier 2 benefits",    state: "locked"  },
+];
+
+export default function BorrowerDashboard({ navigate }) {
+  const [activeLink, setActiveLink] = useState("Dashboard");
+
+  return (
+    <div style={{ fontFamily: "'Inter', sans-serif", background: "#f6f7f8", minHeight: "100vh" }}>
+
+      {/* ── NAVBAR ── */}
+      <Navbar navigate={navigate} />
+
+      {/* ── SIDEBAR ── */}
+      <aside style={{
+        position: "fixed", left: 0, top: 80, bottom: 0, width: 256,
+        background: MIDNIGHT, display: "flex", flexDirection: "column",
+        justifyContent: "space-between", padding: "24px 16px", zIndex: 40,
+      }}>
+        <nav style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          {sidebarLinks.map(link => (
+            <a key={link.label} href="#"
+              onClick={e => { e.preventDefault(); setActiveLink(link.label); }}
+              style={{
+                display: "flex", alignItems: "center", gap: 12,
+                padding: "12px 16px", borderRadius: 8, textDecoration: "none",
+                background: activeLink === link.label ? GOLD : "transparent",
+                color: activeLink === link.label ? "#000" : "#cbd5e1",
+                fontWeight: activeLink === link.label ? 700 : 500,
+                fontSize: 14, transition: "background .15s, color .15s",
+                borderLeft: activeLink === link.label ? `4px solid ${MIDNIGHT}` : "4px solid transparent",
+              }}
+              onMouseEnter={e => { if (activeLink !== link.label) e.currentTarget.style.background = "rgba(255,255,255,.08)"; }}
+              onMouseLeave={e => { if (activeLink !== link.label) e.currentTarget.style.background = "transparent"; }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: 20 }}>{link.icon}</span>
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <a href="#" style={{
+            display: "flex", alignItems: "center", gap: 12,
+            padding: "12px 16px", borderRadius: 8, textDecoration: "none",
+            color: "#cbd5e1", fontSize: 14, fontWeight: 500,
+            borderTop: "1px solid rgba(255,255,255,.1)", paddingTop: 16,
+          }}>
+            <span className="material-symbols-outlined" style={{ fontSize: 20 }}>person_settings</span>
+            Profile and Settings
+          </a>
+          <div style={{
+            background: "rgba(255,255,255,.05)", padding: 16, borderRadius: 12,
+            border: "1px solid rgba(255,255,255,.1)",
+          }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{
+                width: 32, height: 32, borderRadius: "50%", background: GOLD,
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <span className="material-symbols-outlined" style={{ color: MIDNIGHT, fontSize: 18 }}>workspace_premium</span>
+              </div>
+              <div>
+                <p style={{ fontSize: 11, fontWeight: 700, color: "#fff", textTransform: "uppercase", letterSpacing: "0.05em", margin: 0 }}>Tier 1 Elite</p>
+                <p style={{ fontSize: 10, color: "#94a3b8", margin: 0 }}>Low Risk Profile</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      {/* ── MAIN CONTENT ── */}
+      <main style={{ marginLeft: 256, marginTop: 80, padding: 32, minHeight: "calc(100vh - 64px)" }}>
+
+        {/* Welcome Banner */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 32, flexWrap: "wrap", gap: 16 }}>
+          <div>
+            <h1 style={{ fontSize: 28, fontWeight: 900, color: "#0f172a", margin: "0 0 4px", letterSpacing: "-0.5px" }}>Welcome back, Alex!</h1>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#f59e0b", display: "inline-block" }} />
+              <p style={{ fontSize: 13, color: "#64748b", fontWeight: 500, margin: 0 }}>Reminder: Your HDFC Loan EMI is due in 3 days</p>
+            </div>
+          </div>
+          <button style={{
+            background: MIDNIGHT, color: "#fff", padding: "10px 24px",
+            borderRadius: 8, fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer",
+            boxShadow: "0 4px 16px rgba(17,66,93,.2)", transition: "transform .15s",
+          }}
+            onMouseEnter={e => e.currentTarget.style.transform = "scale(1.02)"}
+            onMouseLeave={e => e.currentTarget.style.transform = "none"}
+          >Pay Now</button>
+        </div>
+
+        {/* Grid */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 24 }}>
+
+          {/* ── LEFT+MIDDLE COLUMN (span 2) ── */}
+          <div style={{ gridColumn: "span 2", display: "flex", flexDirection: "column", gap: 24 }}>
+
+            {/* NTC Score Card */}
+            <div style={{
+              background: "#fff", borderRadius: 20, border: "1px solid #e2e8f0",
+              padding: 32, display: "flex", flexDirection: "column", alignItems: "center",
+              position: "relative", overflow: "hidden",
+            }}>
+              <div style={{ position: "absolute", top: 24, right: 24 }}>
+                <span style={{
+                  background: "#f0fdf4", color: "#16a34a", padding: "4px 12px",
+                  borderRadius: 999, fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em",
+                }}>Tier 1 - Low Risk</span>
+              </div>
+              <p style={{ fontSize: 10, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.15em", alignSelf: "flex-start", margin: "0 0 24px" }}>NTC Credit Score</p>
+
+              {/* Gauge */}
+              <div style={{ position: "relative", width: 256, height: 128, marginBottom: 16 }}>
+                <svg viewBox="0 0 100 50" style={{ width: "100%", height: "100%" }}>
+                  <defs>
+                    <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" style={{ stopColor: "#ef4444" }} />
+                      <stop offset="100%" style={{ stopColor: "#991b1b" }} />
+                    </linearGradient>
+                  </defs>
+                  <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#e2e8f0" strokeWidth="8" strokeLinecap="round" />
+                  <path d="M 10 50 A 40 40 0 0 1 75 22" fill="none" stroke="url(#gauge-gradient)" strokeWidth="8" strokeLinecap="round" strokeDasharray="125.6" strokeDashoffset="30" />
+                  <g transform="rotate(120, 50, 50)">
+                    <line x1="50" y1="50" x2="50" y2="15" stroke={MIDNIGHT} strokeWidth="2" strokeLinecap="round" />
+                    <circle cx="50" cy="50" r="3" fill={MIDNIGHT} />
+                  </g>
+                </svg>
+                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
+                  <span style={{ fontSize: 48, fontWeight: 900, color: "#0f172a", lineHeight: 1 }}>780</span>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.15em", marginTop: 4 }}>Excellent</span>
+                </div>
+              </div>
+
+              <div style={{ display: "flex", gap: 12, marginTop: 16 }}>
+                <button style={{
+                  display: "flex", alignItems: "center", gap: 8, padding: "8px 20px",
+                  background: "rgba(255,215,0,.08)", borderRadius: 8, fontSize: 13, fontWeight: 700,
+                  border: "1px solid rgba(255,215,0,.2)", color: MIDNIGHT, cursor: "pointer",
+                }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: 18 }}>analytics</span>
+                  View Full Report
+                </button>
+                <button style={{
+                  display: "flex", alignItems: "center", gap: 8, padding: "8px 20px",
+                  background: GOLD, borderRadius: 8, fontSize: 13, fontWeight: 700,
+                  border: "none", color: "#000", cursor: "pointer",
+                }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: 18 }}>refresh</span>
+                  Refresh Score
+                </button>
+              </div>
+            </div>
+
+            {/* Recent Applications + Lender Matches */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+
+              {/* Recent Applications */}
+              <div style={{ background: "#fff", borderRadius: 24, border: "1px solid #f1f5f9", padding: 28, boxShadow: "0 1px 4px rgba(0,0,0,.04)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+                  <h3 style={{ fontSize: 17, fontWeight: 700, margin: 0, color: "#0f172a" }}>Recent Applications</h3>
+                  <a href="#" style={{ fontSize: 13, fontWeight: 700, color: "#0f172a", textDecoration: "none" }}>View All</a>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  {applications.map((app, i) => (
+                    <div key={i} style={{
+                      display: "flex", alignItems: "center", justifyContent: "space-between",
+                      padding: "14px 16px", borderRadius: 16, border: "1px solid transparent",
+                      transition: "border .15s",
+                    }}
+                      onMouseEnter={e => e.currentTarget.style.borderColor = "#e2e8f0"}
+                      onMouseLeave={e => e.currentTarget.style.borderColor = "transparent"}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                        <div style={{ width: 44, height: 44, borderRadius: 12, background: "#f8fafc", border: "1px solid #e2e8f0" }} />
+                        <div>
+                          <p style={{ fontSize: 13, fontWeight: 700, margin: 0, color: "#0f172a" }}>{app.label}</p>
+                          <p style={{ fontSize: 11, color: "#94a3b8", margin: 0 }}>{app.sub}</p>
+                        </div>
+                      </div>
+                      <span style={{
+                        padding: "4px 10px", borderRadius: 999, fontSize: 10, fontWeight: 700,
+                        background: app.statusBg, color: app.statusColor, border: `1px solid ${app.statusBorder}`,
+                      }}>{app.status}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Lender Matches */}
+              <div style={{ background: "#fff", borderRadius: 24, border: "1px solid #f1f5f9", padding: 28, boxShadow: "0 1px 4px rgba(0,0,0,.04)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+                  <h3 style={{ fontSize: 17, fontWeight: 700, margin: 0, color: "#0f172a" }}>Top Lender Matches</h3>
+                  <span className="material-symbols-outlined" style={{ color: "#94a3b8", fontSize: 22 }}>insights</span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  {lenderMatches.map((l, i) => (
+                    <div key={i} style={{
+                      display: "flex", justifyContent: "space-between", alignItems: "center",
+                      padding: "14px 16px", borderRadius: 16, border: "1px solid #e2e8f0",
+                      transition: "box-shadow .15s",
+                    }}
+                      onMouseEnter={e => e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,.08)"}
+                      onMouseLeave={e => e.currentTarget.style.boxShadow = "none"}
+                    >
+                      <div>
+                        <p style={{ fontSize: 17, fontWeight: 900, margin: "0 0 2px", color: "#0f172a" }}>{l.amount}</p>
+                        <p style={{ fontSize: 11, color: "#94a3b8", margin: 0 }}>{l.bank} • {l.apr} APR</p>
+                      </div>
+                      <div style={{ textAlign: "right", display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-end" }}>
+                        <p style={{ fontSize: 11, fontWeight: 700, color: "#16a34a", margin: 0 }}>{l.match} Match</p>
+                        <button style={{ fontSize: 11, fontWeight: 700, background: "none", border: "none", cursor: "pointer", color: "#0f172a", textDecoration: "underline" }}>
+                          {i === 0 ? "Quick Apply" : "Details"}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Financial Health Indicators */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+              {healthIndicators.map((h, i) => (
+                <div key={i} style={{ background: "#fff", padding: 20, borderRadius: 16, border: "1px solid #e2e8f0" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.1em" }}>{h.label}</span>
+                    <span className="material-symbols-outlined" style={{ color: h.iconColor, fontSize: 18 }}>{h.icon}</span>
+                  </div>
+                  <p style={{ fontSize: 20, fontWeight: 700, margin: "0 0 12px", color: "#0f172a" }}>{h.value}</p>
+                  <div style={{ width: "100%", background: "#f1f5f9", height: 6, borderRadius: 99, overflow: "hidden" }}>
+                    <div style={{ height: "100%", width: h.barWidth, background: h.barColor, borderRadius: 99 }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ── RIGHT COLUMN ── */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+
+            {/* Active Loan Card */}
+            <div style={{
+              background: MIDNIGHT, color: "#fff", borderRadius: 20,
+              padding: 24, boxShadow: "0 8px 32px rgba(17,66,93,.25)",
+              position: "relative", overflow: "hidden",
+            }}>
+              <div style={{
+                position: "absolute", top: 0, right: 0,
+                width: 128, height: 128, borderRadius: "50%",
+                background: "rgba(255,255,255,.05)", transform: "translate(40%, -40%)",
+              }} />
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
+                <div>
+                  <p style={{ fontSize: 9, fontWeight: 700, color: "rgba(255,255,255,.5)", textTransform: "uppercase", letterSpacing: "0.15em", margin: "0 0 4px" }}>Active Loan</p>
+                  <h4 style={{ fontSize: 17, fontWeight: 700, margin: 0 }}>HDFC Home Loan</h4>
+                </div>
+                <div style={{ width: 40, height: 40, background: "#fff", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", padding: 6 }}>
+                  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC_mQDUUfzkOLVlRlDafB6YY1wEZ3B3cdGem9GP9ArNXBLCQOxvE8FSdf05kwsGkg-jH0cy6wgn94pGEdwf_5oDLJLVfeN7lszHXf19tgHbGVNIXVxePMxDraTnd2cC_SSebjvWQaE02E6Rl_QXaUkKmfLBb-TGLz2W5JblNDot9_i_KmWAQu4G5lfDLwJO8_qJd9XSTnsKrafmaej475D8NvAqrd1MRoCthu7_uMKuNdYHpNvjxTA7DhTVu5x6QCy-q_5B9iXSaS-" alt="HDFC" style={{ width: "100%" }} />
+                </div>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 16 }}>
+                <div>
+                  <p style={{ fontSize: 9, color: "rgba(255,255,255,.5)", textTransform: "uppercase", letterSpacing: "0.15em", margin: "0 0 2px" }}>Remaining</p>
+                  <p style={{ fontSize: 26, fontWeight: 900, margin: 0 }}>₹42,50,000</p>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <p style={{ fontSize: 9, color: "rgba(255,255,255,.5)", textTransform: "uppercase", letterSpacing: "0.15em", margin: "0 0 2px" }}>EMI Due</p>
+                  <p style={{ fontSize: 13, fontWeight: 700, margin: 0 }}>15 Oct</p>
+                </div>
+              </div>
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 10, fontWeight: 700, marginBottom: 6 }}>
+                  <span>Progress</span><span>34% Paid</span>
+                </div>
+                <div style={{ width: "100%", background: "rgba(255,255,255,.1)", height: 8, borderRadius: 99, overflow: "hidden" }}>
+                  <div style={{ height: "100%", width: "34%", background: GOLD, borderRadius: 99 }} />
+                </div>
+              </div>
+            </div>
+
+            {/* Credit Building Journey */}
+            <div style={{ background: "#fff", borderRadius: 20, border: "1px solid #e2e8f0", padding: 24 }}>
+              <h3 style={{ fontSize: 15, fontWeight: 700, color: "#0f172a", margin: "0 0 24px", display: "flex", alignItems: "center", gap: 8 }}>
+                <span className="material-symbols-outlined" style={{ color: GOLD, fontSize: 20 }}>route</span>
+                Credit Building Journey
+              </h3>
+              <div style={{ position: "relative" }}>
+                {/* Vertical line */}
+                <div style={{ position: "absolute", left: 16, top: 0, bottom: 0, width: 2, background: "#f1f5f9" }} />
+                <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+                  {journeySteps.map((step, i) => (
+                    <div key={i} style={{ display: "flex", alignItems: "center", gap: 16, position: "relative", opacity: step.state === "locked" ? 0.4 : 1 }}>
+                      <div style={{
+                        width: 32, height: 32, borderRadius: "50%", flexShrink: 0,
+                        background: step.state === "done" ? "#22c55e" : step.state === "active" ? GOLD : "#e2e8f0",
+                        display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1,
+                        boxShadow: step.state === "active" ? `0 0 0 4px rgba(255,215,0,.25)` : "none",
+                      }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: 16, color: step.state === "locked" ? "#94a3b8" : step.state === "active" ? "#000" : "#fff" }}>{step.icon}</span>
+                      </div>
+                      <div>
+                        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                          <p style={{ fontSize: 12, fontWeight: 700, margin: 0, color: "#0f172a" }}>{step.label}</p>
+                          {step.state === "active" && (
+                            <span style={{ padding: "2px 6px", background: GOLD, color: "#000", fontSize: 8, fontWeight: 700, borderRadius: 4, textTransform: "uppercase" }}>Active</span>
+                          )}
+                        </div>
+                        <p style={{ fontSize: 10, color: "#94a3b8", margin: 0 }}>{step.sub}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <button style={{
+                width: "100%", marginTop: 24, padding: "12px 0",
+                background: GOLD, color: "#000", fontWeight: 700, fontSize: 12,
+                borderRadius: 12, border: "none", cursor: "pointer",
+                boxShadow: "0 4px 16px rgba(255,215,0,.2)", transition: "opacity .15s",
+              }}
+                onMouseEnter={e => e.currentTarget.style.opacity = "0.9"}
+                onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+              >Continue Journey</button>
+            </div>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}

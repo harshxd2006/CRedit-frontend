@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 const GOLD     = "#FFD700";
 const PRIMARY  = "#1a355b";
 const MIDNIGHT = "#11425D";
+const API_BASE = "http://localhost:5000/api/auth";
 
 function HomeFooter() {
   return (
@@ -51,7 +52,7 @@ function HomeFooter() {
           <div style={{ background: "rgba(255,255,255,.04)", padding: "24px 32px", borderRadius: 16, maxWidth: 896, margin: "0 auto", textAlign: "center" }}>
             <p style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.2em", color: "#64748b", marginBottom: 12 }}>RBI Disclaimer</p>
             <p style={{ fontSize: 11, color: "#64748b", lineHeight: 1.8, margin: 0 }}>
-              CreditFlow is a technology platform and not a lender. All loan products are offered by RBI-registered NBFCs and Banks. Approval is subject to lender terms and conditions. We never ask for payments to get a loan approved. Report any suspicious calls to our Grievance Officer.
+              CreditFlow is a technology platform and not a lender. All loan products are offered by RBI-registered NBFCs and Banks.
             </p>
           </div>
         </div>
@@ -62,20 +63,41 @@ function HomeFooter() {
 }
 
 export default function Loginpage({ navigate }) {
-  const [mobile, setMobile]   = useState("");
-  const [mpin, setMpin]       = useState("");
-  const [showPin, setShowPin] = useState(false);
-  const [errors, setErrors]   = useState({});
-  const [loading, setLoading] = useState(false);
+  const [mobileVal, setMobileVal] = useState("");
+  const [mpin, setMpinVal]        = useState("");
+  const [showPin, setShowPin]     = useState(false);
+  const [errors, setErrors]       = useState({});
+  const [loading, setLoading]     = useState(false);
+  const [apiError, setApiError]   = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setApiError("");
     const errs = {};
-    if (mobile.length !== 10) errs.mobile = "Enter a valid 10-digit number";
-    if (mpin.length !== 6)    errs.mpin   = "Enter your 6-digit MPIN";
+    if (mobileVal.length !== 10) errs.mobile = "Enter a valid 10-digit number";
+    if (mpin.length !== 4)       errs.mpin   = "Enter your 4-digit MPIN";
     if (Object.keys(errs).length) { setErrors(errs); return; }
+
     setLoading(true);
-    setTimeout(() => { setLoading(false); alert("Login Successful! 🎉"); }, 1500);
+    try {
+      const res  = await fetch(`${API_BASE}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mobile: mobileVal, mpin }),
+      });
+      const data = await res.json();
+      if (!data.success) {
+        setApiError(data.message);
+      } else {
+        // Store basic user info for dashboard
+        sessionStorage.setItem("user", JSON.stringify(data.data));
+        navigate("dashboard");
+      }
+    } catch {
+      setApiError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const onFocus = (e) => { e.target.style.borderColor = MIDNIGHT; e.target.style.boxShadow = "0 0 0 3px rgba(17,66,93,.1)"; };
@@ -86,7 +108,7 @@ export default function Loginpage({ navigate }) {
       <Navbar navigate={navigate} />
 
       <section style={{
-        minHeight: "calc(100vh - 68px)",
+        minHeight: "calc(100vh - 80px)",
         background: "#f6f7f8",
         display: "flex", alignItems: "center", justifyContent: "center",
         padding: "48px 24px",
@@ -99,11 +121,18 @@ export default function Loginpage({ navigate }) {
           padding: "36px 36px 28px",
         }}>
 
-          {/* Title */}
           <div style={{ marginBottom: 32 }}>
             <h1 style={{ fontSize: 26, fontWeight: 800, color: PRIMARY, margin: "0 0 6px" }}>Welcome Back</h1>
             <p style={{ fontSize: 14, color: "rgba(26,53,91,.55)", margin: 0 }}>Login to your CreditFlow account</p>
           </div>
+
+          {/* API Error */}
+          {apiError && (
+            <div style={{ background: "#fef2f2", border: "1px solid #fecaca", borderRadius: 8, padding: "10px 14px", marginBottom: 16, display: "flex", alignItems: "center", gap: 8 }}>
+              <span className="material-symbols-outlined" style={{ color: "#ef4444", fontSize: 16 }}>error</span>
+              <p style={{ fontSize: 12, color: "#dc2626", fontWeight: 600, margin: 0 }}>{apiError}</p>
+            </div>
+          )}
 
           <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: 0 }}>
 
@@ -112,8 +141,8 @@ export default function Loginpage({ navigate }) {
               <label style={{ display: "block", fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: 8 }}>Mobile Number</label>
               <div style={{ position: "relative" }}>
                 <span className="material-symbols-outlined" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "rgba(26,53,91,.35)", fontSize: 18 }}>smartphone</span>
-                <input type="tel" value={mobile}
-                  onChange={e => setMobile(e.target.value.replace(/\D/g, "").slice(0, 10))}
+                <input type="tel" value={mobileVal}
+                  onChange={e => setMobileVal(e.target.value.replace(/\D/g, "").slice(0, 10))}
                   placeholder="Enter 10-digit mobile number"
                   style={{
                     width: "100%", height: 56, paddingLeft: 42, paddingRight: 14,
@@ -127,19 +156,18 @@ export default function Loginpage({ navigate }) {
               {errors.mobile && <p style={{ color: "#ef4444", fontSize: 11, marginTop: 4, fontWeight: 600 }}>{errors.mobile}</p>}
             </div>
 
-            {/* 6-Digit MPIN — same tall treatment as OTP row in Register */}
+            {/* 4-Digit MPIN */}
             <div style={{ marginBottom: 28 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                <label style={{ fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em" }}>6-Digit MPIN</label>
+                <label style={{ fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em" }}>4-Digit MPIN</label>
                 <a href="#" style={{ fontSize: 12, fontWeight: 700, color: "rgba(26,53,91,.55)", textDecoration: "none" }}>Forgot MPIN?</a>
               </div>
-              {/* Same two-column grid layout as MPIN/Confirm MPIN in Register */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                 <div style={{ position: "relative" }}>
                   <span className="material-symbols-outlined" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "rgba(26,53,91,.35)", fontSize: 18 }}>pin</span>
                   <input type={showPin ? "text" : "password"} value={mpin}
-                    onChange={e => setMpin(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                    maxLength={6} placeholder="••••••"
+                    onChange={e => setMpinVal(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                    maxLength={4} placeholder="••••"
                     style={{
                       width: "100%", height: 56, paddingLeft: 42, paddingRight: 44,
                       borderRadius: 8, outline: "none",
@@ -154,7 +182,6 @@ export default function Loginpage({ navigate }) {
                     <span className="material-symbols-outlined" style={{ color: "rgba(26,53,91,.35)", fontSize: 18 }}>{showPin ? "visibility_off" : "visibility"}</span>
                   </button>
                 </div>
-                {/* Forgot MPIN placeholder column — keeps visual balance */}
                 <div style={{
                   height: 56, borderRadius: 8,
                   border: "1px dashed rgba(26,53,91,.12)",

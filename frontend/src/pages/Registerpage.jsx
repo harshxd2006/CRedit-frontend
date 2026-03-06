@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 const GOLD     = "#FFD700";
 const PRIMARY  = "#1a355b";
 const MIDNIGHT = "#11425D";
+const API_BASE = "http://localhost:5000/api/auth";
 
 function HomeFooter() {
   return (
@@ -72,6 +73,7 @@ export default function Registerpage({ navigate }) {
   const [confirmMpin, setConfirmMpin] = useState("");
   const [errors, setErrors]           = useState({});
   const [loading, setLoading]         = useState(false);
+  const [apiError, setApiError]       = useState("");
   const otpRefs                       = useRef([]);
 
   const handleOtpChange = (val, idx) => {
@@ -84,16 +86,51 @@ export default function Registerpage({ navigate }) {
     if (e.key === "Backspace" && !otp[idx] && idx > 0) otpRefs.current[idx - 1]?.focus();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setApiError("");
+    const otpStr = otp.join("");
     const errs = {};
     if (mobile.length !== 10)      errs.mobile      = "Enter a valid 10-digit number";
-    if (otp.join("").length !== 6) errs.otp         = "Enter the complete 6-digit OTP";
-    if (mpin.length !== 6)         errs.mpin        = "MPIN must be exactly 6 digits";
+    if (otpStr.length !== 6)       errs.otp         = "Enter the complete 6-digit OTP";
+    if (mpin.length !== 4)         errs.mpin        = "MPIN must be exactly 4 digits";
     if (mpin !== confirmMpin)      errs.confirmMpin = "MPINs do not match";
     if (Object.keys(errs).length) { setErrors(errs); return; }
+
     setLoading(true);
-    setTimeout(() => { setLoading(false); navigate("login"); }, 1600);
+    try {
+      // Step 1: Send OTP
+      const sendRes  = await fetch(`${API_BASE}/send-otp`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mobile }),
+      });
+      const sendData = await sendRes.json();
+      if (!sendData.success) { setApiError(sendData.message); setLoading(false); return; }
+
+      // Step 2: Verify OTP
+      const verifyRes  = await fetch(`${API_BASE}/verify-otp`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mobile, otp: otpStr }),
+      });
+      const verifyData = await verifyRes.json();
+      if (!verifyData.success) { setApiError(verifyData.message); setLoading(false); return; }
+
+      // Step 3: Set MPIN & create account
+      const mpinRes  = await fetch(`${API_BASE}/set-mpin`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mobile, mpin, confirmMpin }),
+      });
+      const mpinData = await mpinRes.json();
+      if (!mpinData.success) { setApiError(mpinData.message); setLoading(false); return; }
+
+      // All done — go to dashboard
+      navigate("dashboard");
+
+    } catch {
+      setApiError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputBase = {
@@ -112,7 +149,7 @@ export default function Registerpage({ navigate }) {
       <Navbar navigate={navigate} />
 
       <section style={{
-        minHeight: "calc(100vh - 68px)",
+        minHeight: "calc(100vh - 80px)",
         background: "#f6f7f8",
         display: "flex", alignItems: "center", justifyContent: "center",
         padding: "48px 24px",
@@ -129,7 +166,16 @@ export default function Registerpage({ navigate }) {
             <p style={{ fontSize: 14, color: "rgba(26,53,91,.55)", margin: 0 }}>Join CreditFlow for secure financial management</p>
           </div>
 
+          {/* API Error Banner */}
+          {apiError && (
+            <div style={{ background: "#fef2f2", border: "1px solid #fecaca", borderRadius: 8, padding: "10px 14px", marginBottom: 16, display: "flex", alignItems: "center", gap: 8 }}>
+              <span className="material-symbols-outlined" style={{ color: "#ef4444", fontSize: 16 }}>error</span>
+              <p style={{ fontSize: 12, color: "#dc2626", fontWeight: 600, margin: 0 }}>{apiError}</p>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+
             {/* Mobile */}
             <div>
               <label style={{ display: "block", fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: 7 }}>Mobile Number</label>
@@ -174,18 +220,18 @@ export default function Registerpage({ navigate }) {
               <div>
                 <label style={{ display: "block", fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: 7 }}>Set MPIN</label>
                 <input type="password" value={mpin}
-                  onChange={e => setMpin(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                  maxLength={6} placeholder="••••••"
-                  style={{ ...inputBase, width: "100%", height: 48, textAlign: "center", fontSize: 22, letterSpacing: "0.35em", border: `1px solid ${errors.mpin ? "#ef4444" : "rgba(26,53,91,.2)"}` }}
+                  onChange={e => setMpin(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                  maxLength={4} placeholder="••••"
+                  style={{ ...inputBase, height: 48, textAlign: "center", fontSize: 22, letterSpacing: "0.35em", border: `1px solid ${errors.mpin ? "#ef4444" : "rgba(26,53,91,.2)"}` }}
                   onFocus={onFocus} onBlur={onBlur} />
                 {errors.mpin && <ErrMsg>{errors.mpin}</ErrMsg>}
               </div>
               <div>
                 <label style={{ display: "block", fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: 7 }}>Confirm MPIN</label>
                 <input type="password" value={confirmMpin}
-                  onChange={e => setConfirmMpin(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                  maxLength={6} placeholder="••••••"
-                  style={{ ...inputBase, width: "100%", height: 48, textAlign: "center", fontSize: 22, letterSpacing: "0.35em", border: `1px solid ${errors.confirmMpin ? "#ef4444" : "rgba(26,53,91,.2)"}` }}
+                  onChange={e => setConfirmMpin(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                  maxLength={4} placeholder="••••"
+                  style={{ ...inputBase, height: 48, textAlign: "center", fontSize: 22, letterSpacing: "0.35em", border: `1px solid ${errors.confirmMpin ? "#ef4444" : "rgba(26,53,91,.2)"}` }}
                   onFocus={onFocus} onBlur={onBlur} />
                 {errors.confirmMpin && <ErrMsg>{errors.confirmMpin}</ErrMsg>}
               </div>
@@ -201,9 +247,10 @@ export default function Registerpage({ navigate }) {
               transition: "all .2s",
               display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
             }}>
-              {loading ? (
-                <><span style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #94a3b8", borderTopColor: "#475569", display: "inline-block", animation: "spin .8s linear infinite" }} />Verifying...</>
-              ) : <>REGISTER <span className="material-symbols-outlined" style={{ fontSize: 18 }}>arrow_forward</span></>}
+              {loading
+                ? <><span style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #94a3b8", borderTopColor: "#475569", display: "inline-block", animation: "spin .8s linear infinite" }} />Verifying...</>
+                : <>REGISTER <span className="material-symbols-outlined" style={{ fontSize: 18 }}>arrow_forward</span></>
+              }
             </button>
           </form>
 
