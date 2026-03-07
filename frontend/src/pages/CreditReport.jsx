@@ -7,15 +7,13 @@ const MIDNIGHT = "#11425D";
 
 export default function CreditReport({ navigate }) {
   return (
-    <div style={{ fontFamily: "'Inter', sans-serif", background: "#f8f9ff", minHeight: "100vh" }}>
+    <div style={{ fontFamily: "'Inter', sans-serif", background: "#f8f9ff", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar navigate={navigate} />
       <div style={{ display: "flex", flex: 1 }}>
-        <div style={{ flexShrink: 0, position: "sticky", top: 80, alignSelf: "flex-start" }}>
-          <Sidebar navigate={navigate} activePage="creditReport" />
-        </div>
+        <Sidebar navigate={navigate} activePage="creditReport" />
         <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
-          <main style={{ flex: 1, padding: 32 }}>
-            <div style={{ maxWidth: 960, margin: "0 auto" }}>
+          <main style={{ flex: 1, padding: "40px 48px" }}>
+            <div style={{ maxWidth: 1100, margin: "0 auto" }}>
 
               {/* Header */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 32 }}>
@@ -25,13 +23,8 @@ export default function CreditReport({ navigate }) {
                 </div>
                 <div style={{ display: "flex", gap: 10 }}>
                   {[{ icon: "download", label: "Download PDF" }, { icon: "bookmark", label: "Save Later" }].map((btn) => (
-                    <button key={btn.label} style={{
-                      display: "flex", alignItems: "center", gap: 6, padding: "8px 16px",
-                      borderRadius: 8, border: "1px solid #e2e8f0", background: "#fff",
-                      fontSize: 13, fontWeight: 600, cursor: "pointer", color: "#0f172a",
-                    }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: 18 }}>{btn.icon}</span>
-                      {btn.label}
+                    <button key={btn.label} style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, border: "1px solid #e2e8f0", background: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer", color: "#0f172a" }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: 18 }}>{btn.icon}</span>{btn.label}
                     </button>
                   ))}
                 </div>
@@ -41,7 +34,6 @@ export default function CreditReport({ navigate }) {
 
                 {/* Left Column */}
                 <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-
                   {/* Score Card */}
                   <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: 28, textAlign: "center", boxShadow: "0 1px 4px rgba(0,0,0,.04)" }}>
                     <div style={{ position: "relative", width: 140, height: 140, margin: "0 auto 20px" }}>
@@ -56,17 +48,14 @@ export default function CreditReport({ navigate }) {
                         <span style={{ fontSize: 10, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.1em" }}>Score</span>
                       </div>
                     </div>
-                    <span style={{ padding: "6px 16px", background: "#f0fdf4", color: "#16a34a", borderRadius: 999, fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>
-                      Tier 1 Low Risk
-                    </span>
+                    <span style={{ padding: "6px 16px", background: "#f0fdf4", color: "#16a34a", borderRadius: 999, fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>Tier 1 Low Risk</span>
                     <p style={{ fontSize: 12, color: "#64748b", lineHeight: 1.7, marginTop: 16 }}>Your credit profile is in the top 15% of applicants. You qualify for the most competitive interest rates.</p>
                   </div>
 
                   {/* Eligibility Card */}
                   <div style={{ background: MIDNIGHT, color: "#fff", borderRadius: 16, padding: 24, boxShadow: "0 8px 32px rgba(17,66,93,.2)" }}>
                     <h3 style={{ fontSize: 15, fontWeight: 700, display: "flex", alignItems: "center", gap: 8, margin: "0 0 20px" }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: 18 }}>verified</span>
-                      Loan Eligibility
+                      <span className="material-symbols-outlined" style={{ fontSize: 18 }}>verified</span>Loan Eligibility
                     </h3>
                     <div style={{ marginBottom: 16 }}>
                       <p style={{ fontSize: 10, color: "rgba(255,255,255,.5)", textTransform: "uppercase", letterSpacing: "0.12em", margin: "0 0 4px" }}>Max Amount</p>
@@ -76,11 +65,7 @@ export default function CreditReport({ navigate }) {
                       <p style={{ fontSize: 10, color: "rgba(255,255,255,.5)", textTransform: "uppercase", letterSpacing: "0.12em", margin: "0 0 4px" }}>Expected APR</p>
                       <p style={{ fontSize: 28, fontWeight: 900, margin: 0 }}>10.5% <span style={{ fontSize: 13, fontWeight: 400, opacity: 0.6 }}>Fixed</span></p>
                     </div>
-                    <button style={{
-                      width: "100%", background: GOLD, color: MIDNIGHT, padding: "12px 0",
-                      borderRadius: 10, fontWeight: 900, fontSize: 11, border: "none", cursor: "pointer",
-                      textTransform: "uppercase", letterSpacing: "0.1em",
-                    }}>
+                    <button style={{ width: "100%", background: GOLD, color: MIDNIGHT, padding: "12px 0", borderRadius: 10, fontWeight: 900, fontSize: 11, border: "none", cursor: "pointer", textTransform: "uppercase", letterSpacing: "0.1em" }}>
                       Proceed to Lender Selection
                     </button>
                   </div>
@@ -88,14 +73,11 @@ export default function CreditReport({ navigate }) {
 
                 {/* Right Column */}
                 <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-
                   {/* Signals */}
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-                    {/* Positive */}
                     <div>
                       <h3 style={{ fontSize: 15, fontWeight: 700, display: "flex", alignItems: "center", gap: 8, margin: "0 0 16px", color: "#0f172a" }}>
-                        <span className="material-symbols-outlined" style={{ color: "#22c55e", fontSize: 20 }}>check_circle</span>
-                        Positive Signals
+                        <span className="material-symbols-outlined" style={{ color: "#22c55e", fontSize: 20 }}>check_circle</span>Positive Signals
                       </h3>
                       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                         {[
@@ -114,11 +96,9 @@ export default function CreditReport({ navigate }) {
                         ))}
                       </div>
                     </div>
-                    {/* Negative */}
                     <div>
                       <h3 style={{ fontSize: 15, fontWeight: 700, display: "flex", alignItems: "center", gap: 8, margin: "0 0 16px", color: "#0f172a" }}>
-                        <span className="material-symbols-outlined" style={{ color: "#ef4444", fontSize: 20 }}>warning</span>
-                        Areas to Improve
+                        <span className="material-symbols-outlined" style={{ color: "#ef4444", fontSize: 20 }}>warning</span>Areas to Improve
                       </h3>
                       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                         {[
@@ -142,8 +122,7 @@ export default function CreditReport({ navigate }) {
                   {/* Improvement Plan */}
                   <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: 24, boxShadow: "0 1px 4px rgba(0,0,0,.04)" }}>
                     <h3 style={{ fontSize: 17, fontWeight: 900, color: "#0f172a", display: "flex", alignItems: "center", gap: 8, margin: "0 0 24px" }}>
-                      <span className="material-symbols-outlined" style={{ color: MIDNIGHT, fontSize: 20 }}>rocket_launch</span>
-                      Improvement Action Plan
+                      <span className="material-symbols-outlined" style={{ color: MIDNIGHT, fontSize: 20 }}>rocket_launch</span>Improvement Action Plan
                     </h3>
                     <div style={{ display: "flex", flexDirection: "column", gap: 0, position: "relative" }}>
                       {[
@@ -177,7 +156,6 @@ export default function CreditReport({ navigate }) {
                       ))}
                     </div>
                   </div>
-
                 </div>
               </div>
 
@@ -221,11 +199,7 @@ export default function CreditReport({ navigate }) {
               </div>
 
               {/* Footer CTA */}
-              <div style={{
-                marginTop: 32, background: MIDNIGHT, borderRadius: 16, padding: "24px 32px",
-                display: "flex", alignItems: "center", justifyContent: "space-between",
-                boxShadow: "0 8px 32px rgba(17,66,93,.2)",
-              }}>
+              <div style={{ marginTop: 32, background: MIDNIGHT, borderRadius: 16, padding: "24px 32px", display: "flex", alignItems: "center", justifyContent: "space-between", boxShadow: "0 8px 32px rgba(17,66,93,.2)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
                   <div style={{ width: 44, height: 44, background: "rgba(255,255,255,.1)", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <span className="material-symbols-outlined" style={{ color: "#fff", fontSize: 22 }}>lightbulb</span>
@@ -236,21 +210,16 @@ export default function CreditReport({ navigate }) {
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: 12 }}>
-                  <button style={{ padding: "10px 20px", background: "rgba(255,255,255,.1)", color: "#fff", borderRadius: 10, fontWeight: 700, fontSize: 13, border: "none", cursor: "pointer" }}>
-                    Save and Apply Later
-                  </button>
-                  <button style={{ padding: "10px 24px", background: GOLD, color: MIDNIGHT, borderRadius: 10, fontWeight: 900, fontSize: 13, border: "none", cursor: "pointer" }}>
-                    Proceed to Lender Selection
-                  </button>
+                  <button style={{ padding: "10px 20px", background: "rgba(255,255,255,.1)", color: "#fff", borderRadius: 10, fontWeight: 700, fontSize: 13, border: "none", cursor: "pointer" }}>Save and Apply Later</button>
+                  <button style={{ padding: "10px 24px", background: GOLD, color: MIDNIGHT, borderRadius: 10, fontWeight: 900, fontSize: 13, border: "none", cursor: "pointer" }}>Proceed to Lender Selection</button>
                 </div>
               </div>
 
             </div>
           </main>
+          <Footer />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
-

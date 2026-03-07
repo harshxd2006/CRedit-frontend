@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CreditFlow - Apply for Loan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#facc15",
+                        "midnight": "#11425D",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#13181f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }</script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #1a355b;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex h-screen flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-8 py-3 z-20">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center" style="color: #11425D;">
+<span class="material-symbols-outlined text-3xl">account_balance_wallet</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight" style="color: #FFD700;">CreditFlow</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden md:flex flex-col min-w-64 max-w-sm">
+<div class="flex w-full items-stretch rounded-lg bg-slate-100 dark:bg-slate-800 h-10">
+<div class="text-slate-500 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="w-full border-none bg-transparent focus:ring-0 text-sm" placeholder="Search applications, documents..." type="text"/>
+</div>
+</label>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="bg-primary/10 rounded-full h-10 w-10 flex items-center justify-center overflow-hidden border border-primary/20">
+<img alt="User Profile" class="h-full w-full object-cover" data-alt="User profile avatar with a friendly cartoon face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZjh1zXqCljDsEviJoIiw1tnPKYMXSCXfDWACkcExNXl-5exmg2cnsN3fKlQXJk8evEeKbNzPiTRIeXZEuu3UWaEhqTt2sGJtKEjiLlY4ElQtlX9iTWBdEvcJ9AmP1yai-GCt8V3iNo79F0Os9cfp5FcAmnAGKpPd9mDgRSkGpM4ldAicu48qhfnmDkTVCt0varAoEMQnMp1nQFmurCPMUm4Vs70bY9QCkcLGFxSptq1k2nu6wJcc1xzJjmnytbHYjjU7sXZVcFHWo"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-midnight flex flex-col p-0 gap-0 z-30">
+<div class="p-6 mb-4">
+<div class="flex items-center gap-3">
+<div class="text-primary">
+<svg class="size-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-white">CreditFlow</span>
+</div>
+</div>
+<nav class="flex flex-col flex-1">
+<a class="flex items-center gap-3 px-6 py-4 text-slate-400 hover:text-white transition-colors border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-4 bg-white/5 border-l-4 transition-colors" href="#" style="color: #facc15; border-color: #facc15;">
+<span class="material-symbols-outlined">edit_document</span>
+<span class="text-sm font-semibold">Apply for Loan</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-4 text-slate-400 hover:text-white transition-colors border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="text-sm font-semibold">My Applications</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-4 text-slate-400 hover:text-white transition-colors border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-semibold">My Loans</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-4 text-slate-400 hover:text-white transition-colors border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">moving</span>
+<span class="text-sm font-semibold">Credit Building Journey</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-4 text-slate-400 hover:text-white transition-colors border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-sm font-semibold">Help and Support</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-white/10">
+<a class="flex items-center gap-3 px-6 py-6 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="text-sm font-semibold">Profile and Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark px-8 pt-8 pb-16">
+<div class="max-w-3xl mx-auto">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-sm text-slate-500 mb-8">
+<a class="hover:text-primary" href="#">Dashboard</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-100 font-medium">Apply for Loan</span>
+</nav>
+<!-- Header & Progress -->
+<div class="mb-10">
+<h1 class="text-4xl font-black text-slate-900 dark:text-slate-100 tracking-tight mb-2">Apply for Loan</h1>
+<div class="flex justify-between items-center mb-3">
+<p class="text-slate-600 dark:text-slate-400 font-medium text-lg">Step 1 of 4: Loan Requirements</p>
+<span class="font-bold" style="color: #000000;">25% Complete</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-800 h-3 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 25%; background-color: #facc15;"></div>
+</div>
+</div>
+<!-- Application Form Card -->
+<div class="bg-white dark:bg-slate-900 rounded-2xl p-8 shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="space-y-12">
+<!-- Slider Section -->
+<div class="space-y-6">
+<div class="flex justify-between items-end">
+<label class="text-lg font-bold text-slate-900 dark:text-slate-100">Desired Loan Amount</label>
+<div class="text-3xl font-black" style="color: #000000;">
+<span class="text-xl">$</span>250,000
+                                    </div>
+</div>
+<div class="relative pt-1">
+<input class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary" max="500000" min="10000" step="5000" type="range" value="250000"/>
+<div class="flex justify-between mt-4 text-sm font-medium text-slate-500">
+<span>$10,000</span>
+<span>$500,000</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+<p class="text-xs text-slate-500 font-medium uppercase">Est. Monthly</p>
+<p class="text-lg font-bold" style="color: #000000;">$4,250</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border border-slate-100 dark:border-slate-800">
+<p class="text-xs text-slate-500 font-medium uppercase">Interest Rate</p>
+<p class="text-lg font-bold text-slate-900 dark:text-slate-100">8.5% p.a.</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border border-slate-100 dark:border-slate-800">
+<p class="text-xs text-slate-500 font-medium uppercase">Term</p>
+<p class="text-lg font-bold text-slate-900 dark:text-slate-100">60 Months</p>
+</div>
+</div>
+</div>
+<hr class="border-slate-100 dark:border-slate-800"/>
+<!-- Dropdown Section -->
+<div class="space-y-4">
+<label class="text-lg font-bold text-slate-900 dark:text-slate-100 block" for="loan-purpose">What is the purpose of this loan?</label>
+<div class="relative">
+<select class="w-full h-14 pl-4 pr-10 rounded-xl border-slate-200 dark:border-slate-800 dark:bg-slate-900 focus:border-primary focus:ring-primary text-slate-700 dark:text-slate-300 appearance-none" id="loan-purpose">
+<option disabled="" selected="" value="">Select an option</option>
+<option value="emergency">Emergency Expenses</option>
+<option value="medical">Medical Bills</option>
+<option value="education">Education / Tuition</option>
+<option value="debt">Debt Consolidation</option>
+<option value="home">Home Improvement</option>
+<option value="business">Business Investment</option>
+<option value="other">Other</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-4 flex items-center text-slate-400">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+<p class="text-sm text-slate-500 italic">This helps us tailor the best repayment plan for your needs.</p>
+</div>
+<!-- Additional Info -->
+<div class="bg-slate-100 p-4 rounded-xl flex gap-4 items-start">
+<span class="material-symbols-outlined" style="color: #000000;">info</span>
+<p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+<span class="font-bold">Pro Tip:</span> Applicants for "Education" or "Business Investment" might qualify for our low-interest seasonal programs.
+                                </p>
+</div>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row gap-4 mb-4 mt-12">
+<button class="flex-1 bg-primary text-white h-16 rounded-xl font-bold text-lg hover:bg-opacity-90 transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2" style="background-color: #facc15; color: #11425D;">
+                                    Continue to Next Step
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="px-8 h-16 rounded-xl border border-slate-200 dark:border-slate-800 font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                                    Save Draft
+                                </button>
+</div>
+</div>
+</div>
+<footer class="text-center pb-8 mt-12">
+<p class="text-slate-500 text-sm">Need help? Call our 24/7 support line at <span class="font-bold" style="color: #000000;">1-800-CREDIT-FLOW</span></p>
+<div class="flex justify-center gap-6 mt-4">
+<a class="text-xs text-slate-400 hover:text-primary underline" href="#">Privacy Policy</a>
+<a class="text-xs text-slate-400 hover:text-primary underline" href="#">Terms of Service</a>
+<a class="text-xs text-slate-400 hover:text-primary underline" href="#">Security Standards</a>
+</div>
+</footer>
+</div>
+</main>
+</div>
+</div>
+</body></html>
