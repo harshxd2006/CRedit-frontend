@@ -9,8 +9,8 @@ const API_BASE = "http://localhost:5000/api/auth";
 function HomeFooter() {
   return (
     <footer style={{ background: MIDNIGHT, color: "#cbd5e1", paddingTop: 80, paddingBottom: 40, borderTop: "1px solid rgba(255,255,255,.08)" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 64 }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 20px" }}>
+        <div className="login-footer-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 64 }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span className="material-symbols-outlined" style={{ fontSize: 28, color: GOLD }}>account_balance_wallet</span>
@@ -49,7 +49,7 @@ function HomeFooter() {
           ))}
         </div>
         <div style={{ borderTop: "1px solid rgba(255,255,255,.08)", paddingTop: 40, marginBottom: 24 }}>
-          <div style={{ background: "rgba(255,255,255,.04)", padding: "24px 32px", borderRadius: 16, maxWidth: 896, margin: "0 auto", textAlign: "center" }}>
+          <div style={{ background: "rgba(255,255,255,.04)", padding: "24px 20px", borderRadius: 16, maxWidth: 896, margin: "0 auto", textAlign: "center" }}>
             <p style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.2em", color: "#64748b", marginBottom: 12 }}>RBI Disclaimer</p>
             <p style={{ fontSize: 11, color: "#64748b", lineHeight: 1.8, margin: 0 }}>
               CreditFlow is a technology platform and not a lender. All loan products are offered by RBI-registered NBFCs and Banks.
@@ -67,13 +67,11 @@ export default function Loginpage({ navigate }) {
   const [mpin, setMpinVal]        = useState("");
   const [showPin, setShowPin]     = useState(false);
   const [errors, setErrors]       = useState({});
-
   const [loading, setLoading]     = useState(false);
   const [apiError, setApiError]   = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     setApiError("");
     const errs = {};
     if (mobileVal.length !== 10) errs.mobile = "Enter a valid 10-digit number";
@@ -102,17 +100,9 @@ export default function Loginpage({ navigate }) {
     }
   };
 
-  // Zero footprint when no error — expands smoothly when error appears
   const errSlot = (msg) => (
-    <div style={{
-      overflow: "hidden",
-      maxHeight: msg ? 20 : 0,
-      marginTop: msg ? 4 : 0,
-      transition: "max-height 0.15s ease, margin-top 0.15s ease",
-    }}>
-      <p style={{ color: "#ef4444", fontSize: 11, fontWeight: 600, margin: 0, lineHeight: "16px" }}>
-        {msg}
-      </p>
+    <div style={{ overflow: "hidden", maxHeight: msg ? 20 : 0, marginTop: msg ? 4 : 0, transition: "max-height 0.15s ease, margin-top 0.15s ease" }}>
+      <p style={{ color: "#ef4444", fontSize: 11, fontWeight: 600, margin: 0, lineHeight: "16px" }}>{msg}</p>
     </div>
   );
 
@@ -123,22 +113,11 @@ export default function Loginpage({ navigate }) {
     <div style={{ fontFamily: "'Inter', sans-serif" }}>
       <Navbar navigate={navigate} />
 
-      <section style={{
-        minHeight: "calc(100vh - 80px)",
-        background: "#f6f7f8",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        padding: "48px 24px",
-      }}>
-        <div style={{
-          width: "100%", maxWidth: 460,
-          background: "#fff", borderRadius: 20,
-          boxShadow: "0 20px 60px rgba(26,53,91,.12)",
-          border: "1px solid rgba(26,53,91,.07)",
-          padding: "36px 36px 28px",
-        }}>
+      <section style={{ minHeight: "calc(100vh - 64px)", background: "#f6f7f8", display: "flex", alignItems: "center", justifyContent: "center", padding: "32px 16px" }}>
+        <div style={{ width: "100%", maxWidth: 460, background: "#fff", borderRadius: 20, boxShadow: "0 20px 60px rgba(26,53,91,.12)", border: "1px solid rgba(26,53,91,.07)", padding: "32px 24px 28px" }}>
 
-          <div style={{ marginBottom: 32 }}>
-            <h1 style={{ fontSize: 28, fontWeight: 900, color: PRIMARY, margin: "0 0 6px" }}>Welcome Back</h1>
+          <div style={{ marginBottom: 28 }}>
+            <h1 style={{ fontSize: 26, fontWeight: 900, color: PRIMARY, margin: "0 0 6px" }}>Welcome Back</h1>
             <p style={{ fontSize: 14, color: "rgba(26,53,91,.55)", margin: 0 }}>Login to your CreditFlow account</p>
           </div>
 
@@ -159,13 +138,7 @@ export default function Loginpage({ navigate }) {
                 <input type="tel" value={mobileVal}
                   onChange={e => setMobileVal(e.target.value.replace(/\D/g, "").slice(0, 10))}
                   placeholder="Enter 10-digit mobile number"
-                  style={{
-                    width: "100%", height: 56, paddingLeft: 42, paddingRight: 14,
-                    borderRadius: 8, outline: "none", fontSize: 14, fontWeight: 500,
-                    border: `1px solid ${errors.mobile ? "#ef4444" : "rgba(26,53,91,.2)"}`,
-                    background: "#fff", color: PRIMARY, fontFamily: "'Inter', sans-serif",
-                    transition: "border-color .2s, box-shadow .2s",
-                  }}
+                  style={{ width: "100%", height: 52, paddingLeft: 42, paddingRight: 14, borderRadius: 8, outline: "none", fontSize: 14, fontWeight: 500, border: `1px solid ${errors.mobile ? "#ef4444" : "rgba(26,53,91,.2)"}`, background: "#fff", color: PRIMARY, fontFamily: "'Inter', sans-serif", transition: "border-color .2s, box-shadow .2s", boxSizing: "border-box" }}
                   onFocus={onFocus} onBlur={onBlur} />
               </div>
               {errSlot(errors.mobile)}
@@ -177,60 +150,32 @@ export default function Loginpage({ navigate }) {
                 <label style={{ fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em" }}>4-Digit MPIN</label>
                 <a href="#" style={{ fontSize: 12, fontWeight: 700, color: "rgba(26,53,91,.55)", textDecoration: "none" }}>Forgot MPIN?</a>
               </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-                <div style={{ position: "relative" }}>
-                  <span className="material-symbols-outlined" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "rgba(26,53,91,.35)", fontSize: 18 }}>pin</span>
-                  <input type={showPin ? "text" : "password"} value={mpin}
-                    onChange={e => setMpinVal(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                    maxLength={4} placeholder="••••"
-                    style={{
-                      width: "100%", height: 56, paddingLeft: 42, paddingRight: 44,
-                      borderRadius: 8, outline: "none",
-                      border: `1px solid ${errors.mpin ? "#ef4444" : "rgba(26,53,91,.2)"}`,
-                      background: "#fff", color: PRIMARY,
-                      fontFamily: "'Inter', sans-serif", fontSize: 22, letterSpacing: "0.35em",
-                      transition: "border-color .2s, box-shadow .2s",
-                    }}
-                    onFocus={onFocus} onBlur={onBlur} />
-                  <button type="button" onClick={() => setShowPin(!showPin)}
-                    style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", padding: 0 }}>
-                    <span className="material-symbols-outlined" style={{ color: "rgba(26,53,91,.35)", fontSize: 18 }}>{showPin ? "visibility_off" : "visibility"}</span>
-                  </button>
-                </div>
-                <div style={{
-                  height: 56, borderRadius: 8,
-                  border: "1px dashed rgba(26,53,91,.12)",
-                  background: "rgba(26,53,91,.02)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                }}>
-                  <span style={{ fontSize: 11, color: "rgba(26,53,91,.3)", fontWeight: 600, textAlign: "center", lineHeight: 1.4 }}>Secure &amp; Encrypted</span>
-                </div>
+              <div style={{ position: "relative" }}>
+                <span className="material-symbols-outlined" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "rgba(26,53,91,.35)", fontSize: 18 }}>pin</span>
+                <input type={showPin ? "text" : "password"} value={mpin}
+                  onChange={e => setMpinVal(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                  maxLength={4} placeholder="••••"
+                  style={{ width: "100%", height: 52, paddingLeft: 42, paddingRight: 48, borderRadius: 8, outline: "none", border: `1px solid ${errors.mpin ? "#ef4444" : "rgba(26,53,91,.2)"}`, background: "#fff", color: PRIMARY, fontFamily: "'Inter', sans-serif", fontSize: 22, letterSpacing: "0.35em", transition: "border-color .2s, box-shadow .2s", boxSizing: "border-box" }}
+                  onFocus={onFocus} onBlur={onBlur} />
+                <button type="button" onClick={() => setShowPin(!showPin)}
+                  style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+                  <span className="material-symbols-outlined" style={{ color: "rgba(26,53,91,.35)", fontSize: 18 }}>{showPin ? "visibility_off" : "visibility"}</span>
+                </button>
               </div>
               {errSlot(errors.mpin)}
             </div>
 
             {/* Submit */}
-            <div style={{ marginTop: 8 }}>
-              <button type="submit" disabled={loading} style={{
-                width: "100%", background: loading ? "#e2e8f0" : GOLD,
-                color: loading ? "#94a3b8" : "#0f172a",
-                fontWeight: 800, fontSize: 16, padding: "15px", borderRadius: 12,
-                border: "none", cursor: loading ? "not-allowed" : "pointer",
-                boxShadow: loading ? "none" : "0 6px 20px rgba(255,204,0,.4)",
-                transition: "all .2s",
-                display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-              }}>
-                {loading ? (
-                  <><span style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #94a3b8", borderTopColor: "#475569", display: "inline-block", animation: "spin .8s linear infinite" }} />Logging in...</>
-                ) : "LOGIN"}
-              </button>
-            </div>
+            <button type="submit" disabled={loading} style={{ width: "100%", background: loading ? "#e2e8f0" : GOLD, color: loading ? "#94a3b8" : "#0f172a", fontWeight: 800, fontSize: 16, padding: "15px", borderRadius: 12, border: "none", cursor: loading ? "not-allowed" : "pointer", boxShadow: loading ? "none" : "0 6px 20px rgba(255,204,0,.4)", transition: "all .2s", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+              {loading ? (
+                <><span style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #94a3b8", borderTopColor: "#475569", display: "inline-block", animation: "spin .8s linear infinite" }} />Logging in...</>
+              ) : "LOGIN"}
+            </button>
           </form>
 
           <p style={{ textAlign: "center", marginTop: 20, fontSize: 13, color: "#64748b" }}>
             Don't have an account?{" "}
-            <button onClick={() => navigate("register")}
-              style={{ background: "none", border: "none", color: PRIMARY, fontWeight: 700, cursor: "pointer", textDecoration: "underline", fontSize: 13 }}>
+            <button onClick={() => navigate("register")} style={{ background: "none", border: "none", color: PRIMARY, fontWeight: 700, cursor: "pointer", textDecoration: "underline", fontSize: 13 }}>
               Register
             </button>
           </p>
@@ -243,7 +188,14 @@ export default function Loginpage({ navigate }) {
       </section>
 
       <HomeFooter />
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+
+      <style>{`
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @media (max-width: 480px) {
+          .login-footer-grid { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
+          .login-footer-grid > div:first-child { grid-column: 1 / -1; }
+        }
+      `}</style>
     </div>
   );
 }

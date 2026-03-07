@@ -9,34 +9,34 @@ export default function Footer() {
   ];
 
   return (
-    <footer style={{ background: MIDNIGHT, color: "#fff", paddingTop: 64, paddingBottom: 48 }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px" }}>
+    <footer style={{ background: MIDNIGHT, color: "#fff", paddingTop: 48, paddingBottom: 40 }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 20px" }}>
 
-        {/* Upper grid — 4 cols desktop, 2 cols tablet, 1 col mobile */}
+        {/* Upper grid */}
         <div className="footer-grid" style={{
           display: "grid",
           gridTemplateColumns: "2fr 1fr 1fr 1fr",
-          gap: 48,
-          marginBottom: 64,
+          gap: 40,
+          marginBottom: 48,
         }}>
           {/* Brand col */}
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
-              <span className="material-symbols-outlined" style={{ fontSize: 28, color: GOLD }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+              <span className="material-symbols-outlined" style={{ fontSize: 26, color: GOLD }}>
                 account_balance_wallet
               </span>
-              <span style={{ fontSize: 18, fontWeight: 900, letterSpacing: "0.08em", textTransform: "uppercase", color: "#fff" }}>
+              <span style={{ fontSize: 17, fontWeight: 900, letterSpacing: "0.08em", textTransform: "uppercase", color: "#fff" }}>
                 CREDITFLOW
               </span>
             </div>
-            <p style={{ fontSize: 13, color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 280, marginBottom: 24 }}>
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,.55)", lineHeight: 1.8, maxWidth: 280, marginBottom: 20 }}>
               Empowering the new-to-credit population of India with fair access to
               financial opportunities through data and trust.
             </p>
             <div style={{ display: "flex", gap: 10 }}>
               {["share", "public", "alternate_email"].map((icon) => (
                 <a key={icon} href="#" style={{
-                  width: 38, height: 38, borderRadius: 6,
+                  width: 36, height: 36, borderRadius: 6,
                   background: "rgba(255,255,255,.07)",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   transition: "background .15s",
@@ -44,7 +44,7 @@ export default function Footer() {
                   onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,.14)")}
                   onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255,255,255,.07)")}
                 >
-                  <span className="material-symbols-outlined" style={{ fontSize: 18, color: "rgba(255,255,255,.55)" }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: 17, color: "rgba(255,255,255,.55)" }}>
                     {icon}
                   </span>
                 </a>
@@ -55,10 +55,10 @@ export default function Footer() {
           {/* Link cols */}
           {cols.map((col) => (
             <div key={col.title}>
-              <h4 style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fff", marginBottom: 20, marginTop: 0 }}>
+              <h4 style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fff", marginBottom: 16, marginTop: 0 }}>
                 {col.title}
               </h4>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
                 {col.links.map((l) => (
                   <li key={l}>
                     <a href="#" style={{ fontSize: 13, color: "rgba(255,255,255,.45)", fontWeight: 500, textDecoration: "none", transition: "color .15s" }}
@@ -73,8 +73,8 @@ export default function Footer() {
         </div>
 
         {/* RBI Disclaimer */}
-        <div style={{ borderTop: "1px solid rgba(255,255,255,.05)", paddingTop: 40, marginBottom: 28 }}>
-          <div style={{ background: "rgba(0,0,0,.2)", borderRadius: 12, padding: "24px 32px", maxWidth: 896, margin: "0 auto", textAlign: "center" }}>
+        <div style={{ borderTop: "1px solid rgba(255,255,255,.05)", paddingTop: 32, marginBottom: 24 }}>
+          <div style={{ background: "rgba(0,0,0,.2)", borderRadius: 12, padding: "20px 24px", maxWidth: 896, margin: "0 auto", textAlign: "center" }}>
             <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,.3)", margin: "0 0 10px" }}>
               RBI Disclaimer
             </p>
@@ -97,7 +97,7 @@ export default function Footer() {
         @media (max-width: 768px) {
           .footer-grid {
             grid-template-columns: 1fr 1fr !important;
-            gap: 32px !important;
+            gap: 28px !important;
           }
           .footer-grid > div:first-child {
             grid-column: 1 / -1;
@@ -105,10 +105,7 @@ export default function Footer() {
         }
         @media (max-width: 480px) {
           .footer-grid {
-            grid-template-columns: 1fr !important;
-          }
-          .footer-grid > div:first-child {
-            grid-column: 1 !important;
+            grid-template-columns: 1fr 1fr !important;
           }
         }
       `}</style>

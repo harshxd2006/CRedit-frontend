@@ -83,22 +83,21 @@ function SidebarContent({ navigate, activePage, onClose }) {
   );
 }
 
-export default function Sidebar({ navigate, activePage, navbarHeight = 80 }) {
+export default function Sidebar({ navigate, activePage, navbarHeight = 64 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <>
       {/* ── DESKTOP: spacer keeps layout + fixed aside ── */}
-      <div className="sb-spacer" style={{ width: 260, minWidth: 260, flexShrink: 0 }} />
+      <div className="sb-spacer" style={{ width: 270, minWidth: 270, flexShrink: 0 }} />
       <div className="sb-fixed" style={{
-        width: 260, position: "fixed", top: navbarHeight, left: 0,
+        width: 270, position: "fixed", top: navbarHeight, left: 0,
         height: `calc(100vh - ${navbarHeight}px)`, zIndex: 40,
       }}>
         <SidebarContent navigate={navigate} activePage={activePage} />
       </div>
 
-      {/* ── MOBILE: hamburger sits INSIDE the navbar area on the right ── */}
-      {/* It is position:fixed top-right so it never overlaps the logo */}
+      {/* ── MOBILE: hamburger button ── */}
       <button
         className="sb-hamburger"
         onClick={() => setMobileOpen(true)}
@@ -106,19 +105,20 @@ export default function Sidebar({ navigate, activePage, navbarHeight = 80 }) {
         style={{
           display: "none",
           position: "fixed",
-          top: "50%",
+          top: 14,
           right: 16,
-          transform: "translateY(-calc(50% + 40px))",
-          zIndex: 50,
-          background: "transparent",
+          zIndex: 51,
+          background: MIDNIGHT,
           border: "none",
           cursor: "pointer",
-          padding: 4,
+          borderRadius: 8,
+          width: 38,
+          height: 38,
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <span className="material-symbols-outlined" style={{ fontSize: 28, color: MIDNIGHT }}>menu</span>
+        <span className="material-symbols-outlined" style={{ fontSize: 22, color: "#fff" }}>menu</span>
       </button>
 
       {/* ── MOBILE: slide-in drawer ── */}
@@ -136,8 +136,8 @@ export default function Sidebar({ navigate, activePage, navbarHeight = 80 }) {
         @media (max-width: 768px) {
           .sb-spacer  { display: none !important; width: 0 !important; min-width: 0 !important; }
           .sb-fixed   { display: none !important; }
-          .sb-hamburger { display: flex !important; top: 20px !important; transform: none !important; }
-          .page-main  { padding: 24px 16px 40px !important; }
+          .sb-hamburger { display: flex !important; }
+          .page-main  { padding: 20px 16px 40px !important; }
         }
       `}</style>
     </>

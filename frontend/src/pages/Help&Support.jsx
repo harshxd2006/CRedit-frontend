@@ -22,25 +22,24 @@ export default function HelpSupport({ navigate }) {
       <div style={{ display: "flex", flex: 1 }}>
         <Sidebar navigate={navigate} activePage="helpSupport" />
         <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
-          <main style={{ flex: 1, padding: "40px 48px" }}>
+          <main className="page-main" style={{ flex: 1, padding: "24px 16px" }}>
 
-            {/* ── Constrained content area ── */}
-            <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", flexDirection: "column", gap: 24 }}>
+            <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", flexDirection: "column", gap: 20 }}>
 
               {/* Page header */}
-              <div style={{ marginBottom: 8 }}>
-                <h1 style={{ fontSize: 28, fontWeight: 900, color: "#0f172a", margin: "0 0 6px", letterSpacing: "-0.5px" }}>Help &amp; Support</h1>
+              <div style={{ marginBottom: 4 }}>
+                <h1 style={{ fontSize: 24, fontWeight: 900, color: "#0f172a", margin: "0 0 6px", letterSpacing: "-0.5px" }}>Help &amp; Support</h1>
                 <p style={{ fontSize: 14, color: "#64748b", margin: 0 }}>Find answers, learn how to use CreditFlow, or get in touch with our support team.</p>
               </div>
 
               {/* Grievance Officer */}
-              <section style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: 24, boxShadow: "0 1px 4px rgba(0,0,0,.04)" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+              <section style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: 22, boxShadow: "0 1px 4px rgba(0,0,0,.04)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
                   <span className="material-symbols-outlined" style={{ color: GOLD, fontSize: 22 }}>gavel</span>
-                  <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: "#0f172a" }}>Grievance Redressal Officer</h2>
+                  <h2 style={{ fontSize: 17, fontWeight: 700, margin: 0, color: "#0f172a" }}>Grievance Redressal Officer</h2>
                 </div>
-                <p style={{ fontSize: 13, color: "#64748b", marginBottom: 20 }}>If your query is not resolved within 30 days, you may contact our Grievance Officer.</p>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
+                <p style={{ fontSize: 13, color: "#64748b", marginBottom: 16 }}>If your query is not resolved within 30 days, you may contact our Grievance Officer.</p>
+                <div className="grievance-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
                   {[
                     { label: "Name", value: "Mr. Arvind Kumar" },
                     { label: "Contact Number", value: "+91 800-123-4567" },
@@ -48,21 +47,21 @@ export default function HelpSupport({ navigate }) {
                   ].map((item) => (
                     <div key={item.label}>
                       <p style={{ fontSize: 10, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.12em", margin: "0 0 4px" }}>{item.label}</p>
-                      <p style={{ fontSize: 14, fontWeight: 600, color: "#0f172a", margin: 0 }}>{item.value}</p>
+                      <p style={{ fontSize: 13, fontWeight: 600, color: "#0f172a", margin: 0, wordBreak: "break-all" }}>{item.value}</p>
                     </div>
                   ))}
                 </div>
               </section>
 
               {/* Complaint Form & Tutorials */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+              <div className="help-two-col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
                 {/* Complaint Form */}
-                <section style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: 24, boxShadow: "0 1px 4px rgba(0,0,0,.04)" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
+                <section style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: 22, boxShadow: "0 1px 4px rgba(0,0,0,.04)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
                     <span className="material-symbols-outlined" style={{ color: GOLD, fontSize: 22 }}>edit_note</span>
-                    <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: "#0f172a" }}>Submit a Complaint</h2>
+                    <h2 style={{ fontSize: 17, fontWeight: 700, margin: 0, color: "#0f172a" }}>Submit a Complaint</h2>
                   </div>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                     <div>
                       <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#334155", marginBottom: 6 }}>Complaint Category</label>
                       <select value={complaint.category} onChange={(e) => setComplaint({ ...complaint, category: e.target.value })}
@@ -88,12 +87,12 @@ export default function HelpSupport({ navigate }) {
                 </section>
 
                 {/* Video Tutorials */}
-                <section style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: 24, boxShadow: "0 1px 4px rgba(0,0,0,.04)" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
+                <section style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: 22, boxShadow: "0 1px 4px rgba(0,0,0,.04)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
                     <span className="material-symbols-outlined" style={{ color: GOLD, fontSize: 22 }}>play_circle</span>
-                    <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: "#0f172a" }}>Video Tutorials</h2>
+                    <h2 style={{ fontSize: 17, fontWeight: 700, margin: 0, color: "#0f172a" }}>Video Tutorials</h2>
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                     {[
                       { title: "How to apply for a Personal Loan", duration: "2:30 mins • CreditFlow Basics" },
                       { title: "Reading your Credit Report", duration: "4:15 mins • Knowledge Base" },
@@ -101,12 +100,12 @@ export default function HelpSupport({ navigate }) {
                       <div key={vid.title} style={{ cursor: "pointer" }}
                         onMouseEnter={(e) => e.currentTarget.querySelector("h4").style.color = GOLD}
                         onMouseLeave={(e) => e.currentTarget.querySelector("h4").style.color = "#0f172a"}>
-                        <div style={{ aspectRatio: "16/9", background: "#e2e8f0", borderRadius: 10, marginBottom: 10, overflow: "hidden", position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <div style={{ aspectRatio: "16/9", background: "#e2e8f0", borderRadius: 10, marginBottom: 8, overflow: "hidden", position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
                           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(17,66,93,.1), rgba(255,215,0,.1))" }} />
-                          <span className="material-symbols-outlined" style={{ fontSize: 40, color: "rgba(255,255,255,.8)", zIndex: 1 }}>play_circle</span>
+                          <span className="material-symbols-outlined" style={{ fontSize: 36, color: "rgba(255,255,255,.8)", zIndex: 1 }}>play_circle</span>
                         </div>
-                        <h4 style={{ fontSize: 13, fontWeight: 700, margin: "0 0 4px", color: "#0f172a", transition: "color .15s" }}>{vid.title}</h4>
-                        <p style={{ fontSize: 11, color: "#94a3b8", margin: 0 }}>{vid.duration}</p>
+                        <h4 style={{ fontSize: 12, fontWeight: 700, margin: "0 0 3px", color: "#0f172a", transition: "color .15s" }}>{vid.title}</h4>
+                        <p style={{ fontSize: 10, color: "#94a3b8", margin: 0 }}>{vid.duration}</p>
                       </div>
                     ))}
                   </div>
@@ -115,22 +114,22 @@ export default function HelpSupport({ navigate }) {
 
               {/* FAQ */}
               <section>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
                   <span className="material-symbols-outlined" style={{ color: GOLD, fontSize: 22 }}>quiz</span>
-                  <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: "#0f172a" }}>Frequently Asked Questions</h2>
+                  <h2 style={{ fontSize: 17, fontWeight: 700, margin: 0, color: "#0f172a" }}>Frequently Asked Questions</h2>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   {faqs.map((faq, i) => (
                     <div key={i} style={{ background: "#fff", borderRadius: 10, border: "1px solid #e2e8f0", overflow: "hidden" }}>
                       <button onClick={() => setOpenFaq(openFaq === i ? -1 : i)}
-                        style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: 16, background: openFaq === i ? "#f8fafc" : "#fff", border: "none", cursor: "pointer", textAlign: "left" }}>
-                        <span style={{ fontSize: 13, fontWeight: 700, color: openFaq === i ? MIDNIGHT : "#0f172a" }}>{faq.q}</span>
-                        <span className="material-symbols-outlined" style={{ color: openFaq === i ? GOLD : "#94a3b8", fontSize: 20 }}>
+                        style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", background: openFaq === i ? "#f8fafc" : "#fff", border: "none", cursor: "pointer", textAlign: "left" }}>
+                        <span style={{ fontSize: 13, fontWeight: 700, color: openFaq === i ? MIDNIGHT : "#0f172a", flex: 1, paddingRight: 8 }}>{faq.q}</span>
+                        <span className="material-symbols-outlined" style={{ color: openFaq === i ? GOLD : "#94a3b8", fontSize: 20, flexShrink: 0 }}>
                           {openFaq === i ? "expand_less" : "expand_more"}
                         </span>
                       </button>
                       {openFaq === i && faq.a && (
-                        <div style={{ padding: "0 16px 16px", background: "#f8fafc", fontSize: 13, color: "#64748b", lineHeight: 1.7 }}>{faq.a}</div>
+                        <div style={{ padding: "0 16px 14px", background: "#f8fafc", fontSize: 13, color: "#64748b", lineHeight: 1.7 }}>{faq.a}</div>
                       )}
                     </div>
                   ))}
@@ -138,17 +137,17 @@ export default function HelpSupport({ navigate }) {
               </section>
 
               {/* RBI Escalation */}
-              <section style={{ background: "rgba(17,66,93,.04)", border: "2px dashed rgba(17,66,93,.15)", borderRadius: 20, padding: 40, textAlign: "center" }}>
-                <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px", boxShadow: "0 4px 12px rgba(0,0,0,.06)" }}>
-                  <span className="material-symbols-outlined" style={{ fontSize: 28, color: GOLD }}>verified_user</span>
+              <section style={{ background: "rgba(17,66,93,.04)", border: "2px dashed rgba(17,66,93,.15)", borderRadius: 20, padding: "32px 24px", textAlign: "center" }}>
+                <div style={{ width: 56, height: 56, borderRadius: "50%", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px", boxShadow: "0 4px 12px rgba(0,0,0,.06)" }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: 26, color: GOLD }}>verified_user</span>
                 </div>
-                <h3 style={{ fontSize: 19, fontWeight: 700, color: "#0f172a", margin: "0 0 12px" }}>Escalation to Banking Ombudsman</h3>
-                <p style={{ fontSize: 13, color: "#64748b", lineHeight: 1.7, maxWidth: 520, margin: "0 auto 24px" }}>
+                <h3 style={{ fontSize: 17, fontWeight: 700, color: "#0f172a", margin: "0 0 10px" }}>Escalation to Banking Ombudsman</h3>
+                <p style={{ fontSize: 13, color: "#64748b", lineHeight: 1.7, maxWidth: 520, margin: "0 auto 20px" }}>
                   If your grievance is not resolved to your satisfaction by the company within 30 days, you may approach the Integrated Ombudsman Scheme, RBI.
                 </p>
-                <div style={{ display: "flex", justifyContent: "center", gap: 12 }}>
-                  <a href="#" style={{ padding: "10px 24px", background: GOLD, color: MIDNIGHT, fontWeight: 700, fontSize: 13, borderRadius: 8, textDecoration: "none" }}>Visit RBI CMS Portal</a>
-                  <div style={{ padding: "10px 24px", background: "#fff", border: "1px solid #e2e8f0", borderRadius: 8, fontSize: 13, color: "#334155", display: "flex", alignItems: "center", gap: 6 }}>
+                <div className="escalation-btns" style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
+                  <a href="#" style={{ padding: "10px 22px", background: GOLD, color: MIDNIGHT, fontWeight: 700, fontSize: 13, borderRadius: 8, textDecoration: "none" }}>Visit RBI CMS Portal</a>
+                  <div style={{ padding: "10px 22px", background: "#fff", border: "1px solid #e2e8f0", borderRadius: 8, fontSize: 13, color: "#334155", display: "flex", alignItems: "center", gap: 6 }}>
                     <span className="material-symbols-outlined" style={{ fontSize: 16 }}>phone</span>
                     14448 (Toll Free)
                   </div>
@@ -160,6 +159,16 @@ export default function HelpSupport({ navigate }) {
           <Footer />
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .help-two-col { grid-template-columns: 1fr !important; }
+          .grievance-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          .escalation-btns { flex-direction: column !important; align-items: center !important; }
+        }
+      `}</style>
     </div>
   );
 }

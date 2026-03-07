@@ -29,20 +29,20 @@ export default function MyApplications({ navigate }) {
         <Sidebar navigate={navigate} activePage="myApplications" />
 
         <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
-          <main style={{ flex: 1, padding: "40px 48px" }} className="page-main">
+          <main className="page-main" style={{ flex: 1, padding: "24px 16px" }}>
             <div style={{ maxWidth: 900, margin: "0 auto" }}>
 
-              <div style={{ marginBottom: 28 }}>
-                <h1 style={{ fontSize: 28, fontWeight: 900, color: "#0f172a", margin: "0 0 6px", letterSpacing: "-0.5px" }}>My Applications</h1>
+              <div style={{ marginBottom: 20 }}>
+                <h1 style={{ fontSize: 24, fontWeight: 900, color: "#0f172a", margin: "0 0 6px", letterSpacing: "-0.5px" }}>My Applications</h1>
                 <p style={{ fontSize: 14, color: "#64748b", margin: 0 }}>Track and manage all your loan applications in one place.</p>
               </div>
 
               {/* Filters */}
-              <div style={{ display: "flex", gap: 10, marginBottom: 28, flexWrap: "wrap" }}>
+              <div style={{ display: "flex", gap: 8, marginBottom: 24, flexWrap: "wrap" }}>
                 {filters.map((f) => (
                   <button key={f} onClick={() => setActiveFilter(f)}
                     style={{
-                      padding: "8px 18px", borderRadius: 8, fontSize: 13, fontWeight: 600,
+                      padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: 600,
                       border: `2px solid ${activeFilter === f ? MIDNIGHT : "#e2e8f0"}`,
                       background: activeFilter === f ? MIDNIGHT : "#fff",
                       color: activeFilter === f ? "#fff" : "#475569",
@@ -53,32 +53,32 @@ export default function MyApplications({ navigate }) {
 
               {/* Application Cards */}
               {filtered.length === 0 ? (
-                <div style={{ textAlign: "center", padding: "64px 32px", background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0" }}>
-                  <span className="material-symbols-outlined" style={{ fontSize: 48, color: "#e2e8f0", display: "block", marginBottom: 16 }}>description</span>
-                  <h3 style={{ fontSize: 16, fontWeight: 700, color: "#64748b", margin: "0 0 8px" }}>No applications found</h3>
-                  <p style={{ fontSize: 13, color: "#94a3b8", margin: "0 0 20px" }}>Start your loan journey today.</p>
+                <div style={{ textAlign: "center", padding: "48px 24px", background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0" }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: 40, color: "#e2e8f0", display: "block", marginBottom: 14 }}>description</span>
+                  <h3 style={{ fontSize: 15, fontWeight: 700, color: "#64748b", margin: "0 0 8px" }}>No applications found</h3>
+                  <p style={{ fontSize: 13, color: "#94a3b8", margin: "0 0 18px" }}>Start your loan journey today.</p>
                   <button style={{ padding: "12px 28px", background: GOLD, color: MIDNIGHT, borderRadius: 10, fontWeight: 700, fontSize: 13, border: "none", cursor: "pointer" }}>Apply Now</button>
                 </div>
               ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                   {filtered.map((app, i) => (
-                    <div key={i} style={{ background: "#fff", borderRadius: 16, padding: 24, boxShadow: "0 2px 8px rgba(0,0,0,.05)", border: "1px solid #e2e8f0", transition: "transform .15s, box-shadow .15s" }}
+                    <div key={i} style={{ background: "#fff", borderRadius: 16, padding: "20px 16px", boxShadow: "0 2px 8px rgba(0,0,0,.05)", border: "1px solid #e2e8f0", transition: "transform .15s, box-shadow .15s" }}
                       onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,.08)"; }}
                       onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,.05)"; }}>
 
                       {/* Card Header */}
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: 16, borderBottom: "1px solid #f1f5f9", marginBottom: 16 }}>
-                        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                          <div style={{ width: 44, height: 44, borderRadius: 10, background: "rgba(17,66,93,.07)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <span className="material-symbols-outlined" style={{ fontSize: 22, color: MIDNIGHT }}>description</span>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: 14, borderBottom: "1px solid #f1f5f9", marginBottom: 14 }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                          <div style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(17,66,93,.07)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                            <span className="material-symbols-outlined" style={{ fontSize: 20, color: MIDNIGHT }}>description</span>
                           </div>
-                          <h3 style={{ fontSize: 16, fontWeight: 700, color: MIDNIGHT, margin: 0 }}>{app.type}</h3>
+                          <h3 style={{ fontSize: 14, fontWeight: 700, color: MIDNIGHT, margin: 0 }}>{app.type}</h3>
                         </div>
-                        <span style={{ padding: "5px 14px", borderRadius: 999, fontSize: 11, fontWeight: 700, background: app.statusBg, color: app.statusColor, border: `1px solid ${app.statusBorder}` }}>{app.status}</span>
+                        <span style={{ padding: "5px 12px", borderRadius: 999, fontSize: 11, fontWeight: 700, background: app.statusBg, color: app.statusColor, border: `1px solid ${app.statusBorder}`, flexShrink: 0 }}>{app.status}</span>
                       </div>
 
                       {/* Card Details */}
-                      <div className="app-details-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 16 }}>
+                      <div className="app-details-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12, marginBottom: 14 }}>
                         {[
                           { label: "Amount Requested", value: app.amount },
                           { label: "Loan Term",         value: app.term   },
@@ -86,16 +86,16 @@ export default function MyApplications({ navigate }) {
                           { label: "Applied On",        value: app.applied },
                         ].map((d) => (
                           <div key={d.label}>
-                            <p style={{ fontSize: 11, color: "#94a3b8", margin: "0 0 4px", textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600 }}>{d.label}</p>
+                            <p style={{ fontSize: 10, color: "#94a3b8", margin: "0 0 3px", textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600 }}>{d.label}</p>
                             <p style={{ fontSize: 13, color: "#0f172a", fontWeight: 600, margin: 0 }}>{d.value}</p>
                           </div>
                         ))}
                       </div>
 
                       {/* Card Footer */}
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 16, borderTop: "1px solid #f1f5f9" }}>
-                        <span style={{ fontSize: 13, color: "#94a3b8" }}>{app.daysAgo}</span>
-                        <button style={{ padding: "8px 20px", background: MIDNIGHT, color: "#fff", borderRadius: 8, fontWeight: 700, fontSize: 13, border: "none", cursor: "pointer", transition: "opacity .15s" }}
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 14, borderTop: "1px solid #f1f5f9" }}>
+                        <span style={{ fontSize: 12, color: "#94a3b8" }}>{app.daysAgo}</span>
+                        <button style={{ padding: "8px 18px", background: MIDNIGHT, color: "#fff", borderRadius: 8, fontWeight: 700, fontSize: 13, border: "none", cursor: "pointer", transition: "opacity .15s" }}
                           onMouseEnter={(e) => e.currentTarget.style.opacity = "0.85"}
                           onMouseLeave={(e) => e.currentTarget.style.opacity = "1"}>View Details</button>
                       </div>
@@ -111,17 +111,4 @@ export default function MyApplications({ navigate }) {
       </div>
     </div>
   );
-}
-
-const _style = document.createElement("style");
-_style.textContent = `
-  @media (max-width: 768px) {
-          nav, header { padding-right: 60px !important; }
-    /* page-main padding handled by Sidebar.jsx */
-    .app-details-grid { grid-template-columns: 1fr 1fr !important; }
-  }
-`;
-if (!document.getElementById("myapps-styles")) {
-  _style.id = "myapps-styles";
-  document.head.appendChild(_style);
 }
