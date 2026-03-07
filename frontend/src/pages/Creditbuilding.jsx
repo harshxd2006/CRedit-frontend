@@ -23,7 +23,7 @@ export default function CreditBuilding({ navigate }) {
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#f8f9ff", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar navigate={navigate} />
 
-      <div style={{ display: "flex", flex: 1, alignItems: "flex-start" }}>
+      <div style={{ display: "flex", flex: 1 }}>
 
         {/* Universal Sidebar — sticky, scrolls with page */}
         <div style={{ flexShrink: 0, position: "sticky", top: 80, alignSelf: "flex-start" }}>

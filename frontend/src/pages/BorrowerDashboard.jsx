@@ -30,22 +30,12 @@ const journeySteps = [
 export default function BorrowerDashboard({ navigate }) {
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#f6f7f8", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-
-      {/* ── NAVBAR ── */}
       <Navbar navigate={navigate} />
 
-      {/* ── BODY ROW: Sidebar + (Main + Footer) ── */}
-      <div style={{ display: "flex", flex: 1, alignItems: "flex-start" }}>
+      <div style={{ display: "flex", flex: 1 }}>
+        <Sidebar navigate={navigate} activePage="dashboard" />
 
-        {/* Sidebar — sticky so it stays visible while scrolling, but doesn't lock height */}
-        <div style={{ flexShrink: 0, position: "sticky", top: 80, alignSelf: "flex-start" }}>
-          <Sidebar navigate={navigate} activePage="dashboard" />
-        </div>
-
-        {/* Right column: main content + footer */}
         <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
-
-          {/* ── MAIN CONTENT ── */}
           <main style={{ flex: 1, padding: 32 }}>
 
             {/* Welcome Banner */}
@@ -57,48 +47,24 @@ export default function BorrowerDashboard({ navigate }) {
                   <p style={{ fontSize: 13, color: "#64748b", fontWeight: 500, margin: 0 }}>Reminder: Your HDFC Loan EMI is due in 3 days</p>
                 </div>
               </div>
-              <button
-                style={{
-                  background: MIDNIGHT, color: "#fff", padding: "10px 24px",
-                  borderRadius: 8, fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer",
-                  boxShadow: "0 4px 16px rgba(17,66,93,.2)", transition: "transform .15s",
-                }}
-                onMouseEnter={e => e.currentTarget.style.transform = "scale(1.02)"}
-                onMouseLeave={e => e.currentTarget.style.transform = "none"}
-              >Pay Now</button>
+              <button style={{ background: MIDNIGHT, color: "#fff", padding: "10px 24px", borderRadius: 8, fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", boxShadow: "0 4px 16px rgba(17,66,93,.2)" }}>Pay Now</button>
             </div>
 
             {/* Main Grid */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 24 }}>
 
-              {/* ── LEFT + MIDDLE (span 2) ── */}
               <div style={{ gridColumn: "span 2", display: "flex", flexDirection: "column", gap: 24 }}>
 
                 {/* NTC Score Card */}
-                <div style={{
-                  background: "#fff", borderRadius: 20, border: "1px solid #e2e8f0",
-                  padding: 32, display: "flex", flexDirection: "column", alignItems: "center",
-                  position: "relative", overflow: "hidden",
-                }}>
+                <div style={{ background: "#fff", borderRadius: 20, border: "1px solid #e2e8f0", padding: 32, display: "flex", flexDirection: "column", alignItems: "center", position: "relative", overflow: "hidden" }}>
                   <div style={{ position: "absolute", top: 24, right: 24 }}>
-                    <span style={{
-                      background: "#f0fdf4", color: "#16a34a", padding: "4px 12px",
-                      borderRadius: 999, fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em",
-                    }}>Tier 1 - Low Risk</span>
+                    <span style={{ background: "#f0fdf4", color: "#16a34a", padding: "4px 12px", borderRadius: 999, fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>Tier 1 - Low Risk</span>
                   </div>
                   <p style={{ fontSize: 10, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.15em", alignSelf: "flex-start", margin: "0 0 24px" }}>NTC Credit Score</p>
-
-                  {/* Gauge */}
                   <div style={{ position: "relative", width: 256, height: 128, marginBottom: 16 }}>
                     <svg viewBox="0 0 100 50" style={{ width: "100%", height: "100%" }}>
-                      <defs>
-                        <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" style={{ stopColor: "#ef4444" }} />
-                          <stop offset="100%" style={{ stopColor: "#991b1b" }} />
-                        </linearGradient>
-                      </defs>
                       <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#e2e8f0" strokeWidth="8" strokeLinecap="round" />
-                      <path d="M 10 50 A 40 40 0 0 1 75 22" fill="none" stroke="url(#gauge-gradient)" strokeWidth="8" strokeLinecap="round" strokeDasharray="125.6" strokeDashoffset="30" />
+                      <path d="M 10 50 A 40 40 0 0 1 75 22" fill="none" stroke={GOLD} strokeWidth="8" strokeLinecap="round" strokeDasharray="125.6" strokeDashoffset="30" />
                       <g transform="rotate(120, 50, 50)">
                         <line x1="50" y1="50" x2="50" y2="15" stroke={MIDNIGHT} strokeWidth="2" strokeLinecap="round" />
                         <circle cx="50" cy="50" r="3" fill={MIDNIGHT} />
@@ -109,31 +75,18 @@ export default function BorrowerDashboard({ navigate }) {
                       <span style={{ fontSize: 11, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.15em", marginTop: 4 }}>Excellent</span>
                     </div>
                   </div>
-
                   <div style={{ display: "flex", gap: 12, marginTop: 16 }}>
-                    <button style={{
-                      display: "flex", alignItems: "center", gap: 8, padding: "8px 20px",
-                      background: "rgba(255,215,0,.08)", borderRadius: 8, fontSize: 13, fontWeight: 700,
-                      border: "1px solid rgba(255,215,0,.2)", color: MIDNIGHT, cursor: "pointer",
-                    }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: 18 }}>analytics</span>
-                      View Full Report
+                    <button style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 20px", background: "rgba(255,215,0,.08)", borderRadius: 8, fontSize: 13, fontWeight: 700, border: "1px solid rgba(255,215,0,.2)", color: MIDNIGHT, cursor: "pointer" }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: 18 }}>analytics</span>View Full Report
                     </button>
-                    <button style={{
-                      display: "flex", alignItems: "center", gap: 8, padding: "8px 20px",
-                      background: GOLD, borderRadius: 8, fontSize: 13, fontWeight: 700,
-                      border: "none", color: "#000", cursor: "pointer",
-                    }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: 18 }}>refresh</span>
-                      Refresh Score
+                    <button style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 20px", background: GOLD, borderRadius: 8, fontSize: 13, fontWeight: 700, border: "none", color: "#000", cursor: "pointer" }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: 18 }}>refresh</span>Refresh Score
                     </button>
                   </div>
                 </div>
 
                 {/* Recent Applications + Lender Matches */}
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
-
-                  {/* Recent Applications */}
                   <div style={{ background: "#fff", borderRadius: 24, border: "1px solid #f1f5f9", padding: 28, boxShadow: "0 1px 4px rgba(0,0,0,.04)" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
                       <h3 style={{ fontSize: 17, fontWeight: 700, margin: 0, color: "#0f172a" }}>Recent Applications</h3>
@@ -141,14 +94,9 @@ export default function BorrowerDashboard({ navigate }) {
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                       {applications.map((app, i) => (
-                        <div key={i} style={{
-                          display: "flex", alignItems: "center", justifyContent: "space-between",
-                          padding: "14px 16px", borderRadius: 16, border: "1px solid transparent",
-                          transition: "border .15s",
-                        }}
+                        <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderRadius: 16, border: "1px solid transparent", transition: "border .15s" }}
                           onMouseEnter={e => e.currentTarget.style.borderColor = "#e2e8f0"}
-                          onMouseLeave={e => e.currentTarget.style.borderColor = "transparent"}
-                        >
+                          onMouseLeave={e => e.currentTarget.style.borderColor = "transparent"}>
                           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
                             <div style={{ width: 44, height: 44, borderRadius: 12, background: "#f8fafc", border: "1px solid #e2e8f0" }} />
                             <div>
@@ -156,16 +104,12 @@ export default function BorrowerDashboard({ navigate }) {
                               <p style={{ fontSize: 11, color: "#94a3b8", margin: 0 }}>{app.sub}</p>
                             </div>
                           </div>
-                          <span style={{
-                            padding: "4px 10px", borderRadius: 999, fontSize: 10, fontWeight: 700,
-                            background: app.statusBg, color: app.statusColor, border: `1px solid ${app.statusBorder}`,
-                          }}>{app.status}</span>
+                          <span style={{ padding: "4px 10px", borderRadius: 999, fontSize: 10, fontWeight: 700, background: app.statusBg, color: app.statusColor, border: `1px solid ${app.statusBorder}` }}>{app.status}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  {/* Lender Matches */}
                   <div style={{ background: "#fff", borderRadius: 24, border: "1px solid #f1f5f9", padding: 28, boxShadow: "0 1px 4px rgba(0,0,0,.04)" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
                       <h3 style={{ fontSize: 17, fontWeight: 700, margin: 0, color: "#0f172a" }}>Top Lender Matches</h3>
@@ -173,23 +117,16 @@ export default function BorrowerDashboard({ navigate }) {
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                       {lenderMatches.map((l, i) => (
-                        <div key={i} style={{
-                          display: "flex", justifyContent: "space-between", alignItems: "center",
-                          padding: "14px 16px", borderRadius: 16, border: "1px solid #e2e8f0",
-                          transition: "box-shadow .15s",
-                        }}
+                        <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 16px", borderRadius: 16, border: "1px solid #e2e8f0", transition: "box-shadow .15s" }}
                           onMouseEnter={e => e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,.08)"}
-                          onMouseLeave={e => e.currentTarget.style.boxShadow = "none"}
-                        >
+                          onMouseLeave={e => e.currentTarget.style.boxShadow = "none"}>
                           <div>
                             <p style={{ fontSize: 17, fontWeight: 900, margin: "0 0 2px", color: "#0f172a" }}>{l.amount}</p>
                             <p style={{ fontSize: 11, color: "#94a3b8", margin: 0 }}>{l.bank} • {l.apr} APR</p>
                           </div>
                           <div style={{ textAlign: "right", display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-end" }}>
                             <p style={{ fontSize: 11, fontWeight: 700, color: "#16a34a", margin: 0 }}>{l.match} Match</p>
-                            <button style={{ fontSize: 11, fontWeight: 700, background: "none", border: "none", cursor: "pointer", color: "#0f172a", textDecoration: "underline" }}>
-                              {i === 0 ? "Quick Apply" : "Details"}
-                            </button>
+                            <button style={{ fontSize: 11, fontWeight: 700, background: "none", border: "none", cursor: "pointer", color: "#0f172a", textDecoration: "underline" }}>{i === 0 ? "Quick Apply" : "Details"}</button>
                           </div>
                         </div>
                       ))}
@@ -197,7 +134,7 @@ export default function BorrowerDashboard({ navigate }) {
                   </div>
                 </div>
 
-                {/* Financial Health Indicators */}
+                {/* Health Indicators */}
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
                   {healthIndicators.map((h, i) => (
                     <div key={i} style={{ background: "#fff", padding: 20, borderRadius: 16, border: "1px solid #e2e8f0" }}>
@@ -214,20 +151,12 @@ export default function BorrowerDashboard({ navigate }) {
                 </div>
               </div>
 
-              {/* ── RIGHT COLUMN ── */}
+              {/* Right Column */}
               <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
 
                 {/* Active Loan Card */}
-                <div style={{
-                  background: MIDNIGHT, color: "#fff", borderRadius: 20,
-                  padding: 24, boxShadow: "0 8px 32px rgba(17,66,93,.25)",
-                  position: "relative", overflow: "hidden",
-                }}>
-                  <div style={{
-                    position: "absolute", top: 0, right: 0,
-                    width: 128, height: 128, borderRadius: "50%",
-                    background: "rgba(255,255,255,.05)", transform: "translate(40%, -40%)",
-                  }} />
+                <div style={{ background: MIDNIGHT, color: "#fff", borderRadius: 20, padding: 24, boxShadow: "0 8px 32px rgba(17,66,93,.25)", position: "relative", overflow: "hidden" }}>
+                  <div style={{ position: "absolute", top: 0, right: 0, width: 128, height: 128, borderRadius: "50%", background: "rgba(255,255,255,.05)", transform: "translate(40%, -40%)" }} />
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
                     <div>
                       <p style={{ fontSize: 9, fontWeight: 700, color: "rgba(255,255,255,.5)", textTransform: "uppercase", letterSpacing: "0.15em", margin: "0 0 4px" }}>Active Loan</p>
@@ -268,20 +197,13 @@ export default function BorrowerDashboard({ navigate }) {
                     <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
                       {journeySteps.map((step, i) => (
                         <div key={i} style={{ display: "flex", alignItems: "center", gap: 16, position: "relative", opacity: step.state === "locked" ? 0.4 : 1 }}>
-                          <div style={{
-                            width: 32, height: 32, borderRadius: "50%", flexShrink: 0,
-                            background: step.state === "done" ? "#22c55e" : step.state === "active" ? GOLD : "#e2e8f0",
-                            display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1,
-                            boxShadow: step.state === "active" ? `0 0 0 4px rgba(255,215,0,.25)` : "none",
-                          }}>
+                          <div style={{ width: 32, height: 32, borderRadius: "50%", flexShrink: 0, background: step.state === "done" ? "#22c55e" : step.state === "active" ? GOLD : "#e2e8f0", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1, boxShadow: step.state === "active" ? `0 0 0 4px rgba(255,215,0,.25)` : "none" }}>
                             <span className="material-symbols-outlined" style={{ fontSize: 16, color: step.state === "locked" ? "#94a3b8" : step.state === "active" ? "#000" : "#fff" }}>{step.icon}</span>
                           </div>
                           <div>
                             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                               <p style={{ fontSize: 12, fontWeight: 700, margin: 0, color: "#0f172a" }}>{step.label}</p>
-                              {step.state === "active" && (
-                                <span style={{ padding: "2px 6px", background: GOLD, color: "#000", fontSize: 8, fontWeight: 700, borderRadius: 4, textTransform: "uppercase" }}>Active</span>
-                              )}
+                              {step.state === "active" && <span style={{ padding: "2px 6px", background: GOLD, color: "#000", fontSize: 8, fontWeight: 700, borderRadius: 4, textTransform: "uppercase" }}>Active</span>}
                             </div>
                             <p style={{ fontSize: 10, color: "#94a3b8", margin: 0 }}>{step.sub}</p>
                           </div>
@@ -289,24 +211,13 @@ export default function BorrowerDashboard({ navigate }) {
                       ))}
                     </div>
                   </div>
-                  <button style={{
-                    width: "100%", marginTop: 24, padding: "12px 0",
-                    background: GOLD, color: "#000", fontWeight: 700, fontSize: 12,
-                    borderRadius: 12, border: "none", cursor: "pointer",
-                    boxShadow: "0 4px 16px rgba(255,215,0,.2)", transition: "opacity .15s",
-                  }}
-                    onMouseEnter={e => e.currentTarget.style.opacity = "0.9"}
-                    onMouseLeave={e => e.currentTarget.style.opacity = "1"}
-                  >Continue Journey</button>
+                  <button style={{ width: "100%", marginTop: 24, padding: "12px 0", background: GOLD, color: "#000", fontWeight: 700, fontSize: 12, borderRadius: 12, border: "none", cursor: "pointer" }}>Continue Journey</button>
                 </div>
 
                 {/* Tier Badge */}
                 <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: 20 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                    <div style={{
-                      width: 40, height: 40, borderRadius: "50%", background: GOLD,
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                    }}>
+                    <div style={{ width: 40, height: 40, borderRadius: "50%", background: GOLD, display: "flex", alignItems: "center", justifyContent: "center" }}>
                       <span className="material-symbols-outlined" style={{ color: MIDNIGHT, fontSize: 20 }}>workspace_premium</span>
                     </div>
                     <div>
@@ -315,12 +226,9 @@ export default function BorrowerDashboard({ navigate }) {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </main>
-
-          {/* ── FOOTER ── */}
           <Footer />
         </div>
       </div>

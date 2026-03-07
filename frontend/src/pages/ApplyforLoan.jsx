@@ -379,7 +379,7 @@ export default function ApplyforLoan({ navigate }) {
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#f6f7f8", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar navigate={navigate} />
 
-      <div style={{ display: "flex", flex: 1, alignItems: "flex-start" }}>
+      <div style={{ display: "flex", flex: 1 }}>
 
         {/* Universal Sidebar — sticky, scrolls with page */}
         <div style={{ flexShrink: 0, position: "sticky", top: 80, alignSelf: "flex-start" }}>

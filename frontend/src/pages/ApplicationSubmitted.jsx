@@ -10,7 +10,7 @@ export default function ApplicationSubmitted({ navigate }) {
     <div style={{ fontFamily: "'Inter', sans-serif", minHeight: "100vh", background: "#f8f9ff", display: "flex", flexDirection: "column" }}>
       <Navbar navigate={navigate} />
 
-      <div style={{ display: "flex", flex: 1, alignItems: "flex-start" }}>
+      <div style={{ display: "flex", flex: 1 }}>
 
         {/* Universal Sidebar — sticky, scrolls with page */}
         <div style={{ flexShrink: 0, position: "sticky", top: 80, alignSelf: "flex-start" }}>

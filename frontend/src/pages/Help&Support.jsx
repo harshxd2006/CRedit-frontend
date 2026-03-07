@@ -20,8 +20,10 @@ export default function HelpSupport({ navigate }) {
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#f8f9ff", minHeight: "100vh" }}>
       <Navbar navigate={navigate} />
 
-      <div style={{ display: "flex" }}>
-        <Sidebar navigate={navigate} activePage="helpSupport" />
+      <div style={{ display: "flex", flex: 1 }}>
+        <div style={{ flexShrink: 0, position: "sticky", top: 80, alignSelf: "flex-start" }}>
+          <Sidebar navigate={navigate} activePage="helpSupport" />
+        </div>
 
         {/* Main Content */}
         <main style={{ flex: 1, padding: "32px 48px", maxWidth: "900px" }}>

@@ -51,10 +51,10 @@ export default function AccountsSettings({ navigate }) {
       <Navbar navigate={navigate} />
 
       {/* ── BODY ROW ── */}
-      <div style={{ display: "flex", flex: 1, alignItems: "flex-start" }}>
+      <div style={{ display: "flex", flex: 1 }}>
 
         {/* Universal Sidebar — sticky, scrolls with page */}
-        <div style={{ flexShrink: 0, position: "sticky", top: 80, alignSelf: "flex-start" }}>
+        <div style={{ display: "flex", flex: 1 }}>
           <Sidebar navigate={navigate} activePage="accountsSettings" />
         </div>
 
