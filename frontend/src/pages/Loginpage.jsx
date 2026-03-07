@@ -67,17 +67,20 @@ export default function Loginpage({ navigate }) {
   const [mpin, setMpinVal]        = useState("");
   const [showPin, setShowPin]     = useState(false);
   const [errors, setErrors]       = useState({});
+
   const [loading, setLoading]     = useState(false);
   const [apiError, setApiError]   = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
     setApiError("");
     const errs = {};
     if (mobileVal.length !== 10) errs.mobile = "Enter a valid 10-digit number";
     if (mpin.length !== 4)       errs.mpin   = "Enter your 4-digit MPIN";
     if (Object.keys(errs).length) { setErrors(errs); return; }
 
+    setErrors({});
     setLoading(true);
     try {
       const res  = await fetch(`${API_BASE}/login`, {
@@ -89,7 +92,6 @@ export default function Loginpage({ navigate }) {
       if (!data.success) {
         setApiError(data.message);
       } else {
-        // Store basic user info for dashboard
         sessionStorage.setItem("user", JSON.stringify(data.data));
         navigate("dashboard");
       }
@@ -100,8 +102,22 @@ export default function Loginpage({ navigate }) {
     }
   };
 
+  // Zero footprint when no error — expands smoothly when error appears
+  const errSlot = (msg) => (
+    <div style={{
+      overflow: "hidden",
+      maxHeight: msg ? 20 : 0,
+      marginTop: msg ? 4 : 0,
+      transition: "max-height 0.15s ease, margin-top 0.15s ease",
+    }}>
+      <p style={{ color: "#ef4444", fontSize: 11, fontWeight: 600, margin: 0, lineHeight: "16px" }}>
+        {msg}
+      </p>
+    </div>
+  );
+
   const onFocus = (e) => { e.target.style.borderColor = MIDNIGHT; e.target.style.boxShadow = "0 0 0 3px rgba(17,66,93,.1)"; };
-  const onBlur  = (e, hasErr) => { e.target.style.borderColor = hasErr ? "#ef4444" : "rgba(26,53,91,.2)"; e.target.style.boxShadow = "none"; };
+  const onBlur  = (e) => { e.target.style.borderColor = "rgba(26,53,91,.2)"; e.target.style.boxShadow = "none"; };
 
   return (
     <div style={{ fontFamily: "'Inter', sans-serif" }}>
@@ -122,11 +138,10 @@ export default function Loginpage({ navigate }) {
         }}>
 
           <div style={{ marginBottom: 32 }}>
-            <h1 style={{ fontSize: 26, fontWeight: 800, color: PRIMARY, margin: "0 0 6px" }}>Welcome Back</h1>
+            <h1 style={{ fontSize: 28, fontWeight: 900, color: PRIMARY, margin: "0 0 6px" }}>Welcome Back</h1>
             <p style={{ fontSize: 14, color: "rgba(26,53,91,.55)", margin: 0 }}>Login to your CreditFlow account</p>
           </div>
 
-          {/* API Error */}
           {apiError && (
             <div style={{ background: "#fef2f2", border: "1px solid #fecaca", borderRadius: 8, padding: "10px 14px", marginBottom: 16, display: "flex", alignItems: "center", gap: 8 }}>
               <span className="material-symbols-outlined" style={{ color: "#ef4444", fontSize: 16 }}>error</span>
@@ -151,9 +166,9 @@ export default function Loginpage({ navigate }) {
                     background: "#fff", color: PRIMARY, fontFamily: "'Inter', sans-serif",
                     transition: "border-color .2s, box-shadow .2s",
                   }}
-                  onFocus={onFocus} onBlur={e => onBlur(e, errors.mobile)} />
+                  onFocus={onFocus} onBlur={onBlur} />
               </div>
-              {errors.mobile && <p style={{ color: "#ef4444", fontSize: 11, marginTop: 4, fontWeight: 600 }}>{errors.mobile}</p>}
+              {errSlot(errors.mobile)}
             </div>
 
             {/* 4-Digit MPIN */}
@@ -176,7 +191,7 @@ export default function Loginpage({ navigate }) {
                       fontFamily: "'Inter', sans-serif", fontSize: 22, letterSpacing: "0.35em",
                       transition: "border-color .2s, box-shadow .2s",
                     }}
-                    onFocus={onFocus} onBlur={e => onBlur(e, errors.mpin)} />
+                    onFocus={onFocus} onBlur={onBlur} />
                   <button type="button" onClick={() => setShowPin(!showPin)}
                     style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", padding: 0 }}>
                     <span className="material-symbols-outlined" style={{ color: "rgba(26,53,91,.35)", fontSize: 18 }}>{showPin ? "visibility_off" : "visibility"}</span>
@@ -191,23 +206,25 @@ export default function Loginpage({ navigate }) {
                   <span style={{ fontSize: 11, color: "rgba(26,53,91,.3)", fontWeight: 600, textAlign: "center", lineHeight: 1.4 }}>Secure &amp; Encrypted</span>
                 </div>
               </div>
-              {errors.mpin && <p style={{ color: "#ef4444", fontSize: 11, marginTop: 4, fontWeight: 600 }}>{errors.mpin}</p>}
+              {errSlot(errors.mpin)}
             </div>
 
             {/* Submit */}
-            <button type="submit" disabled={loading} style={{
-              width: "100%", background: loading ? "#e2e8f0" : GOLD,
-              color: loading ? "#94a3b8" : "#0f172a",
-              fontWeight: 800, fontSize: 16, padding: "15px", borderRadius: 12,
-              border: "none", cursor: loading ? "not-allowed" : "pointer",
-              boxShadow: loading ? "none" : "0 6px 20px rgba(255,204,0,.4)",
-              transition: "all .2s", marginBottom: 0,
-              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-            }}>
-              {loading ? (
-                <><span style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #94a3b8", borderTopColor: "#475569", display: "inline-block", animation: "spin .8s linear infinite" }} />Logging in...</>
-              ) : "LOGIN"}
-            </button>
+            <div style={{ marginTop: 8 }}>
+              <button type="submit" disabled={loading} style={{
+                width: "100%", background: loading ? "#e2e8f0" : GOLD,
+                color: loading ? "#94a3b8" : "#0f172a",
+                fontWeight: 800, fontSize: 16, padding: "15px", borderRadius: 12,
+                border: "none", cursor: loading ? "not-allowed" : "pointer",
+                boxShadow: loading ? "none" : "0 6px 20px rgba(255,204,0,.4)",
+                transition: "all .2s",
+                display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+              }}>
+                {loading ? (
+                  <><span style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid #94a3b8", borderTopColor: "#475569", display: "inline-block", animation: "spin .8s linear infinite" }} />Logging in...</>
+                ) : "LOGIN"}
+              </button>
+            </div>
           </form>
 
           <p style={{ textAlign: "center", marginTop: 20, fontSize: 13, color: "#64748b" }}>

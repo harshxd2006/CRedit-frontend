@@ -62,10 +62,6 @@ function HomeFooter() {
   );
 }
 
-function ErrMsg({ children }) {
-  return <p style={{ color: "#ef4444", fontSize: 11, marginTop: 4, fontWeight: 600 }}>{children}</p>;
-}
-
 export default function Registerpage({ navigate }) {
   const [mobile, setMobile]           = useState("");
   const [otp, setOtp]                 = useState(["", "", "", "", "", ""]);
@@ -91,15 +87,15 @@ export default function Registerpage({ navigate }) {
     setApiError("");
     const otpStr = otp.join("");
     const errs = {};
-    if (mobile.length !== 10)      errs.mobile      = "Enter a valid 10-digit number";
-    if (otpStr.length !== 6)       errs.otp         = "Enter the complete 6-digit OTP";
-    if (mpin.length !== 4)         errs.mpin        = "MPIN must be exactly 4 digits";
-    if (mpin !== confirmMpin)      errs.confirmMpin = "MPINs do not match";
+    if (mobile.length !== 10)  errs.mobile      = "Enter a valid 10-digit number";
+    if (otpStr.length !== 6)   errs.otp         = "Enter the complete 6-digit OTP";
+    if (mpin.length !== 4)     errs.mpin        = "MPIN must be exactly 4 digits";
+    if (mpin !== confirmMpin)  errs.confirmMpin = "MPINs do not match";
     if (Object.keys(errs).length) { setErrors(errs); return; }
 
+    setErrors({});
     setLoading(true);
     try {
-      // Step 1: Send OTP
       const sendRes  = await fetch(`${API_BASE}/send-otp`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mobile }),
@@ -107,7 +103,6 @@ export default function Registerpage({ navigate }) {
       const sendData = await sendRes.json();
       if (!sendData.success) { setApiError(sendData.message); setLoading(false); return; }
 
-      // Step 2: Verify OTP
       const verifyRes  = await fetch(`${API_BASE}/verify-otp`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mobile, otp: otpStr }),
@@ -115,7 +110,6 @@ export default function Registerpage({ navigate }) {
       const verifyData = await verifyRes.json();
       if (!verifyData.success) { setApiError(verifyData.message); setLoading(false); return; }
 
-      // Step 3: Set MPIN & create account
       const mpinRes  = await fetch(`${API_BASE}/set-mpin`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mobile, mpin, confirmMpin }),
@@ -123,15 +117,34 @@ export default function Registerpage({ navigate }) {
       const mpinData = await mpinRes.json();
       if (!mpinData.success) { setApiError(mpinData.message); setLoading(false); return; }
 
-      // All done — go to dashboard
       navigate("dashboard");
-
     } catch {
       setApiError("Network error. Please try again.");
     } finally {
       setLoading(false);
     }
   };
+
+  // TRUE fix: field wrapper always has exact same height.
+  // Error text is always in DOM — invisible (opacity 0) when no message.
+  // Height NEVER changes → zero layout shift.
+  const Field = ({ label, error, children, right }) => (
+    <div style={{ marginBottom: 0 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 7 }}>
+        <label style={{ fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em" }}>{label}</label>
+        {right}
+      </div>
+      {children}
+      {/* Always rendered, always 18px tall — just invisible when no error */}
+      <p style={{
+        fontSize: 11, fontWeight: 600, color: "#ef4444",
+        margin: "4px 0 0", height: 14, lineHeight: "14px",
+        opacity: error ? 1 : 0,
+        transition: "opacity 0.15s ease",
+        userSelect: "none",
+      }}>{error || "‎"}</p>
+    </div>
+  );
 
   const inputBase = {
     width: "100%", borderRadius: 8, outline: "none",
@@ -145,24 +158,28 @@ export default function Registerpage({ navigate }) {
   const onBlur  = (e) => { e.target.style.borderColor = "rgba(26,53,91,.2)"; e.target.style.boxShadow = "none"; };
 
   return (
-    <div style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div style={{ fontFamily: "'Inter', sans-serif", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar navigate={navigate} />
 
       <section style={{
-        minHeight: "calc(100vh - 80px)",
         background: "#f6f7f8",
-        display: "flex", alignItems: "center", justifyContent: "center",
         padding: "48px 24px",
+        boxSizing: "border-box",
+        flex: 1,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}>
         <div style={{
           width: "100%", maxWidth: 460,
           background: "#fff", borderRadius: 20,
           boxShadow: "0 20px 60px rgba(26,53,91,.12)",
           border: "1px solid rgba(26,53,91,.07)",
-          padding: "36px 36px 28px",
+          padding: "32px 36px 28px",
+          margin: "auto 0",
         }}>
-          <div style={{ marginBottom: 24 }}>
-            <h1 style={{ fontSize: 26, fontWeight: 800, color: PRIMARY, margin: "0 0 6px" }}>Create Your Account</h1>
+          <div style={{ marginBottom: 18 }}>
+            <h1 style={{ fontSize: 28, fontWeight: 900, color: PRIMARY, margin: "0 0 6px" }}>Create Your Account</h1>
             <p style={{ fontSize: 14, color: "rgba(26,53,91,.55)", margin: 0 }}>Join CreditFlow for secure financial management</p>
           </div>
 
@@ -174,11 +191,10 @@ export default function Registerpage({ navigate }) {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
 
             {/* Mobile */}
-            <div>
-              <label style={{ display: "block", fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: 7 }}>Mobile Number</label>
+            <Field label="Mobile Number" error={errors.mobile}>
               <div style={{ position: "relative" }}>
                 <span className="material-symbols-outlined" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "rgba(26,53,91,.35)", fontSize: 18 }}>smartphone</span>
                 <input type="tel" value={mobile}
@@ -187,15 +203,12 @@ export default function Registerpage({ navigate }) {
                   style={{ ...inputBase, height: 48, paddingLeft: 42, paddingRight: 14, fontSize: 14, fontWeight: 500, border: `1px solid ${errors.mobile ? "#ef4444" : "rgba(26,53,91,.2)"}` }}
                   onFocus={onFocus} onBlur={onBlur} />
               </div>
-              {errors.mobile && <ErrMsg>{errors.mobile}</ErrMsg>}
-            </div>
+            </Field>
 
             {/* OTP */}
-            <div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 7 }}>
-                <label style={{ fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em" }}>6-Digit OTP</label>
-                <button type="button" style={{ fontSize: 12, fontWeight: 700, color: "rgba(26,53,91,.55)", background: "none", border: "none", cursor: "pointer" }}>Resend OTP?</button>
-              </div>
+            <Field label="6-Digit OTP" error={errors.otp} right={
+              <button type="button" style={{ fontSize: 12, fontWeight: 700, color: "rgba(26,53,91,.55)", background: "none", border: "none", cursor: "pointer" }}>Resend OTP?</button>
+            }>
               <div style={{ display: "flex", gap: 8, justifyContent: "space-between" }}>
                 {otp.map((v, i) => (
                   <input key={i} ref={el => (otpRefs.current[i] = el)}
@@ -212,29 +225,24 @@ export default function Registerpage({ navigate }) {
                     onFocus={onFocus} onBlur={onBlur} />
                 ))}
               </div>
-              {errors.otp && <ErrMsg>{errors.otp}</ErrMsg>}
-            </div>
+            </Field>
 
             {/* MPIN */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-              <div>
-                <label style={{ display: "block", fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: 7 }}>Set MPIN</label>
+              <Field label="Set MPIN" error={errors.mpin}>
                 <input type="password" value={mpin}
                   onChange={e => setMpin(e.target.value.replace(/\D/g, "").slice(0, 4))}
                   maxLength={4} placeholder="••••"
                   style={{ ...inputBase, height: 48, textAlign: "center", fontSize: 22, letterSpacing: "0.35em", border: `1px solid ${errors.mpin ? "#ef4444" : "rgba(26,53,91,.2)"}` }}
                   onFocus={onFocus} onBlur={onBlur} />
-                {errors.mpin && <ErrMsg>{errors.mpin}</ErrMsg>}
-              </div>
-              <div>
-                <label style={{ display: "block", fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: 7 }}>Confirm MPIN</label>
+              </Field>
+              <Field label="Confirm MPIN" error={errors.confirmMpin}>
                 <input type="password" value={confirmMpin}
                   onChange={e => setConfirmMpin(e.target.value.replace(/\D/g, "").slice(0, 4))}
                   maxLength={4} placeholder="••••"
                   style={{ ...inputBase, height: 48, textAlign: "center", fontSize: 22, letterSpacing: "0.35em", border: `1px solid ${errors.confirmMpin ? "#ef4444" : "rgba(26,53,91,.2)"}` }}
                   onFocus={onFocus} onBlur={onBlur} />
-                {errors.confirmMpin && <ErrMsg>{errors.confirmMpin}</ErrMsg>}
-              </div>
+              </Field>
             </div>
 
             {/* Submit */}
@@ -244,7 +252,7 @@ export default function Registerpage({ navigate }) {
               fontWeight: 800, fontSize: 16, padding: "15px", borderRadius: 12,
               border: "none", cursor: loading ? "not-allowed" : "pointer",
               boxShadow: loading ? "none" : "0 6px 20px rgba(255,204,0,.4)",
-              transition: "all .2s",
+              transition: "all .2s", marginTop: 6,
               display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
             }}>
               {loading

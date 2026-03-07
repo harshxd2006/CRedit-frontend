@@ -31,9 +31,10 @@ export default function ReviewSign({ navigate }) {
         <Sidebar navigate={navigate} activePage="reviewSign" />
 
         <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
-          <main style={{ flex: 1, padding: "40px 48px" }}>
+          <main className="page-main" style={{ flex: 1, padding: "40px 48px" }}>
             <div style={{ maxWidth: 896, margin: "0 auto" }}>
 
+              {/* Header */}
               <div style={{ marginBottom: 32 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
                   <span style={{ fontSize: 13, fontWeight: 600, color: MIDNIGHT }}>Step 7 of 8</span>
@@ -45,9 +46,10 @@ export default function ReviewSign({ navigate }) {
                 <p style={{ fontSize: 14, color: "#64748b", margin: 0 }}>Please carefully review the Key Fact Statement (KFS) before proceeding with the Aadhaar eSign.</p>
               </div>
 
-              <div style={{ display: "flex", gap: 32, alignItems: "flex-start" }}>
+              {/* Two-column layout — stacks on mobile */}
+              <div className="review-cols" style={{ display: "flex", gap: 32, alignItems: "flex-start" }}>
 
-                {/* Left Column */}
+                {/* ── Left Column ── */}
                 <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 24 }}>
 
                   {/* KFS Card */}
@@ -59,6 +61,7 @@ export default function ReviewSign({ navigate }) {
                       </h2>
                     </div>
                     <div style={{ padding: 24 }}>
+                      {/* KFS grid — 2 cols on desktop, 2 cols on mobile too (compact numbers) */}
                       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 24 }}>
                         {[
                           { label: "Loan Amount",   value: "₹5,00,000" },
@@ -68,7 +71,7 @@ export default function ReviewSign({ navigate }) {
                         ].map((item) => (
                           <div key={item.label}>
                             <p style={{ fontSize: 10, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.15em", margin: "0 0 4px" }}>{item.label}</p>
-                            <p style={{ fontSize: 22, fontWeight: 700, margin: 0, color: item.highlight ? MIDNIGHT : "#0f172a" }}>{item.value}</p>
+                            <p style={{ fontSize: 20, fontWeight: 700, margin: 0, color: item.highlight ? MIDNIGHT : "#0f172a" }}>{item.value}</p>
                           </div>
                         ))}
                       </div>
@@ -110,13 +113,13 @@ export default function ReviewSign({ navigate }) {
                     <div style={{ aspectRatio: "4 / 3", width: "100%", background: "#f8fafc", border: "2px dashed #e2e8f0", borderRadius: 12, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
                       <span className="material-symbols-outlined" style={{ fontSize: 48, color: "#cbd5e1", marginBottom: 8 }}>picture_as_pdf</span>
                       <p style={{ fontSize: 13, fontWeight: 600, color: "#94a3b8", margin: "0 0 16px" }}>KFS_Loan_Agreement_v1.pdf</p>
-                      <button style={{ padding: "8px 16px", border: "1px solid #e2e8f0", borderRadius: 8, fontSize: 12, fontWeight: 700, background: "#fff", cursor: "pointer", color: "#475569" }}>View Full Document</button>
+                      <button style={{ padding: "8px 16px", border: "1px solid #e2e8f0", borderRadius: 8, fontSize: 13, fontWeight: 700, background: "#fff", cursor: "pointer", color: "#475569" }}>View Full Document</button>
                     </div>
                   </div>
                 </div>
 
-                {/* Right Column — eSign */}
-                <div style={{ width: 340, flexShrink: 0, display: "flex", flexDirection: "column", gap: 16 }}>
+                {/* ── Right Column — eSign ── */}
+                <div className="esign-col" style={{ width: 340, flexShrink: 0, display: "flex", flexDirection: "column", gap: 16 }}>
                   <div style={{ background: "#fff", borderRadius: 16, border: "1px solid rgba(17,66,93,.1)", padding: 24, boxShadow: "0 4px 20px rgba(0,0,0,.08)" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
                       <div style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(17,66,93,.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -131,24 +134,24 @@ export default function ReviewSign({ navigate }) {
                           <span className="material-symbols-outlined" style={{ color: "#fff", fontSize: 24 }}>check</span>
                         </div>
                         <p style={{ fontSize: 14, fontWeight: 700, color: "#166534", margin: "0 0 4px" }}>E-Sign Complete!</p>
-                        <p style={{ fontSize: 12, color: "#16a34a", margin: 0 }}>Documents delivered to your email.</p>
+                        <p style={{ fontSize: 13, color: "#16a34a", margin: 0 }}>Documents delivered to your email.</p>
                       </div>
                     ) : (
                       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                         {/* Aadhaar */}
                         <div>
-                          <label style={{ display: "block", fontSize: 10, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>Aadhaar Number (Last 4 Digits)</label>
+                          <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 8 }}>Aadhaar Number (Last 4 Digits)</label>
                           <div style={{ display: "flex", alignItems: "center", background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 8, padding: "0 14px", height: 48 }}>
-                            <span style={{ color: "#94a3b8", letterSpacing: "0.3em", marginRight: 8, fontSize: 14 }}>•••• ••••</span>
+                            <span style={{ color: "#94a3b8", letterSpacing: "0.3em", marginRight: 8, fontSize: 13 }}>•••• ••••</span>
                             <input type="text" maxLength={4} placeholder="5678" value={aadhaarLast4}
                               onChange={(e) => setAadhaarLast4(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                              style={{ flex: 1, background: "transparent", border: "none", outline: "none", fontSize: 18, fontFamily: "monospace", letterSpacing: "0.3em", color: "#0f172a", fontWeight: 700 }} />
+                              style={{ flex: 1, background: "transparent", border: "none", outline: "none", fontSize: 16, fontFamily: "monospace", letterSpacing: "0.3em", color: "#0f172a", fontWeight: 700 }} />
                           </div>
                         </div>
 
                         {/* OTP */}
                         <div>
-                          <label style={{ display: "block", fontSize: 10, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>Enter OTP</label>
+                          <label style={{ display: "block", fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 8 }}>Enter OTP</label>
                           <div style={{ display: "flex", gap: 8 }}>
                             {otp.map((v, i) => (
                               <input key={i} ref={(el) => (otpRefs.current[i] = el)}
@@ -170,11 +173,11 @@ export default function ReviewSign({ navigate }) {
                         {/* Consent */}
                         <label style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer" }}>
                           <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} style={{ marginTop: 3, width: 16, height: 16, cursor: "pointer", accentColor: MIDNIGHT }} />
-                          <span style={{ fontSize: 12, color: "#64748b", lineHeight: 1.6 }}>I hereby authorize CreditFlow to use my Aadhaar details for e-sign purposes and agree to the terms of the Loan Agreement.</span>
+                          <span style={{ fontSize: 13, color: "#64748b", lineHeight: 1.6 }}>I hereby authorize CreditFlow to use my Aadhaar details for e-sign purposes and agree to the terms of the Loan Agreement.</span>
                         </label>
 
                         <button onClick={() => agreed && setSigned(true)}
-                          style={{ width: "100%", padding: "14px 0", background: agreed ? GOLD : "#e2e8f0", color: agreed ? "#000" : "#94a3b8", fontWeight: 700, fontSize: 14, borderRadius: 12, border: "none", cursor: agreed ? "pointer" : "not-allowed", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, transition: "all .2s", boxShadow: agreed ? "0 6px 20px rgba(255,215,0,.3)" : "none" }}>
+                          style={{ width: "100%", padding: "14px 0", background: agreed ? GOLD : "#e2e8f0", color: agreed ? "#000" : "#94a3b8", fontWeight: 700, fontSize: 13, borderRadius: 12, border: "none", cursor: agreed ? "pointer" : "not-allowed", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, transition: "all .2s", boxShadow: agreed ? "0 6px 20px rgba(255,215,0,.3)" : "none" }}>
                           <span className="material-symbols-outlined" style={{ fontSize: 18 }}>draw</span>
                           Complete E-Sign
                         </button>
@@ -192,6 +195,13 @@ export default function ReviewSign({ navigate }) {
           <Footer />
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .review-cols { flex-direction: column !important; }
+          .esign-col { width: 100% !important; }
+        }
+      `}</style>
     </div>
   );
 }
