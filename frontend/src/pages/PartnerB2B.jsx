@@ -15,13 +15,13 @@ export default function PartnerB2B({ navigate }) {
       <Navbar navigate={navigate} variant="partner" />
 
       {/* HERO */}
-      <section style={{ backgroundColor: "#11425D", padding: "60px 20px 100px", position: "relative", overflow: "hidden" }}>
+      <section style={{ backgroundColor: "#11425D", padding: "48px 20px 48px", position: "relative", overflow: "hidden" }}>
         <div className="partner-hero-grid" style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
           <div style={{ flex: "0 0 auto" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", borderRadius: 9999, background: "rgba(255,215,0,0.1)", padding: "4px 12px", fontSize: 14, fontWeight: 600, color: "#FFD700", border: "1px solid rgba(255,215,0,0.2)", marginBottom: 24 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", borderRadius: 9999, background: "rgba(255,215,0,0.1)", padding: "4px 12px", fontSize: 14, fontWeight: 600, color: "#FFD700", border: "1px solid rgba(255,215,0,0.2)", marginBottom: 12 }}>
               LSP Solutions for NBFCs
             </div>
-            <h1 className="partner-hero-h1" style={{ fontSize: 48, fontWeight: 900, color: "#fff", lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 24 }}>
+            <h1 className="partner-hero-h1" style={{ fontSize: 48, fontWeight: 900, color: "#fff", lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 14 }}>
               Stop Losing Money on NTC Borrowers You Can't Accurately Assess.
             </h1>
             <p style={{ fontSize: 16, color: "#cbd5e1", lineHeight: 1.75, marginBottom: 40 }}>
@@ -38,11 +38,15 @@ export default function PartnerB2B({ navigate }) {
             </div>
           </div>
 
-          <div className="partner-hero-img">
-            <div style={{ borderRadius: 16, background: "#f1f5f9", padding: 8, border: "1px solid #e2e8f0" }}>
-              <div style={{ background: "#fff", borderRadius: 8, overflow: "hidden", boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }}>
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmPPmlvtrpyhkQOzQHlqNqH3op5Vs9TyDM0ioyG9iO9rSoBgZWFlYEcUA49XX25EDu6COPIdXq1OFfwoDJTXOSrxBj-TbCl7tYaJrz4eTngPnqrHgQz0vZhNW94WxAAjBGgVEhJye17NxgeBz5lvVqH2s_zUhkNG4tEmt6SWcahtyPeO3yPw01DF4iay7d73e4EI0Qspwa55VuijDwHE9aR8QLOMKvzOdftug7Y6UEWcNYIcxDZV6gyOKqfqQMvHsMyCFp6DvOm1Q"
-                  alt="Analytics dashboard" style={{ width: "100%", height: "auto", display: "block" }} />
+          {/* Image — fully framed with padding on all sides */}
+          <div className="partner-hero-img" style={{ alignSelf: "center" }}>
+            <div style={{ borderRadius: 20, background: "#e8edf2", padding: 12, border: "1px solid #d1d9e0", boxShadow: "0 24px 64px rgba(0,0,0,0.25)" }}>
+              <div style={{ background: "#fff", borderRadius: 12, overflow: "hidden" }}>
+                <img
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmPPmlvtrpyhkQOzQHlqNqH3op5Vs9TyDM0ioyG9iO9rSoBgZWFlYEcUA49XX25EDu6COPIdXq1OFfwoDJTXOSrxBj-TbCl7tYaJrz4eTngPnqrHgQz0vZhNW94WxAAjBGgVEhJye17NxgeBz5lvVqH2s_zUhkNG4tEmt6SWcahtyPeO3yPw01DF4iay7d73e4EI0Qspwa55VuijDwHE9aR8QLOMKvzOdftug7Y6UEWcNYIcxDZV6gyOKqfqQMvHsMyCFp6DvOm1Q"
+                  alt="Analytics dashboard"
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                />
               </div>
             </div>
           </div>

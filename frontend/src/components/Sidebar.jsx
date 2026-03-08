@@ -88,16 +88,40 @@ export default function Sidebar({ navigate, activePage, navbarHeight = 64 }) {
 
   return (
     <>
-      {/* ── DESKTOP: spacer keeps layout + fixed aside ── */}
+      {/*
+        DESKTOP LAYOUT
+        ─────────────
+        .sb-spacer  — a normal in-flow div, width 270px.
+                      It pushes the page content to the right.
+                      It does NOT stretch to fill height, so the page
+                      height is determined by the content + footer,
+                      not artificially inflated. This means the footer
+                      (placed outside the flex row in each page) sits at
+                      the true bottom of the document and scrolls into
+                      view naturally at full width.
+
+        .sb-fixed   — the visible sidebar panel, position:fixed so it
+                      stays on screen while the page scrolls. Its height
+                      is viewport-height minus the navbar so it never
+                      pushes the document taller.
+      */}
       <div className="sb-spacer" style={{ width: 270, minWidth: 270, flexShrink: 0 }} />
       <div className="sb-fixed" style={{
-        width: 270, position: "fixed", top: navbarHeight, left: 0,
-        height: `calc(100vh - ${navbarHeight}px)`, zIndex: 40,
+        width: 270,
+        position: "fixed",
+        top: navbarHeight,
+        left: 0,
+        /* Key: height is viewport-based, NOT 100% of parent.
+           This ensures the sidebar never forces the page taller
+           than its content, so the footer lands correctly. */
+        height: `calc(100vh - ${navbarHeight}px)`,
+        zIndex: 40,
+        overflowY: "auto",
       }}>
         <SidebarContent navigate={navigate} activePage={activePage} />
       </div>
 
-      {/* ── MOBILE: hamburger button ── */}
+      {/* MOBILE: hamburger button */}
       <button
         className="sb-hamburger"
         onClick={() => setMobileOpen(true)}
@@ -121,7 +145,7 @@ export default function Sidebar({ navigate, activePage, navbarHeight = 64 }) {
         <span className="material-symbols-outlined" style={{ fontSize: 22, color: "#fff" }}>menu</span>
       </button>
 
-      {/* ── MOBILE: slide-in drawer ── */}
+      {/* MOBILE: slide-in drawer */}
       {mobileOpen && (
         <div style={{ position: "fixed", inset: 0, zIndex: 60, display: "flex" }}>
           <div onClick={() => setMobileOpen(false)}
@@ -134,10 +158,10 @@ export default function Sidebar({ navigate, activePage, navbarHeight = 64 }) {
 
       <style>{`
         @media (max-width: 768px) {
-          .sb-spacer  { display: none !important; width: 0 !important; min-width: 0 !important; }
-          .sb-fixed   { display: none !important; }
+          .sb-spacer    { display: none !important; width: 0 !important; min-width: 0 !important; }
+          .sb-fixed     { display: none !important; }
           .sb-hamburger { display: flex !important; }
-          .page-main  { padding: 20px 16px 40px !important; }
+          .page-main    { padding: 20px 16px 40px !important; }
         }
       `}</style>
     </>

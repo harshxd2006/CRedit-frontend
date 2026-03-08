@@ -29,14 +29,22 @@ const journeySteps = [
 
 export default function BorrowerDashboard({ navigate }) {
   return (
+    /*
+      Outer wrapper: column flex so Footer stacks BELOW the sidebar+content row.
+      The whole page scrolls as one — sidebar is fixed via CSS inside Sidebar.jsx,
+      so it stays visible while the page scrolls, and the footer appears naturally
+      at the bottom when you reach the end, spanning full width.
+    */
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#f6f7f8", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar navigate={navigate} />
 
+      {/* flex row: sidebar (fixed internally) + scrollable content */}
       <div style={{ display: "flex", flex: 1 }}>
         <Sidebar navigate={navigate} activePage="dashboard" />
 
-        <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
-          <main className="page-main" style={{ flex: 1, padding: "24px 20px" }}>
+        {/* Content area — no footer inside here */}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <main className="page-main" style={{ padding: "24px 20px" }}>
             <div style={{ maxWidth: 1100, margin: "0 auto" }}>
 
               {/* Welcome Banner */}
@@ -231,9 +239,15 @@ export default function BorrowerDashboard({ navigate }) {
 
             </div>
           </main>
-          <Footer />
         </div>
       </div>
+
+      {/* ✅ Footer lives here — outside the sidebar+content flex row.
+          The outer wrapper is display:flex + flexDirection:column, so this
+          stacks below the row. The whole document scrolls as one; the sidebar
+          stays "sticky" via its own fixed positioning, and the footer appears
+          full-width when you naturally scroll to the bottom of the page. */}
+      <Footer />
 
       <style>{`
         @media (max-width: 900px) {

@@ -100,9 +100,12 @@ export default function Loginpage({ navigate }) {
     }
   };
 
+  // Fixed-height slot — always reserves space so card never resizes
   const errSlot = (msg) => (
-    <div style={{ overflow: "hidden", maxHeight: msg ? 20 : 0, marginTop: msg ? 4 : 0, transition: "max-height 0.15s ease, margin-top 0.15s ease" }}>
-      <p style={{ color: "#ef4444", fontSize: 11, fontWeight: 600, margin: 0, lineHeight: "16px" }}>{msg}</p>
+    <div style={{ height: 18, marginTop: 4 }}>
+      {msg && (
+        <p style={{ color: "#ef4444", fontSize: 11, fontWeight: 600, margin: 0, lineHeight: "18px" }}>{msg}</p>
+      )}
     </div>
   );
 
@@ -121,17 +124,20 @@ export default function Loginpage({ navigate }) {
             <p style={{ fontSize: 14, color: "rgba(26,53,91,.55)", margin: 0 }}>Login to your CreditFlow account</p>
           </div>
 
-          {apiError && (
-            <div style={{ background: "#fef2f2", border: "1px solid #fecaca", borderRadius: 8, padding: "10px 14px", marginBottom: 16, display: "flex", alignItems: "center", gap: 8 }}>
-              <span className="material-symbols-outlined" style={{ color: "#ef4444", fontSize: 16 }}>error</span>
-              <p style={{ fontSize: 12, color: "#dc2626", fontWeight: 600, margin: 0 }}>{apiError}</p>
-            </div>
-          )}
+          {/* Fixed height API error slot so card doesn't jump */}
+          <div style={{ height: apiError ? "auto" : 0, overflow: "hidden", marginBottom: apiError ? 16 : 0, transition: "none" }}>
+            {apiError && (
+              <div style={{ background: "#fef2f2", border: "1px solid #fecaca", borderRadius: 8, padding: "10px 14px", display: "flex", alignItems: "center", gap: 8 }}>
+                <span className="material-symbols-outlined" style={{ color: "#ef4444", fontSize: 16 }}>error</span>
+                <p style={{ fontSize: 12, color: "#dc2626", fontWeight: 600, margin: 0 }}>{apiError}</p>
+              </div>
+            )}
+          </div>
 
           <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: 0 }}>
 
             {/* Mobile Number */}
-            <div style={{ marginBottom: 24 }}>
+            <div style={{ marginBottom: 16 }}>
               <label style={{ display: "block", fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: 8 }}>Mobile Number</label>
               <div style={{ position: "relative" }}>
                 <span className="material-symbols-outlined" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "rgba(26,53,91,.35)", fontSize: 18 }}>smartphone</span>
@@ -145,7 +151,7 @@ export default function Loginpage({ navigate }) {
             </div>
 
             {/* 4-Digit MPIN */}
-            <div style={{ marginBottom: 28 }}>
+            <div style={{ marginBottom: 20 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
                 <label style={{ fontSize: 12, fontWeight: 700, color: PRIMARY, textTransform: "uppercase", letterSpacing: "0.09em" }}>4-Digit MPIN</label>
                 <a href="#" style={{ fontSize: 12, fontWeight: 700, color: "rgba(26,53,91,.55)", textDecoration: "none" }}>Forgot MPIN?</a>
