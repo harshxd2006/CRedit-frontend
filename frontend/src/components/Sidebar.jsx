@@ -4,17 +4,17 @@ const GOLD = "#FFD700";
 const MIDNIGHT = "#11425D";
 
 const navItems = [
-  { label: "Profile",                 icon: "person",          key: "accountsSettings" },
-  { label: "Dashboard",               icon: "dashboard",       key: "dashboard"        },
-  { label: "Apply for Loan",          icon: "currency_rupee",  key: "applyForLoan"     },
-  { label: "My Applications",         icon: "description",     key: "myApplications"   },
-  { label: "My Loans",                icon: "credit_card",     key: "myLoans"          },
-  { label: "Credit Building Journey", icon: "route",           key: "creditBuilding"   },
-  { label: "Help & Support",          icon: "help_outline",    key: "helpSupport"      },
+  { label: "Profile", icon: "person", key: "accountsSettings" },
+  { label: "Dashboard", icon: "dashboard", key: "dashboard" },
+  { label: "Apply for Loan", icon: "currency_rupee", key: "applyForLoan" },
+  { label: "My Applications", icon: "description", key: "myApplications" },
+  { label: "My Loans", icon: "credit_card", key: "myLoans" },
+  { label: "Credit Building Journey", icon: "route", key: "creditBuilding" },
+  { label: "Help & Support", icon: "help_outline", key: "helpSupport" },
 ];
 
 const bottomItems = [
-  { label: "Settings", icon: "settings",       key: "accountsSettings" },
+  { label: "Settings", icon: "settings", key: "settings" },
   { label: "Arjun M.", icon: "account_circle", key: "accountsSettings" },
 ];
 
@@ -43,6 +43,7 @@ function NavBtn({ item, isActive, navigate, onClick }) {
 }
 
 function SidebarContent({ navigate, activePage, onClose }) {
+
   return (
     <div style={{
       width: 270, background: MIDNIGHT, color: "#fff",
@@ -74,7 +75,7 @@ function SidebarContent({ navigate, activePage, onClose }) {
         <div style={{ borderTop: "1px solid rgba(255,255,255,.08)", paddingTop: 8 }}>
           {bottomItems.map((item) => (
             <NavBtn key={item.key + item.label} item={item}
-              isActive={false} navigate={navigate} onClick={onClose} />
+              isActive={activePage === item.key} navigate={navigate} onClick={onClose} />
           ))}
         </div>
       </div>

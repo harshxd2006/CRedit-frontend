@@ -14,14 +14,14 @@ import ReviewSign from "./pages/Review&Sign";
 import LoanDetails from "./pages/LoanDetails";
 import MyApplications from "./pages/MyApplications";
 import MyLoans from "./pages/MyLoans";
+import Settings from "./pages/Settings";
 
 export default function App() {
   const [page, setPage] = useState("home");
-
   const navigate = (target) => {
     console.log("[Navigate] →", target);
     setPage(target);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {
@@ -30,41 +30,43 @@ export default function App() {
 
   const renderPage = () => {
     switch (page) {
-      case "home":                return <Homepage navigate={navigate} />;
-      case "register":            return <RegisterPage navigate={navigate} />;
-      case "login":               return <Loginpage navigate={navigate} />;
-      case "partner":             return <PartnerB2B navigate={navigate} />;
-      case "dashboard":           return <BorrowerDashboard navigate={navigate} />;
-      case "accountsSettings":    return <AccountsSettings navigate={navigate} />;
-      case "applicationSubmitted":return <ApplicationSubmitted navigate={navigate} />;
-      case "applyForLoan":        return <ApplyforLoan navigate={navigate} />;
-      case "creditReport":        return <CreditReport navigate={navigate} />;
-      case "creditBuilding":      return <Creditbuilding navigate={navigate} />;
-      case "helpSupport":         return <HelpSupport navigate={navigate} />;
-      case "loanDetails":         return <LoanDetails navigate={navigate} />;
-      case "myApplications":      return <MyApplications navigate={navigate} />;
-      case "myLoans":             return <MyLoans navigate={navigate} />;
-      case "reviewSign":          return <ReviewSign navigate={navigate} />;
-      default:                    return <Homepage navigate={navigate} />;
+      case "home": return <Homepage navigate={navigate} />;
+      case "register": return <RegisterPage navigate={navigate} />;
+      case "login": return <Loginpage navigate={navigate} />;
+      case "partner": return <PartnerB2B navigate={navigate} />;
+      case "dashboard": return <BorrowerDashboard navigate={navigate} />;
+      case "accountsSettings": return <AccountsSettings navigate={navigate} />;
+      case "applicationSubmitted": return <ApplicationSubmitted navigate={navigate} />;
+      case "applyForLoan": return <ApplyforLoan navigate={navigate} />;
+      case "creditReport": return <CreditReport navigate={navigate} />;
+      case "creditBuilding": return <Creditbuilding navigate={navigate} />;
+      case "helpSupport": return <HelpSupport navigate={navigate} />;
+      case "loanDetails": return <LoanDetails navigate={navigate} />;
+      case "myApplications": return <MyApplications navigate={navigate} />;
+      case "myLoans": return <MyLoans navigate={navigate} />;
+      case "reviewSign": return <ReviewSign navigate={navigate} />;
+      case "settings": return <Settings navigate={navigate} />;
+      default: return <Homepage navigate={navigate} />;
     }
   };
 
   const allPages = [
-    { label: "Home",          key: "home" },
-    { label: "Register",      key: "register" },
-    { label: "Login",         key: "login" },
-    { label: "Partner B2B",   key: "partner" },
-    { label: "Dashboard",     key: "dashboard" },
-    { label: "Profile",       key: "accountsSettings" },
+    { label: "Home", key: "home" },
+    { label: "Register", key: "register" },
+    { label: "Login", key: "login" },
+    { label: "Partner B2B", key: "partner" },
+    { label: "Dashboard", key: "dashboard" },
+    { label: "Profile", key: "accountsSettings" },
     { label: "App Submitted", key: "applicationSubmitted" },
-    { label: "Apply Loan",    key: "applyForLoan" },
+    { label: "Apply Loan", key: "applyForLoan" },
     { label: "Credit Report", key: "creditReport" },
-    { label: "Credit Build",  key: "creditBuilding" },
-    { label: "Help",          key: "helpSupport" },
-    { label: "Loan Details",  key: "loanDetails" },
-    { label: "My Apps",       key: "myApplications" },
-    { label: "My Loans",      key: "myLoans" },
-    { label: "Review Sign",   key: "reviewSign" },
+    { label: "Credit Build", key: "creditBuilding" },
+    { label: "Help", key: "helpSupport" },
+    { label: "Loan Details", key: "loanDetails" },
+    { label: "My Apps", key: "myApplications" },
+    { label: "My Loans", key: "myLoans" },
+    { label: "Review Sign", key: "reviewSign" },
+    { label: "Settings", key: "settings" },
   ];
 
   return (
