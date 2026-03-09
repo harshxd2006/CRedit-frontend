@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import FAQSection from "../components/FaqSection";
 
 const GOLD = "#FFD700";
 const MIDNIGHT = "#11425D";
@@ -13,6 +14,8 @@ const recentActivity = [
   { label: "Document Verification",   value: "Completed",   valueColor: "#0f172a" },
   { label: "Interest Accrual",        value: "-$210.45",    valueColor: "#0f172a" },
 ];
+
+
 
 export default function MyLoans({ navigate }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -37,14 +40,7 @@ export default function MyLoans({ navigate }) {
               <div style={{ display: "flex", borderBottom: "1px solid #e2e8f0", marginBottom: 24, overflowX: "auto" }}>
                 {tabs.map((tab, i) => (
                   <button key={tab} onClick={() => setActiveTab(i)}
-                    style={{
-                      padding: "11px 18px", fontSize: 13,
-                      fontWeight: activeTab === i ? 600 : 500,
-                      color: activeTab === i ? MIDNIGHT : "#64748b",
-                      background: "none", border: "none",
-                      borderBottom: activeTab === i ? `2px solid ${MIDNIGHT}` : "2px solid transparent",
-                      cursor: "pointer", transition: "color .15s", whiteSpace: "nowrap",
-                    }}
+                    style={{ padding: "11px 18px", fontSize: 13, fontWeight: activeTab === i ? 600 : 500, color: activeTab === i ? MIDNIGHT : "#64748b", background: "none", border: "none", borderBottom: activeTab === i ? `2px solid ${MIDNIGHT}` : "2px solid transparent", cursor: "pointer", transition: "color .15s", whiteSpace: "nowrap" }}
                   >{tab}</button>
                 ))}
               </div>
@@ -145,9 +141,14 @@ export default function MyLoans({ navigate }) {
 
             </div>
           </main>
-          <Footer />
         </div>
       </div>
+
+      {/* FAQ — full width, outside the sidebar+content flex row */}
+      <FAQSection />
+
+      {/* Footer — full width */}
+      <Footer />
 
       <style>{`
         @media (max-width: 768px) {

@@ -21,7 +21,7 @@ export default function PartnerB2B({ navigate }) {
             <div style={{ display: "inline-flex", alignItems: "center", borderRadius: 9999, background: "rgba(255,215,0,0.1)", padding: "4px 12px", fontSize: 14, fontWeight: 600, color: "#FFD700", border: "1px solid rgba(255,215,0,0.2)", marginBottom: 12 }}>
               LSP Solutions for NBFCs
             </div>
-            <h1 className="partner-hero-h1" style={{ fontSize: 48, fontWeight: 900, color: "#fff", lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 14 }}>
+            <h1 className="partner-hero-h1" style={{ fontSize: 56, fontWeight: 900, color: "#fff", lineHeight: 1.1, letterSpacing: "-2px", marginBottom: 14 }}>
               Stop Losing Money on NTC Borrowers You Can't Accurately Assess.
             </h1>
             <p style={{ fontSize: 16, color: "#cbd5e1", lineHeight: 1.75, marginBottom: 40 }}>
@@ -317,7 +317,7 @@ export default function PartnerB2B({ navigate }) {
         @media (max-width: 768px) {
           .partner-hero-grid { grid-template-columns: 1fr !important; }
           .partner-hero-img { display: none !important; }
-          .partner-hero-h1 { font-size: 32px !important; }
+          .partner-hero-h1 { font-size: 36px !important; letter-spacing: -1px !important; }
           .partner-hero-btns { flex-direction: column !important; }
           .partner-hero-btns a { text-align: center; justify-content: center; }
           .partner-3col { grid-template-columns: 1fr !important; }

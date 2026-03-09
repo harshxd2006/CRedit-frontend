@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import FAQSection from "../components/FaqSection";
 
 const GOLD = "#FFD700";
 const MIDNIGHT = "#11425D";
@@ -247,6 +248,8 @@ export default function BorrowerDashboard({ navigate }) {
           stacks below the row. The whole document scrolls as one; the sidebar
           stays "sticky" via its own fixed positioning, and the footer appears
           full-width when you naturally scroll to the bottom of the page. */}
+      <FAQSection />
+
       <Footer />
 
       <style>{`

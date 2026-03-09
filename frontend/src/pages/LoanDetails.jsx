@@ -2,9 +2,12 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import FAQSection from "../components/FaqSection";
 
 const GOLD = "#FFD700";
 const MIDNIGHT = "#11425D";
+
+
 
 export default function LoanDetails({ navigate }) {
   const [loanAmount, setLoanAmount] = useState(250000);
@@ -25,11 +28,7 @@ export default function LoanDetails({ navigate }) {
         <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
 
           {/* Sub-header */}
-          <header style={{
-            display: "flex", alignItems: "center", justifyContent: "space-between",
-            padding: "0 16px", height: 56, background: "#fff", borderBottom: "1px solid #e2e8f0",
-            flexShrink: 0,
-          }}>
+          <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 16px", height: 56, background: "#fff", borderBottom: "1px solid #e2e8f0", flexShrink: 0 }}>
             <h1 style={{ fontSize: 16, fontWeight: 700, margin: 0, color: "#0f172a" }}>Configure Loan</h1>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div style={{ textAlign: "right" }}>
@@ -62,14 +61,11 @@ export default function LoanDetails({ navigate }) {
                 </div>
 
                 <div style={{ marginBottom: 14 }}>
-                  <input
-                    type="range" min={minAmount} max={maxAmount} step={10000} value={loanAmount}
+                  <input type="range" min={minAmount} max={maxAmount} step={10000} value={loanAmount}
                     onChange={(e) => setLoanAmount(Number(e.target.value))}
-                    style={{ width: "100%", accentColor: MIDNIGHT, cursor: "pointer", height: 6 }}
-                  />
+                    style={{ width: "100%", accentColor: MIDNIGHT, cursor: "pointer", height: 6 }} />
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: 4 }}>
-                    <span>₹10,000</span>
-                    <span>₹5,00,000</span>
+                    <span>₹10,000</span><span>₹5,00,000</span>
                   </div>
                 </div>
 
@@ -127,17 +123,14 @@ export default function LoanDetails({ navigate }) {
                 </div>
                 <div className="adv-pref-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
                   {[
-                    { label: "Target EMI",     placeholder: "e.g. 10,000" },
-                    { label: "Max Rate (%)",   placeholder: "e.g. 12" },
+                    { label: "Target EMI",      placeholder: "e.g. 10,000" },
+                    { label: "Max Rate (%)",    placeholder: "e.g. 12" },
                     { label: "Collateral Type", placeholder: "Unsecured", disabled: true },
                   ].map((field) => (
                     <div key={field.label}>
                       <label style={{ display: "block", fontSize: 10, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>{field.label}</label>
-                      <input
-                        placeholder={field.placeholder}
-                        disabled={field.disabled}
-                        style={{ width: "100%", height: 40, padding: "0 12px", borderRadius: 6, border: "1px solid #e2e8f0", fontSize: 13, fontFamily: "'Inter', sans-serif", outline: "none", background: field.disabled ? "#f8fafc" : "#fff", boxSizing: "border-box" }}
-                      />
+                      <input placeholder={field.placeholder} disabled={field.disabled}
+                        style={{ width: "100%", height: 40, padding: "0 12px", borderRadius: 6, border: "1px solid #e2e8f0", fontSize: 13, fontFamily: "'Inter', sans-serif", outline: "none", background: field.disabled ? "#f8fafc" : "#fff", boxSizing: "border-box" }} />
                     </div>
                   ))}
                 </div>
@@ -153,25 +146,14 @@ export default function LoanDetails({ navigate }) {
 
               {/* Footer CTA */}
               <div className="loan-footer-cta" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 20, borderTop: "1px solid #e2e8f0", paddingBottom: 32, gap: 12, flexWrap: "wrap" }}>
-                <button
-                  onClick={() => navigate?.("dashboard")}
-                  style={{
-                    display: "flex", alignItems: "center", gap: 6, background: "none", border: "none",
-                    color: "#64748b", fontWeight: 700, fontSize: 14, cursor: "pointer",
-                  }}
-                >
+                <button onClick={() => navigate?.("dashboard")}
+                  style={{ display: "flex", alignItems: "center", gap: 6, background: "none", border: "none", color: "#64748b", fontWeight: 700, fontSize: 14, cursor: "pointer" }}>
                   <span className="material-symbols-outlined" style={{ fontSize: 18 }}>arrow_back</span>
                   Back to Employment
                 </button>
-                <button style={{
-                  padding: "12px 28px", background: GOLD, color: MIDNIGHT, borderRadius: 12,
-                  fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer",
-                  display: "flex", alignItems: "center", gap: 8,
-                  boxShadow: "0 6px 20px rgba(255,215,0,.3)", transition: "transform .15s",
-                }}
+                <button style={{ padding: "12px 28px", background: GOLD, color: MIDNIGHT, borderRadius: 12, fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: 8, boxShadow: "0 6px 20px rgba(255,215,0,.3)", transition: "transform .15s" }}
                   onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-2px)"}
-                  onMouseLeave={(e) => e.currentTarget.style.transform = "none"}
-                >
+                  onMouseLeave={(e) => e.currentTarget.style.transform = "none"}>
                   Generate My Report
                   <span className="material-symbols-outlined" style={{ fontSize: 18 }}>analytics</span>
                 </button>
@@ -179,10 +161,14 @@ export default function LoanDetails({ navigate }) {
 
             </div>
           </main>
-
-          <Footer />
         </div>
       </div>
+
+      {/* FAQ — full width, outside the sidebar+content flex row */}
+      <FAQSection />
+
+      {/* Footer — full width */}
+      <Footer />
 
       <style>{`
         @media (max-width: 600px) {

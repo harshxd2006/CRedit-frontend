@@ -2,9 +2,12 @@ import { useState, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import FAQSection from "../components/FaqSection";
 
 const GOLD = "#FFD700";
 const MIDNIGHT = "#11425D";
+
+
 
 export default function ReviewSign({ navigate }) {
   const [aadhaarLast4, setAadhaarLast4] = useState("");
@@ -191,9 +194,14 @@ export default function ReviewSign({ navigate }) {
               </div>
             </div>
           </main>
-          <Footer />
         </div>
       </div>
+
+      {/* FAQ — full width, outside the sidebar+content flex row */}
+      <FAQSection />
+
+      {/* Footer — full width */}
+      <Footer />
 
       <style>{`
         @media (max-width: 768px) {

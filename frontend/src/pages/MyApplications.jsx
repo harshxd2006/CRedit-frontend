@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import FAQSection from "../components/FaqSection";
 
 const GOLD = "#FFD700";
 const MIDNIGHT = "#11425D";
@@ -13,6 +14,8 @@ const allApplications = [
 ];
 
 const filters = ["All", "Pending", "Approved", "Rejected", "Under Review"];
+
+
 
 export default function MyApplications({ navigate }) {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -41,13 +44,7 @@ export default function MyApplications({ navigate }) {
               <div style={{ display: "flex", gap: 8, marginBottom: 24, flexWrap: "wrap" }}>
                 {filters.map((f) => (
                   <button key={f} onClick={() => setActiveFilter(f)}
-                    style={{
-                      padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: 600,
-                      border: `2px solid ${activeFilter === f ? MIDNIGHT : "#e2e8f0"}`,
-                      background: activeFilter === f ? MIDNIGHT : "#fff",
-                      color: activeFilter === f ? "#fff" : "#475569",
-                      cursor: "pointer", transition: "all .15s",
-                    }}>{f}</button>
+                    style={{ padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: 600, border: `2px solid ${activeFilter === f ? MIDNIGHT : "#e2e8f0"}`, background: activeFilter === f ? MIDNIGHT : "#fff", color: activeFilter === f ? "#fff" : "#475569", cursor: "pointer", transition: "all .15s" }}>{f}</button>
                 ))}
               </div>
 
@@ -66,7 +63,6 @@ export default function MyApplications({ navigate }) {
                       onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,.08)"; }}
                       onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,.05)"; }}>
 
-                      {/* Card Header */}
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: 14, borderBottom: "1px solid #f1f5f9", marginBottom: 14 }}>
                         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                           <div style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(17,66,93,.07)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -77,7 +73,6 @@ export default function MyApplications({ navigate }) {
                         <span style={{ padding: "5px 12px", borderRadius: 999, fontSize: 11, fontWeight: 700, background: app.statusBg, color: app.statusColor, border: `1px solid ${app.statusBorder}`, flexShrink: 0 }}>{app.status}</span>
                       </div>
 
-                      {/* Card Details */}
                       <div className="app-details-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12, marginBottom: 14 }}>
                         {[
                           { label: "Amount Requested", value: app.amount },
@@ -92,7 +87,6 @@ export default function MyApplications({ navigate }) {
                         ))}
                       </div>
 
-                      {/* Card Footer */}
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 14, borderTop: "1px solid #f1f5f9" }}>
                         <span style={{ fontSize: 12, color: "#94a3b8" }}>{app.daysAgo}</span>
                         <button style={{ padding: "8px 18px", background: MIDNIGHT, color: "#fff", borderRadius: 8, fontWeight: 700, fontSize: 13, border: "none", cursor: "pointer", transition: "opacity .15s" }}
@@ -106,9 +100,14 @@ export default function MyApplications({ navigate }) {
 
             </div>
           </main>
-          <Footer />
         </div>
       </div>
+
+      {/* FAQ — full width, outside the sidebar+content flex row */}
+      <FAQSection />
+
+      {/* Footer — full width */}
+      <Footer />
     </div>
   );
 }

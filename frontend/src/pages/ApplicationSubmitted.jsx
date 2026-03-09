@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import FAQSection from "../components/FaqSection";
 
 const GOLD = "#FFD700";
 const MIDNIGHT = "#11425D";
@@ -10,27 +11,21 @@ export default function ApplicationSubmitted({ navigate }) {
     <div style={{ fontFamily: "'Inter', sans-serif", minHeight: "100vh", background: "#f8f9ff", display: "flex", flexDirection: "column" }}>
       <Navbar navigate={navigate} />
 
+      {/* Sidebar + Content row */}
       <div style={{ display: "flex", flex: 1 }}>
         <Sidebar navigate={navigate} activePage="applicationSubmitted" />
 
         <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
 
           {/* Page Header */}
-          <header style={{
-            display: "flex", alignItems: "center", justifyContent: "space-between",
-            padding: "0 20px", height: 56, background: "#fff", borderBottom: "1px solid #e2e8f0",
-            flexShrink: 0,
-          }}>
+          <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 20px", height: 56, background: "#fff", borderBottom: "1px solid #e2e8f0", flexShrink: 0 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span className="material-symbols-outlined" style={{ color: MIDNIGHT, fontSize: 20 }}>check_circle</span>
               <h2 style={{ fontSize: 15, fontWeight: 700, margin: 0, color: "#0f172a" }}>Application Confirmation</h2>
             </div>
             <div style={{ display: "flex", gap: 8 }}>
               {["notifications", "account_circle"].map((icon) => (
-                <button key={icon} style={{
-                  width: 36, height: 36, borderRadius: 8, background: "#f1f5f9",
-                  border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-                }}>
+                <button key={icon} style={{ width: 36, height: 36, borderRadius: 8, background: "#f1f5f9", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <span className="material-symbols-outlined" style={{ fontSize: 18, color: "#64748b" }}>{icon}</span>
                 </button>
               ))}
@@ -43,15 +38,8 @@ export default function ApplicationSubmitted({ navigate }) {
               <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", overflow: "hidden", boxShadow: "0 4px 16px rgba(0,0,0,.06)" }}>
 
                 {/* Success Hero */}
-                <div style={{
-                  background: MIDNIGHT, padding: "48px 24px",
-                  display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center",
-                }}>
-                  <div style={{
-                    width: 72, height: 72, borderRadius: "50%", background: GOLD,
-                    display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20,
-                    boxShadow: "0 8px 32px rgba(255,215,0,.3)",
-                  }}>
+                <div style={{ background: MIDNIGHT, padding: "48px 24px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                  <div style={{ width: 72, height: 72, borderRadius: "50%", background: GOLD, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, boxShadow: "0 8px 32px rgba(255,215,0,.3)" }}>
                     <span className="material-symbols-outlined" style={{ fontSize: 40, color: "#000", fontVariationSettings: "'FILL' 1" }}>check</span>
                   </div>
                   <h1 style={{ fontSize: 24, fontWeight: 900, color: "#fff", margin: "0 0 10px" }}>Application Submitted!</h1>
@@ -82,31 +70,12 @@ export default function ApplicationSubmitted({ navigate }) {
                       <div style={{ position: "absolute", left: 15, top: 8, bottom: 8, width: 2, background: "#e2e8f0" }} />
                       <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
                         {[
-                          {
-                            icon: "check", bg: "#22c55e", color: "#fff",
-                            title: "Application Received",
-                            desc: "System has verified all uploaded documents and identity information.",
-                            status: "Completed", statusColor: "#16a34a",
-                          },
-                          {
-                            icon: "verified_user", bg: GOLD, color: "#000",
-                            title: "Lender Review",
-                            desc: "A specialized credit officer is reviewing your credit limit and terms. This usually takes 12-24 hours.",
-                            status: "In Progress", statusColor: MIDNIGHT,
-                          },
-                          {
-                            icon: "account_balance_wallet", bg: "#e2e8f0", color: "#94a3b8",
-                            title: "Fund Disbursement",
-                            desc: "Once approved, funds will be instantly transferred to your linked bank account ending in **4902.",
-                            status: "Upcoming", statusColor: "#94a3b8",
-                          },
+                          { icon: "check", bg: "#22c55e", color: "#fff", title: "Application Received", desc: "System has verified all uploaded documents and identity information.", status: "Completed", statusColor: "#16a34a" },
+                          { icon: "verified_user", bg: GOLD, color: "#000", title: "Lender Review", desc: "A specialized credit officer is reviewing your credit limit and terms. This usually takes 12-24 hours.", status: "In Progress", statusColor: MIDNIGHT },
+                          { icon: "account_balance_wallet", bg: "#e2e8f0", color: "#94a3b8", title: "Fund Disbursement", desc: "Once approved, funds will be instantly transferred to your linked bank account ending in **4902.", status: "Upcoming", statusColor: "#94a3b8" },
                         ].map((step, i) => (
                           <div key={i} style={{ display: "flex", gap: 20, position: "relative", opacity: step.status === "Upcoming" ? 0.6 : 1 }}>
-                            <div style={{
-                              width: 32, height: 32, borderRadius: "50%", background: step.bg,
-                              display: "flex", alignItems: "center", justifyContent: "center",
-                              flexShrink: 0, zIndex: 1,
-                            }}>
+                            <div style={{ width: 32, height: 32, borderRadius: "50%", background: step.bg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, zIndex: 1 }}>
                               <span className="material-symbols-outlined" style={{ fontSize: 16, color: step.color }}>{step.icon}</span>
                             </div>
                             <div>
@@ -122,21 +91,11 @@ export default function ApplicationSubmitted({ navigate }) {
 
                   {/* Action Buttons */}
                   <div className="appsubmit-btns" style={{ display: "flex", gap: 10, paddingTop: 20, borderTop: "1px solid #f1f5f9", flexWrap: "wrap" }}>
-                    <button style={{
-                      flex: 1, minWidth: 120, background: GOLD, color: "#000", height: 46, borderRadius: 12,
-                      fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer",
-                      display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-                    }}>
+                    <button style={{ flex: 1, minWidth: 120, background: GOLD, color: "#000", height: 46, borderRadius: 12, fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
                       <span className="material-symbols-outlined" style={{ fontSize: 18 }}>analytics</span>
                       Track Status
                     </button>
-                    <button
-                      onClick={() => navigate?.("dashboard")}
-                      style={{
-                        flex: 1, minWidth: 120, background: "#f1f5f9", color: "#0f172a", height: 46, borderRadius: 12,
-                        fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer",
-                        display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-                      }}>
+                    <button onClick={() => navigate?.("dashboard")} style={{ flex: 1, minWidth: 120, background: "#f1f5f9", color: "#0f172a", height: 46, borderRadius: 12, fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
                       <span className="material-symbols-outlined" style={{ fontSize: 18 }}>home</span>
                       Back to Dashboard
                     </button>
@@ -147,9 +106,14 @@ export default function ApplicationSubmitted({ navigate }) {
             </div>
           </main>
 
-          <Footer />
         </div>
       </div>
+
+      {/* FAQ — full width, outside the sidebar+content flex row */}
+      <FAQSection />
+
+      {/* Footer — full width */}
+      <Footer />
 
       <style>{`
         @media (max-width: 480px) {

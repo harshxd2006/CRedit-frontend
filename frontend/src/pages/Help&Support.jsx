@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import FAQSection from "../components/FaqSection";
 
 const GOLD = "#FFD700";
 const MIDNIGHT = "#11425D";
@@ -12,6 +13,8 @@ const faqs = [
   { q: "How long does it take for loan approval?", a: "Typically, most applications are processed within 24-48 hours. However, depending on the documentation provided and third-party verification, it may take up to 5 business days." },
 ];
 
+
+
 export default function HelpSupport({ navigate }) {
   const [complaint, setComplaint] = useState({ category: "", description: "" });
   const [openFaq, setOpenFaq] = useState(2);
@@ -19,6 +22,7 @@ export default function HelpSupport({ navigate }) {
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#f8f9ff", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar navigate={navigate} />
+
       <div style={{ display: "flex", flex: 1 }}>
         <Sidebar navigate={navigate} activePage="helpSupport" />
         <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
@@ -156,9 +160,14 @@ export default function HelpSupport({ navigate }) {
 
             </div>
           </main>
-          <Footer />
         </div>
       </div>
+
+      {/* FAQ — full width, outside the sidebar+content flex row */}
+      <FAQSection />
+
+      {/* Footer — full width */}
+      <Footer />
 
       <style>{`
         @media (max-width: 768px) {

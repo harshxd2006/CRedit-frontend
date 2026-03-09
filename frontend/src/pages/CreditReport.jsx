@@ -1,14 +1,19 @@
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import FAQSection from "../components/FaqSection";
 
 const GOLD = "#FFD700";
 const MIDNIGHT = "#11425D";
+
+
 
 export default function CreditReport({ navigate }) {
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#f8f9ff", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar navigate={navigate} />
+
       <div style={{ display: "flex", flex: 1 }}>
         <Sidebar navigate={navigate} activePage="creditReport" />
         <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
@@ -218,9 +223,14 @@ export default function CreditReport({ navigate }) {
 
             </div>
           </main>
-          <Footer />
         </div>
       </div>
+
+      {/* FAQ — full width, outside the sidebar+content flex row */}
+      <FAQSection />
+
+      {/* Footer — full width */}
+      <Footer />
 
       <style>{`
         @media (max-width: 768px) {
