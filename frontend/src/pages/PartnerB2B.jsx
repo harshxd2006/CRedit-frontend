@@ -1,6 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+
+
+function useScrollReveal() {
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+}
 
 export default function PartnerB2B({ navigate }) {
   const [formData, setFormData] = useState({
@@ -8,6 +27,7 @@ export default function PartnerB2B({ navigate }) {
   });
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  useScrollReveal();
   const handleSubmit = (e) => { e.preventDefault(); alert("Demo request submitted!"); };
 
   return (
@@ -16,19 +36,19 @@ export default function PartnerB2B({ navigate }) {
 
       {/* HERO */}
       <section style={{ backgroundColor: "#11425D", padding: "48px 20px 48px", position: "relative", overflow: "hidden" }}>
-        <div className="partner-hero-grid" style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
+        <div className="partner-hero-grid reveal-on-scroll" style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
           <div style={{ flex: "0 0 auto" }}>
             <div style={{ display: "inline-flex", alignItems: "center", borderRadius: 9999, background: "rgba(255,215,0,0.1)", padding: "4px 12px", fontSize: 14, fontWeight: 600, color: "#FFD700", border: "1px solid rgba(255,215,0,0.2)", marginBottom: 12 }}>
               LSP Solutions for NBFCs
             </div>
-            <h1 className="partner-hero-h1" style={{ fontSize: 56, fontWeight: 900, color: "#fff", lineHeight: 1.1, letterSpacing: "-2px", marginBottom: 14 }}>
+            <h1 className="partner-hero-h1 reveal-on-scroll delay-1" style={{ fontSize: 56, fontWeight: 900, color: "#fff", lineHeight: 1.1, letterSpacing: "-2px", marginBottom: 14 }}>
               Stop Losing Money on NTC Borrowers You Can't Accurately Assess.
             </h1>
-            <p style={{ fontSize: 16, color: "#cbd5e1", lineHeight: 1.75, marginBottom: 40 }}>
+            <p className="reveal-on-scroll delay-2" style={{ fontSize: 16, color: "#cbd5e1", lineHeight: 1.75, marginBottom: 40 }}>
               CreditFlow delivers pre-verified, risk-tiered NTC borrowers with full bank statement intelligence and ML-driven repayment forecasting.
             </p>
-            <div className="partner-hero-btns" style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
-              <a href="#demo" style={{ background: "#FFD700", color: "#0f172a", fontWeight: 700, fontSize: 16, padding: "14px 28px", borderRadius: 8, textDecoration: "none", boxShadow: "0 8px 24px rgba(255,215,0,0.3)" }}>
+            <div className="partner-hero-btns reveal-on-scroll delay-3" style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+              <a href="#demo" className="shimmer-btn" style={{ background: "#FFD700", color: "#0f172a", fontWeight: 700, fontSize: 16, padding: "14px 28px", borderRadius: 8, textDecoration: "none", boxShadow: "0 8px 24px rgba(255,215,0,0.3)" }}>
                 Request a Demo
               </a>
               <a href="#" style={{ background: "#fff", color: "#0f172a", fontWeight: 700, fontSize: 16, padding: "14px 28px", borderRadius: 8, textDecoration: "none", border: "1px solid #e2e8f0", display: "flex", alignItems: "center", gap: 8 }}>
@@ -60,7 +80,7 @@ export default function PartnerB2B({ navigate }) {
             <h2 style={{ fontSize: 34, fontWeight: 700, color: "#0f172a" }}>The NTC Problem</h2>
             <p style={{ marginTop: 16, color: "#475569" }}>Why current credit models fail 28% of viable Indian borrowers.</p>
           </div>
-          <div className="partner-3col" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
+          <div className="partner-3col reveal-on-scroll delay-2" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
             {[
               { icon: "warning", title: "Generic Models", stat: "6-8% Average Default", desc: "Standard scoring fails to capture true repayment capacity, leading to broad-brush rejections or high-risk approvals." },
               { icon: "payments", title: "Manual Verification", stat: "₹1,200+ Per File", desc: "High overheads for verifying non-traditional data sources and physical documentation drives up acquisition costs." },
@@ -79,7 +99,7 @@ export default function PartnerB2B({ navigate }) {
 
       {/* HOW IT WORKS */}
       <section id="how-it-works" style={{ background: "#fff", padding: "72px 20px" }}>
-        <div className="partner-how-grid" style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "flex-start" }}>
+        <div className="partner-how-grid reveal-on-scroll delay-2" style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "flex-start" }}>
           <div>
             <h2 style={{ fontSize: 32, fontWeight: 700, color: "#0f172a", marginBottom: 20 }}>Technical Assessment Journey</h2>
             <p style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 36 }}>Our ML model processes 2,000+ data points per applicant, focusing on 14 critical liquidity factors.</p>
@@ -138,7 +158,7 @@ export default function PartnerB2B({ navigate }) {
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <h2 style={{ fontSize: 34, fontWeight: 700, color: "#0f172a" }}>Value for Lending Partners</h2>
           </div>
-          <div className="partner-4col" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }}>
+          <div className="partner-4col reveal-on-scroll delay-2" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }}>
             {[
               { icon: "person_search", title: "Pre-screened Borrowers", desc: "Access a curated pipeline of borrowers who have already passed KYC and initial credit filters." },
               { icon: "layers", title: "Risk-Tiered Apps", desc: "Review applications pre-sorted by risk level, allowing for differentiated interest rates." },
@@ -157,12 +177,12 @@ export default function PartnerB2B({ navigate }) {
 
       {/* METRICS */}
       <section style={{ background: "#FFD700", padding: "56px 20px" }}>
-        <div className="partner-metrics" style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24, textAlign: "center" }}>
+        <div className="partner-metrics reveal-on-scroll delay-2" style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24, textAlign: "center" }}>
           {[
-            { val: "2.4%",  label: "NPA Rate",       sub: "vs 7.2% Industry Avg" },
-            { val: "70%",   label: "Cost Reduction",  sub: "On manual verification" },
-            { val: "140M+", label: "NTC Profiles",    sub: "Validated Monthly" },
-            { val: "94%",   label: "Model Accuracy",  sub: "In repayment prediction" },
+            { val: "2.4%", label: "NPA Rate", sub: "vs 7.2% Industry Avg" },
+            { val: "70%", label: "Cost Reduction", sub: "On manual verification" },
+            { val: "140M+", label: "NTC Profiles", sub: "Validated Monthly" },
+            { val: "94%", label: "Model Accuracy", sub: "In repayment prediction" },
           ].map((s) => (
             <div key={s.label}>
               <div style={{ fontSize: 40, fontWeight: 900, color: "#0f172a", letterSpacing: "-2px" }}>{s.val}</div>
@@ -180,7 +200,7 @@ export default function PartnerB2B({ navigate }) {
             <h2 style={{ fontSize: 34, fontWeight: 700, color: "#0f172a" }}>Partnership Structure</h2>
             <p style={{ marginTop: 16, color: "#475569" }}>Simple, transparent, and aligned with your lending targets.</p>
           </div>
-          <div className="partner-structure-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
+          <div className="partner-structure-grid reveal-on-scroll delay-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               {[
                 { icon: "handshake", title: "Referral Fee Model", desc: "Pay only for successful loan disbursements. Zero upfront platform costs." },
@@ -222,7 +242,7 @@ export default function PartnerB2B({ navigate }) {
             <h2 style={{ fontSize: 34, fontWeight: 700, color: "#fff" }}>Compliance &amp; Security</h2>
             <p style={{ marginTop: 16, color: "rgba(255,255,255,0.4)" }}>Meeting the highest regulatory standards for digital lending.</p>
           </div>
-          <div className="partner-compliance-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 28, textAlign: "center" }}>
+          <div className="partner-compliance-grid reveal-on-scroll delay-2" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 28, textAlign: "center" }}>
             {[
               { icon: "gavel", title: "RBI 2025 Compliant", desc: "Adheres strictly to Digital Lending Directions 2025." },
               { icon: "storage", title: "Indian Servers", desc: "All data stored and processed within Indian geography." },
@@ -242,7 +262,7 @@ export default function PartnerB2B({ navigate }) {
       {/* TESTIMONIALS */}
       <section style={{ background: "#fff", padding: "72px 20px" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-          <div className="partner-testi-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <div className="partner-testi-grid reveal-on-scroll delay-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
             {[
               { quote: "CreditFlow has revolutionized our NTC underwriting. Their Tier-1 borrowers perform remarkably similar to our established credit customers, allowing us to expand our book safely.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDfSLEQZW2GceH3GQjYCuTqT5tTAkcIAI4Gb8ERniEN0rhSev55eRpLTQWkazuvK4x3LxogvZSmckpqbV38ycmBX4IcPcEGapC2qpcrcSAe5RyhtmSdndPe1ugJdjJJW63fPpjv0DriGk-Ur8Og8cu766emMDT9avwq0uLjNPF2HWfGW-mep5vbWP8aFTGKy3rv26DZRslpwqOT7H2h5nIQSzy4ZjgG7vt6ZftCXR5BipIo6auPPEeJaB2QTWpqt_S2jtD_FIz7UjY", role: "Chief Risk Officer", org: "Tier-1 Registered NBFC" },
               { quote: "The level of bank statement intelligence provided exceeds any other LSP we've partnered with. Their bounce prediction model is a game changer for collection overheads.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBjflh4WucWMzAWza6dZ69d_xDqi9SCxvg8-Vfe2HQHn_ZwQJl2Jb4z_-Ha_0xgg9t8szet1mvIYQbAM9mY11wlA2K-vy6QldMpFiDkaT61_7QZgzXKbFtgyGGQ7RgwSyWy3HkH98RyV90CMiTrz4hNnB6jotCys1R19RLdSu3xAa444FCkXzwLgZHxHmuTWdyUSvXIMK5-QoDCiu2Byt_ZDkTx3OXGyTdDhkBdxodTZLMrABJ9XyUNoHXSG8GFW0-wO6qQQ3BRdPs", role: "Head of Credit", org: "Fintech Lending Corp" },
@@ -314,6 +334,56 @@ export default function PartnerB2B({ navigate }) {
       <Footer />
 
       <style>{`
+        .reveal-on-scroll {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-on-scroll.revealed {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        @keyframes shimmer {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+
+        .shimmer-btn {
+          background: linear-gradient(90deg, #FFD700 0%, #fff3b0 20%, #FFD700 40%, #FFD700 100%) !important;
+          background-size: 200% auto !important;
+          animation: shimmer 4s infinite linear;
+          color: #0f172a !important;
+          border: 1px solid rgba(255,215,0,0.5);
+          transition: all 0.2s ease !important;
+        }
+        .shimmer-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 12px 28px rgba(255,215,0,0.4) !important;
+        }
+
+        /* Float animation for the dashboard image */
+        @keyframes floatDash {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+          100% { transform: translateY(0px); }
+        }
+        .partner-hero-img > div {
+          animation: floatDash 6s ease-in-out infinite;
+        }
+
+        /* Hover lift for cards */
+        .partner-3col > div, .partner-4col > div {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .partner-3col > div:hover, .partner-4col > div:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 16px 48px rgba(0,0,0,0.08) !important;
+        }
+
         @media (max-width: 768px) {
           .partner-hero-grid { grid-template-columns: 1fr !important; }
           .partner-hero-img { display: none !important; }

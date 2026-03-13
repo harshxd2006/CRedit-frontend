@@ -1,7 +1,62 @@
+import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+
+// Custom Hook for counting up
+function useCountUp(end, duration = 2000) {
+  const [count, setCount] = useState(0);
+  const [hasTriggered, setHasTriggered] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !hasTriggered) {
+        setHasTriggered(true);
+        let start = 0;
+        const increment = end / (duration / 16);
+        const timer = setInterval(() => {
+          start += increment;
+          if (start >= end) {
+            setCount(end);
+            clearInterval(timer);
+          } else {
+            setCount(Math.floor(start));
+          }
+        }, 16);
+      }
+    }, { threshold: 0.5 });
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [end, duration, hasTriggered]);
+
+  return [count, ref];
+}
+
+// Custom hook to trigger scroll reveals
+function useScrollReveal() {
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+}
+
 export default function Homepage({ navigate }) {
+  useScrollReveal();
+  const [creditScore, scoreRef] = useCountUp(782, 2000);
+
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#ffffff", color: "#0f172a" }}>
 
@@ -14,7 +69,7 @@ export default function Homepage({ navigate }) {
           <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
 
             {/* Left */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+            <div className="reveal-on-scroll" style={{ display: "flex", flexDirection: "column", gap: 28 }}>
               <div style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
                 padding: "6px 14px", borderRadius: 999,
@@ -25,12 +80,12 @@ export default function Homepage({ navigate }) {
                 Partnered with RBI-Registered Lenders
               </div>
 
-              <h1 className="hero-h1" style={{ fontSize: 56, fontWeight: 900, lineHeight: 1.1, letterSpacing: "-2px", margin: 0, color: "#0f172a" }}>
+              <h1 className="hero-h1 reveal-on-scroll delay-1" style={{ fontSize: 56, fontWeight: 900, lineHeight: 1.1, letterSpacing: "-2px", margin: 0, color: "#0f172a" }}>
                 Never Taken a Loan Before?{" "}
                 <span>That Shouldn't Stop You.</span>
               </h1>
 
-              <p style={{ fontSize: 16, color: "#475569", maxWidth: 520, lineHeight: 1.75, margin: 0 }}>
+              <p className="reveal-on-scroll delay-2" style={{ fontSize: 16, color: "#475569", maxWidth: 520, lineHeight: 1.75, margin: 0 }}>
                 India's first credit platform built exclusively for NTC borrowers. We look at your potential, not just your history.
               </p>
 
@@ -41,7 +96,7 @@ export default function Homepage({ navigate }) {
                     padding: "14px 32px", borderRadius: 12, fontWeight: 700, fontSize: 16,
                     background: "#FFD700", color: "#000", border: "none", cursor: "pointer",
                     boxShadow: "0 8px 24px rgba(255,215,0,.30)",
-                    transition: "opacity .15s", width: "fit-content",
+                    transition: "all .15s", width: "fit-content",
                   }}
                   onMouseEnter={e => e.currentTarget.style.opacity = "0.9"}
                   onMouseLeave={e => e.currentTarget.style.opacity = "1"}
@@ -51,7 +106,7 @@ export default function Homepage({ navigate }) {
               </div>
 
               {/* Stats row */}
-              <div className="hero-stats" style={{
+              <div className="hero-stats reveal-on-scroll delay-3" style={{
                 display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
                 paddingTop: 20, borderTop: "1px solid #e2e8f0",
               }}>
@@ -71,7 +126,7 @@ export default function Homepage({ navigate }) {
             </div>
 
             {/* Right — Phone mockup */}
-            <div className="hero-phone" style={{ display: "flex", justifyContent: "center", position: "relative" }}>
+            <div className="hero-phone reveal-on-scroll delay-4" style={{ display: "flex", justifyContent: "center", position: "relative" }}>
               <div style={{
                 position: "absolute", top: "50%", left: "50%",
                 transform: "translate(-50%,-50%)",
@@ -96,9 +151,9 @@ export default function Homepage({ navigate }) {
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                     <p style={{ fontSize: 10, color: "#94a3b8", margin: 0 }}>Your Credit Potential</p>
-                    <h3 style={{ fontSize: 32, fontWeight: 900, margin: 0 }}>782</h3>
+                    <h3 ref={scoreRef} style={{ fontSize: 32, fontWeight: 900, margin: 0 }}>{creditScore}</h3>
                     <div style={{ height: 7, background: "#e2e8f0", borderRadius: 99, overflow: "hidden" }}>
-                      <div style={{ height: "100%", width: "85%", background: "#FFD700", borderRadius: 99 }} />
+                      <div className="progress-fill" style={{ height: "100%", background: "#FFD700", borderRadius: 99 }} />
                     </div>
                     <p style={{ fontSize: 8, fontWeight: 700, color: "#FFD700", margin: 0, letterSpacing: "0.1em" }}>EXCELLENT BEHAVIOR</p>
                   </div>
@@ -138,11 +193,11 @@ export default function Homepage({ navigate }) {
               Traditional credit systems ignore millions of responsible people just because they haven't borrowed before.
             </p>
           </div>
-          <div className="problem-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
+          <div className="problem-grid reveal-on-scroll delay-2" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
             {[
-              { icon: "cancel",      bg: "#fef2f2", color: "#ef4444", title: "Rejected Instantly",  desc: "Applied to multiple apps only to be rejected in seconds by automated bots." },
+              { icon: "cancel", bg: "#fef2f2", color: "#ef4444", title: "Rejected Instantly", desc: "Applied to multiple apps only to be rejected in seconds by automated bots." },
               { icon: "trending_up", bg: "#fff7ed", color: "#f97316", title: "Staggering Interest", desc: "Finally got approved? But the interest rate is a soul-crushing 28% or more." },
-              { icon: "history",     bg: "#f8fafc", color: "#64748b", title: "No History, No Hope", desc: "Big banks tell you: \"No credit history means no chance\". How do you even start?" },
+              { icon: "history", bg: "#f8fafc", color: "#64748b", title: "No History, No Hope", desc: "Big banks tell you: \"No credit history means no chance\". How do you even start?" },
             ].map(c => (
               <div key={c.title} style={{
                 background: "#fff", padding: "28px 24px", borderRadius: 20,
@@ -163,7 +218,7 @@ export default function Homepage({ navigate }) {
       {/* ── HOW IT WORKS ── */}
       <section id="how-it-works" style={{ padding: "72px 20px" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-          <div className="hiw-grid" style={{ display: "flex", gap: 56, alignItems: "center" }}>
+          <div className="hiw-grid reveal-on-scroll delay-2" style={{ display: "flex", gap: 56, alignItems: "center" }}>
             <div style={{ flex: "1 1 400px", display: "flex", flexDirection: "column", gap: 24 }}>
               <h2 className="hiw-h2" style={{ fontSize: 42, fontWeight: 900, lineHeight: 1.1, letterSpacing: "-1px", margin: 0 }}>
                 Here's How <span>CreditFlow</span> Fixes This
@@ -174,8 +229,8 @@ export default function Homepage({ navigate }) {
               <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
                 {[
                   { n: 1, title: "Analyze Transactions", desc: "Securely sync your bank statements. We analyze spending habits and consistent income patterns." },
-                  { n: 2, title: "Generate NTC Report",  desc: "We create a unique credit profile that highlights your reliability and financial discipline." },
-                  { n: 3, title: "Match with Lender",    desc: "Connect instantly with RBI-registered lenders who specialize in first-time borrowers." },
+                  { n: 2, title: "Generate NTC Report", desc: "We create a unique credit profile that highlights your reliability and financial discipline." },
+                  { n: 3, title: "Match with Lender", desc: "Connect instantly with RBI-registered lenders who specialize in first-time borrowers." },
                 ].map(s => (
                   <div key={s.n} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
                     <div style={{
@@ -222,10 +277,10 @@ export default function Homepage({ navigate }) {
               </thead>
               <tbody>
                 {[
-                  { feature: "Underwriting Model",   cf: "NTC-Specific AI",   trad: "Standard CIBIL Focus" },
-                  { feature: "Pricing Transparency", cf: "Zero Hidden Fees",  trad: "Hidden Charges" },
-                  { feature: "Improvement Roadmap",  cf: "Included",          trad: "None" },
-                  { feature: "Credit Building",      cf: "Guided Journey",    trad: "Manual" },
+                  { feature: "Underwriting Model", cf: "NTC-Specific AI", trad: "Standard CIBIL Focus" },
+                  { feature: "Pricing Transparency", cf: "Zero Hidden Fees", trad: "Hidden Charges" },
+                  { feature: "Improvement Roadmap", cf: "Included", trad: "None" },
+                  { feature: "Credit Building", cf: "Guided Journey", trad: "Manual" },
                 ].map((row, i) => (
                   <tr key={i} style={{ borderBottom: "1px solid rgba(255,255,255,.10)" }}>
                     <td style={{ padding: "20px 14px", fontWeight: 500, fontSize: 13 }}>{row.feature}</td>
@@ -245,13 +300,13 @@ export default function Homepage({ navigate }) {
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <h2 style={{ fontSize: 32, fontWeight: 900, margin: 0 }}>Built for the Next Generation</h2>
           </div>
-          <div className="innovation-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 20 }}>
+          <div className="innovation-grid reveal-on-scroll delay-2" style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 20 }}>
             {[
-              { icon: "psychology",    title: "NTC Specific Model",    desc: "Custom algorithms designed for zero credit history." },
-              { icon: "analytics",     title: "Statement Intelligence", desc: "Auto-categorization of your income and spending." },
-              { icon: "description",   title: "Transparent Report",     desc: "See exactly why you were approved or declined." },
-              { icon: "layers",        title: "Risk Tiering",           desc: "Fair interest rates based on your specific risk profile." },
-              { icon: "rocket_launch", title: "Building Journey",       desc: "Roadmap to your first high-limit credit card." },
+              { icon: "psychology", title: "NTC Specific Model", desc: "Custom algorithms designed for zero credit history." },
+              { icon: "analytics", title: "Statement Intelligence", desc: "Auto-categorization of your income and spending." },
+              { icon: "description", title: "Transparent Report", desc: "See exactly why you were approved or declined." },
+              { icon: "layers", title: "Risk Tiering", desc: "Fair interest rates based on your specific risk profile." },
+              { icon: "rocket_launch", title: "Building Journey", desc: "Roadmap to your first high-limit credit card." },
             ].map(card => (
               <div key={card.title} style={{
                 background: "#fff", padding: "20px 16px", borderRadius: 16,
@@ -273,12 +328,12 @@ export default function Homepage({ navigate }) {
       {/* ── SECURITY ── */}
       <section id="security" style={{ padding: "72px 20px", background: "#fff" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-          <div className="security-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center" }}>
+          <div className="security-grid reveal-on-scroll delay-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center" }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
               {[
-                { icon: "lock",           title: "AES-256 Encryption" },
-                { icon: "security",       title: "RBI Compliant" },
-                { icon: "no_accounts",    title: "No Contact Access" },
+                { icon: "lock", title: "AES-256 Encryption" },
+                { icon: "security", title: "RBI Compliant" },
+                { icon: "no_accounts", title: "No Contact Access" },
                 { icon: "delete_forever", title: "Data Deletion Policy" },
               ].map(s => (
                 <div key={s.title} style={{
@@ -331,8 +386,8 @@ export default function Homepage({ navigate }) {
           >
             {[
               { icon: "account_balance", name: "BharatLend" },
-              { icon: "shield",          name: "PrimeCapital" },
-              { icon: "token",           name: "ZenithFinance" },
+              { icon: "shield", name: "PrimeCapital" },
+              { icon: "token", name: "ZenithFinance" },
             ].map(p => (
               <div key={p.name} style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <span className="material-symbols-outlined" style={{ fontSize: 20 }}>{p.icon}</span>
@@ -349,17 +404,17 @@ export default function Homepage({ navigate }) {
           <h2 style={{ fontSize: 32, fontWeight: 900, textAlign: "center", marginBottom: 48, letterSpacing: "-0.5px" }}>
             Stories of New Beginnings
           </h2>
-          <div className="testimonials-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
+          <div className="testimonials-grid reveal-on-scroll delay-2" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
             {[
               {
                 quote: "I was rejected by 4 apps because I'm a fresh graduate. CreditFlow looked at my internship income and approved me in 10 minutes.",
                 img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDA0vd_yNlCZeSMHM8mNHPabeIX_wobH_ZVTaQA3ziKzDKxcRDf-mvLqnxn0-WHZbGfwAxYl0UDr8Qn1zG9MOW9DWNkNEDmL3c5OTGiFALEgTR4VIsv3tP-AnrpmlT51EjRLtKIFLHArYnB-vmTsgCROs5NYLNEu9l0G5l687rqjTEY9DC5DZQF9GjE3QKQf5L8VmTs_PLn_yVW_TsfJO23Wr5wZkPnmyCimfCwyzat42hz0TG58IfawfVZYvDUh7Vio_iL7po2aaY",
-                name: "Aditya Verma",  sub: "Pune • ₹50,000 Loan @ 16%",
+                name: "Aditya Verma", sub: "Pune • ₹50,000 Loan @ 16%",
               },
               {
                 quote: "Transparent and fast. I didn't even have a CIBIL score. Now I have a score of 720 thanks to their credit building roadmap.",
                 img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCr9dq3FuGQI242OqmAYjMeI-N_AlvfvTK3OC46r777s8BvUxDKknXAKMGmZF6SYEoC35Lz3QP6A8L9kMIvNs5wFUE4lJnqXmamNU-583aGVSR31cZa3QO3oBlzIg2cIoDK_tmwDzi3BTkjAtt_ffE1FZEzC6CFki86lu-W2z8f3ojUP9l-7xHmDFrXi0poyW_acg3CSzoV9-ZUNaTjVh9whNHxsgGrUuEKMvGa-kqyfRKjjpN76tWt6QMhuPo-rX3Y0NMnbjQ8rBc",
-                name: "Priya Sharma",  sub: "Bangalore • ₹1,20,000 Loan @ 14%",
+                name: "Priya Sharma", sub: "Bangalore • ₹1,20,000 Loan @ 14%",
               },
               {
                 quote: "The team actually cares. They helped me understand my bank statement and how to improve it before I applied. Excellent service.",
@@ -408,7 +463,7 @@ export default function Homepage({ navigate }) {
               <span className="material-symbols-outlined" style={{ fontSize: 18 }}>arrow_forward</span>
             </button>
           </div>
-          <div className="blog-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 28 }}>
+          <div className="blog-grid reveal-on-scroll delay-2" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 28 }}>
             {[
               {
                 img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDH2_IB8J7vH_7ltZu9dgrdX5qAuBzE8zAGRfq3pjRZx4cy9NahAB7CMm0RPrVvQxQD39vOpYUHj_9r9heZNY6tCq007dnLEaj0D-TK2E5-0dfQN6aVQhqxuetyJY7c-spueddPqbgLvJIQlRUOvpRSScsWK618HZUz8oTc0dYenT9UDb0y8hekJyeED0O93eIA5tRZ8d9e2R4o6Ljopf6IDqlKFwGyVF_n0_Wm3sGlk97FCN2QA_raBs4JioHmN3AUZQJgFz5jGkc",
@@ -448,6 +503,59 @@ export default function Homepage({ navigate }) {
       <Footer />
 
       <style>{`
+        .reveal-on-scroll {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-on-scroll.revealed {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        @keyframes pulseGradient {
+          0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+          50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.8; }
+          100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+        }
+
+        @keyframes shimmer {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+
+        .shimmer-btn {
+          background: linear-gradient(90deg, #FFD700 0%, #fff3b0 20%, #FFD700 40%, #FFD700 100%);
+          background-size: 200% auto;
+          animation: shimmer 4s infinite linear;
+          color: #000 !important;
+          border: 1px solid rgba(255,215,0,0.5);
+        }
+        .shimmer-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 12px 28px rgba(255,215,0,0.4) !important;
+        }
+
+        .progress-fill {
+           width: 0%;
+           transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .revealed .progress-fill {
+           width: 85%;
+        }
+
+        .problem-grid > div {
+           transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .problem-grid > div:hover {
+           transform: translateY(-6px);
+           box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+        }
+
         @media (max-width: 768px) {
           .hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
           .hero-h1 { font-size: 36px !important; letter-spacing: -1px !important; }
